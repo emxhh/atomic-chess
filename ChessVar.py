@@ -46,3 +46,15 @@ class ChessPiece:
         self._name = name
         self._color = color
 
+
+class Pawn(ChessPiece):
+    """"""
+
+    def __init__(self, name, color):
+        super().__init__(name, color)
+        self._move_count = 0
+
+    def is_valid_move(self, color, position):
+        """"""
+        pass
+
