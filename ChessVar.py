@@ -17,6 +17,11 @@ class ChessVar:
     def __init__(self):
         self._board = []
         # setup initial board with pieces
+        for m in range(8):
+            self._board.append([])
+            for n in range(8):
+                self._board[n].append("")
+
         self._game_state = "UNFINISHED"
 
     def get_game_state(self):
