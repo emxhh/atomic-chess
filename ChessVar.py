@@ -37,3 +37,12 @@ class ChessVar:
     def print_board(self):
         """"""
         # print game board
+
+
+class ChessPiece:
+    """"""
+
+    def __init__(self, name, color):
+        self._name = name
+        self._color = color
+
