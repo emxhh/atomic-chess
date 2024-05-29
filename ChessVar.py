@@ -38,13 +38,13 @@ class ChessVar:
         """"""
         print("  a", "b", "c", "d", "e", "f", "g", "h")
         for row in range(self._rows):
-            print(str(row + 1) + " ", end="")
+            print(str(row+1) + " ", end="")
             for col in range(self._columns):
                 position = self._board[row][col]
                 print(position if isinstance(position, str) else position._unicode, end="")
                 if col < self._rows:
                     print("|", end="")
-            if row < self._rows:
+            if row <= self._rows:
                 print("\n")
 
     def get_game_state(self):
@@ -78,10 +78,17 @@ class Pawn(ChessPiece):
         super().__init__(name, color)
         self._move_count = 0
         self._unicode = "\u2659" if self._color == "white" else "\u265F"
+        self._coordinates = ""
 
-    def is_valid_move(self, color, position):
+    def valid_moves(self, color, position):
         """"""
-        pass
+        possible_moves = []
+        row_position = self._coordinates[1:]
+        col_position = self._coordinates[0]
+        print("row pos", row_position)
+        if self._move_count == 0:
+            possible_moves.append((col_position + str(int(row_position) + 1)) if self._color == "white" else (col_position + str(int(row_position) - 1)))
+            pass
 
 
 game = ChessVar()
