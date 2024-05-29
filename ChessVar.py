@@ -32,15 +32,16 @@ class ChessVar:
         # create black pawns
         for i in range(self._rows):
             pawn = Pawn("pawn", "black")
-            self._board[1][i] = pawn
+            self._board[-2][i] = pawn
+
 
     def print_board(self):
         """"""
         print("  a", "b", "c", "d", "e", "f", "g", "h")
-        for row in range(self._rows):
-            print(str(row+1) + " ", end="")
+        for row in range(self._rows, 0, -1):
+            print(str(row) + " ", end="")
             for col in range(self._columns):
-                position = self._board[row][col]
+                position = self._board[row-1][col]
                 print(position if isinstance(position, str) else position._unicode, end="")
                 if col < self._rows:
                     print("|", end="")
