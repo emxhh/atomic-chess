@@ -53,7 +53,7 @@ class ChessVar:
         for row in range(self._rows, 0, -1):
             print(str(row) + " ", end="")
             for col in range(self._columns):
-                position = self._board[row-1][col]
+                position = self._board[row - 1][col]
                 print(position if isinstance(position, str) else position._unicode, end="")
                 if col < self._rows:
                     print("|", end="")
@@ -63,6 +63,10 @@ class ChessVar:
     def get_game_state(self):
         """"""
         return self._game_state
+
+    def valid_moves(self, chess_piece):
+        """"""
+        return chess_piece.specified_valid_moves(chess_piece, self._chess_pieces)
 
     def make_move(self, move_from, move_to):
         """"""
@@ -93,21 +97,22 @@ class Pawn(ChessPiece):
         self._move_count = 0
         self._unicode = "\u2659" if self._color == "white" else "\u265F"
 
-
-    def valid_moves(self):
+    def possible_moves(self):
         """"""
         possible_moves = []
         row_position = self._coordinates[1:]
         col_position = self._coordinates[0]
 
-        possible_moves.append((col_position + str(int(row_position) + 1)) if self._color == "white" else (col_position + str(int(row_position) - 1)))
+        possible_moves.append((col_position + str(int(row_position) + 1)) if self._color == "white" else (
+                    col_position + str(int(row_position) - 1)))
         if self._move_count == 0:
-            possible_moves.append((col_position + str(int(row_position) + 2)) if self._color == "white" else (col_position + str(int(row_position) - 2)))
+            possible_moves.append((col_position + str(int(row_position) + 2)) if self._color == "white" else (
+                        col_position + str(int(row_position) - 2)))
         return possible_moves
 
 
 game = ChessVar()
 # print(game._chess_pieces)
 print(game._chess_pieces["a7"]._coordinates)
-print(game._chess_pieces["a7"].valid_moves())
+print(game._chess_pieces["a7"].possible_moves())
 # game.print_board()
