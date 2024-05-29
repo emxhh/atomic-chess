@@ -16,12 +16,11 @@ class ChessVar:
 
     def __init__(self):
         self._board = []
-        # setup initial board with pieces
         self._rows = 8
         self._columns = self._rows
         self._game_state = "UNFINISHED"
-        self.initialize_board()
         self._chess_pieces = {}
+        self.initialize_board()
 
     def initialize_board(self):
         """"""
@@ -37,6 +36,7 @@ class ChessVar:
             coordinates = col_coordinate + str(row_coordinate)
             pawn = Pawn("pawn", "black", coordinates)
             self._board[row_coordinate - 1][col] = pawn
+            self._chess_pieces[coordinates] = pawn
 
         # initialize white pawns
         for col in range(self._columns):
@@ -45,6 +45,7 @@ class ChessVar:
             coordinates = col_coordinate + str(row_coordinate)
             pawn = Pawn("pawn", "white", coordinates)
             self._board[row_coordinate - 1][col] = pawn
+            self._chess_pieces[coordinates] = pawn
 
     def print_board(self):
         """"""
