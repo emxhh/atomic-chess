@@ -24,9 +24,19 @@ class Player:
         self._color = color
 
 class ChessVar:
-    """"""
+    """
+    A class to represent a game of atomic chess, played by two players.
+    Player 1 always starts first.
+    Uses Player class for players' data
+    """
 
     def __init__(self):
+        """
+        Initializes an instance of an atomic chess game.
+        Takes no parameters.
+        Initializes the board and places initial pieces in correct positions.
+        All data members are private
+        """
         self._board = []
         self._rows = 8
         self._columns = self._rows
@@ -35,7 +45,7 @@ class ChessVar:
         self.initialize_board()
 
     def initialize_board(self):
-        """"""
+        """Initializes the game board and places the chess pieces in their starting positions."""
         for row in range(self._rows):
             self._board.append([])
             for col in range(self._columns):
@@ -60,7 +70,7 @@ class ChessVar:
             self._chess_pieces[coordinates] = pawn
 
     def print_board(self):
-        """"""
+        """Prints the current state of the game board."""
         print("  a", "b", "c", "d", "e", "f", "g", "h")
         for row in range(self._rows, 0, -1):
             print(str(row) + " ", end="")
@@ -73,11 +83,11 @@ class ChessVar:
                 print("\n")
 
     def get_game_state(self):
-        """"""
+        """Returns the game state to indicate if the game is unfinished or if black or white has won"""
         return self._game_state
 
     def is_valid_move(self, chess_piece, move_to):
-        """"""
+        """Checks if the move_to coordinates are valid for the chess piece"""
         if move_to in self._chess_pieces:
             return False
         else:
@@ -86,7 +96,7 @@ class ChessVar:
                 return True
 
     def make_move(self, move_from, move_to):
-        """"""
+        """Makes a move for the chess piece in the move_from coordinates to the move_to coordinates"""
         # if move_from does not have the player's piece, return false
         if move_from not in self._chess_pieces:
             return False
@@ -107,9 +117,17 @@ class ChessVar:
 
 
 class ChessPiece:
-    """"""
+    """
+    A class to represent a chess piece in the atomic chess game. Used by ChessVar
+
+    Attributes:
+        name: A string that labels the name of the chess piece
+        color: A string that labels the chess piece as white or black
+        coordinates: A string that indicates the position of the chess piece on the game board
+    """
 
     def __init__(self, name, color, coordinates):
+        """Initializes the instance based on name, color, and coordintates of the chess piece"""
         self._name = name
         self._color = color
         self._coordinates = coordinates
