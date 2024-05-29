@@ -24,10 +24,10 @@ class ChessVar:
 
     def initialize_board(self):
         """"""
-        for m in range(self._rows):
+        for row in range(self._rows):
             self._board.append([])
-            for n in range(self._columns):
-                self._board[m].append(" ")
+            for col in range(self._columns):
+                self._board[row].append(" ")
 
         # initialize black pawns
         for col in range(self._columns):
@@ -91,11 +91,12 @@ class Pawn(ChessPiece):
         super().__init__(name, color)
         self._move_count = 0
         self._unicode = "\u2659" if self._color == "white" else "\u265F"
-        self._coordinates = ""
+        self._coordinates = coordinates
 
-    def valid_moves(self, color, position):
+    def valid_moves(self):
         """"""
         possible_moves = []
+        print(self._coordinates)
         row_position = self._coordinates[1:]
         col_position = self._coordinates[0]
         print("row pos", row_position)
@@ -105,4 +106,7 @@ class Pawn(ChessPiece):
 
 
 game = ChessVar()
-game.print_board()
+# print(game._chess_pieces)
+print(game._chess_pieces["a7"]._coordinates)
+print(game._chess_pieces["a7"].valid_moves())
+# game.print_board()
