@@ -17,12 +17,27 @@ class ChessVar:
     def __init__(self):
         self._board = []
         # setup initial board with pieces
-        for m in range(8):
-            self._board.append([])
-            for n in range(8):
-                self._board[n].append("")
-
+        self._rows = 8
+        self._columns = self._rows
         self._game_state = "UNFINISHED"
+        self.initialize_board()
+
+    def initialize_board(self):
+        """"""
+        for m in range(self._rows):
+            self._board.append([])
+            for n in range(self._columns):
+                self._board[n].append(" ")
+
+        # create black pawns
+        for i in range(self._rows):
+            pawn = Pawn("pawn", "black")
+            self._board[1][i] = pawn
+
+    def print_board(self):
+        """"""
+        # print game board
+        print("a", "b", "c", "d", "e", "f", "g", "h")
 
     def get_game_state(self):
         """"""
@@ -38,10 +53,6 @@ class ChessVar:
         # remove exploded pieces
         # update game_state if necessary
         # return true
-
-    def print_board(self):
-        """"""
-        # print game board
 
 
 class ChessPiece:
@@ -62,4 +73,3 @@ class Pawn(ChessPiece):
     def is_valid_move(self, color, position):
         """"""
         pass
-
