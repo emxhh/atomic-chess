@@ -93,7 +93,7 @@ class Pawn(ChessPiece):
         print("row pos", row_position)
         if self._move_count == 0:
             possible_moves.append((col_position + str(int(row_position) + 1)) if self._color == "white" else (col_position + str(int(row_position) - 1)))
-            pass
+        return possible_moves
 
 
 game = ChessVar()
