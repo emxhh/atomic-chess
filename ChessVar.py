@@ -98,6 +98,10 @@ class ChessPiece:
         self._color = color
         self._coordinates = coordinates
 
+    def set_coordinates(self, coordinates):
+        """Updates coordinates of the chess piece"""
+        self._coordinates = coordinates
+
 
 class Pawn(ChessPiece):
     """"""
