@@ -77,7 +77,7 @@ class Pawn(ChessPiece):
     def __init__(self, name, color):
         super().__init__(name, color)
         self._move_count = 0
-        self._unicode = "/u2659" if self._color is "white" else "/u265F"
+        self._unicode = "/u2659" if self._color == "white" else "/u265F"
 
     def is_valid_move(self, color, position):
         """"""
