@@ -29,11 +29,15 @@ class ChessVar:
             for n in range(self._columns):
                 self._board[m].append(" ")
 
-        # create black pawns
+        # initialize black pawns
         for i in range(self._rows):
             pawn = Pawn("pawn", "black")
-            self._board[-2][i] = pawn
+            self._board[6][i] = pawn
 
+        # initialize white pawns
+        for row in range(self._rows):
+            pawn = Pawn("pawn", "white")
+            self._board[1][row] = pawn
 
     def print_board(self):
         """"""
