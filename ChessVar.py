@@ -38,13 +38,13 @@ class ChessVar:
         """"""
         # print game board
         print("a", "b", "c", "d", "e", "f", "g", "h")
-        for i in range(self._rows):
-            print(str(i + 1) + " ", end="")
-            for j in range(self._columns):
-                print(self._board[i][j], end="")
-                if j < self._rows:
+        for row in range(self._rows):
+            print(str(row + 1) + " ", end="")
+            for col in range(self._columns):
+                print(self._board[row][col], end="")
+                if col < self._rows:
                     print("|", end="")
-            if i < 8:
+            if row < 8:
                 print("\n")
 
     def get_game_state(self):
@@ -77,6 +77,7 @@ class Pawn(ChessPiece):
     def __init__(self, name, color):
         super().__init__(name, color)
         self._move_count = 0
+        self._unicode = "/u2659" if self._color is "white" else "/u265F"
 
     def is_valid_move(self, color, position):
         """"""
