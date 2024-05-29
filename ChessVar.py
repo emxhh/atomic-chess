@@ -91,7 +91,7 @@ class ChessVar:
         # remove exploded pieces
         # update game_state if necessary
         # return true
-
+        return True
 
 class ChessPiece:
     """"""
