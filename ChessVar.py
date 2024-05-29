@@ -138,15 +138,19 @@ class ChessPiece:
 
 
 class Pawn(ChessPiece):
-    """"""
+    """
+    A class to represent a pawn chess piece.
+    Inherits from Chess Piece
+    """
 
     def __init__(self, name, color, coordinates):
+        """Initializes the instance based on name, color, and coordintates of the chess piece"""
         super().__init__(name, color, coordinates)
         self._move_count = 0
         self._unicode = "\u2659" if self._color == "white" else "\u265F"
 
     def possible_moves(self):
-        """"""
+        """Returns a list of possible moves for the pawn from on its current position"""
         possible_moves = []
         row_position = self._coordinates[1:]
         col_position = self._coordinates[0]
