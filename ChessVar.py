@@ -76,9 +76,14 @@ class ChessVar:
     def make_move(self, move_from, move_to):
         """"""
         # if move_from does not have the player's piece, return false
+        if move_from not in self._chess_pieces:
+            return False
         # if the move is invalid, return false
+        if not self.is_valid_move(self._chess_pieces[move_from], move_to):
+            return False
         # if the game_state is won, return false
-
+        if self.get_game_state() == "WHITE_WON" or self.get_game_state() == "BLACK_WON":
+            return False
         # else make the move
         # remove exploded pieces
         # update game_state if necessary
