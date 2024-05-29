@@ -79,29 +79,30 @@ class ChessVar:
 class ChessPiece:
     """"""
 
-    def __init__(self, name, color):
+    def __init__(self, name, color, coordinates):
         self._name = name
         self._color = color
+        self._coordinates = coordinates
 
 
 class Pawn(ChessPiece):
     """"""
 
     def __init__(self, name, color, coordinates):
-        super().__init__(name, color)
+        super().__init__(name, color, coordinates)
         self._move_count = 0
         self._unicode = "\u2659" if self._color == "white" else "\u265F"
-        self._coordinates = coordinates
+
 
     def valid_moves(self):
         """"""
         possible_moves = []
-        print(self._coordinates)
         row_position = self._coordinates[1:]
         col_position = self._coordinates[0]
-        print("row pos", row_position)
+
+        possible_moves.append((col_position + str(int(row_position) + 1)) if self._color == "white" else (col_position + str(int(row_position) - 1)))
         if self._move_count == 0:
-            possible_moves.append((col_position + str(int(row_position) + 1)) if self._color == "white" else (col_position + str(int(row_position) - 1)))
+            possible_moves.append((col_position + str(int(row_position) + 2)) if self._color == "white" else (col_position + str(int(row_position) - 2)))
         return possible_moves
 
 
