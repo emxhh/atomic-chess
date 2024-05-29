@@ -88,12 +88,9 @@ class ChessVar:
 
     def is_valid_move(self, chess_piece, move_to):
         """Checks if the move_to coordinates are valid for the chess piece"""
-        if move_to in self._chess_pieces:
-            return False
-        else:
-            possible_moves = chess_piece.possible_moves()
-            if move_to in possible_moves:
-                return True
+        possible_moves = chess_piece.possible_moves()
+        if move_to in possible_moves:
+            return True
 
     def make_move(self, move_from, move_to):
         """Makes a move for the chess piece in the move_from coordinates to the move_to coordinates"""
