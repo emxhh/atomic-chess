@@ -64,9 +64,14 @@ class ChessVar:
         """"""
         return self._game_state
 
-    def valid_moves(self, chess_piece):
+    def is_valid_move(self, chess_piece, move_to):
         """"""
-        return chess_piece.specified_valid_moves(chess_piece, self._chess_pieces)
+        if move_to in self._chess_pieces:
+            return False
+        else:
+            possible_moves = chess_piece.possible_moves()
+            if move_to in possible_moves:
+                return True
 
     def make_move(self, move_from, move_to):
         """"""
@@ -113,6 +118,6 @@ class Pawn(ChessPiece):
 
 game = ChessVar()
 # print(game._chess_pieces)
-print(game._chess_pieces["a7"]._coordinates)
-print(game._chess_pieces["a7"].possible_moves())
+# print(game._chess_pieces["a7"]._coordinates)
+# print(game._chess_pieces["a7"].possible_moves())
 # game.print_board()
