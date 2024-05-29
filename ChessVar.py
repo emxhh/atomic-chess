@@ -120,8 +120,10 @@ class Pawn(ChessPiece):
         row_position = self._coordinates[1:]
         col_position = self._coordinates[0]
 
-        possible_moves.append((col_position + str(int(row_position) + 1)) if self._color == "white" else (
-                    col_position + str(int(row_position) - 1)))
+        if self._color == "white":
+            possible_moves.append(col_position + str(int(row_position) + 1))
+        else:
+            possible_moves.append(col_position + str(int(row_position) - 1))
         if self._move_count == 0:
             possible_moves.append((col_position + str(int(row_position) + 2)) if self._color == "white" else (
                         col_position + str(int(row_position) - 2)))
