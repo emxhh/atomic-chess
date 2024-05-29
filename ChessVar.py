@@ -85,6 +85,9 @@ class ChessVar:
         if self.get_game_state() == "WHITE_WON" or self.get_game_state() == "BLACK_WON":
             return False
         # else make the move
+        self._chess_pieces[move_from].set_coordinates(move_to)
+        self._chess_pieces[move_to] = self._chess_pieces[move_from]
+        del self._chess_pieces[move_from]
         # remove exploded pieces
         # update game_state if necessary
         # return true
