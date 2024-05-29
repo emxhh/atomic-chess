@@ -4,12 +4,24 @@
 # Description: Atomic chess game
 
 class Player:
-    """"""
+    """
+    A class to represent a player in the atomic chess game.
+
+    Attributes:
+        name: A string that labels the player name
+        color: A string that indicates if the player will be playing the white or black chess pieces
+    """
 
     def __init__(self, name, color):
+        """
+        Initializes the instance based on name and color. All data members are private.
+
+        Args:
+            name: Defines the player's name
+            color: Defines the color of the player's chess pieces of either white or black
+        """
         self._name = name
         self._color = color
-
 
 class ChessVar:
     """"""
@@ -93,6 +105,7 @@ class ChessVar:
         # return true
         return True
 
+
 class ChessPiece:
     """"""
 
@@ -126,7 +139,7 @@ class Pawn(ChessPiece):
             possible_moves.append(col_position + str(int(row_position) - 1))
         if self._move_count == 0:
             possible_moves.append((col_position + str(int(row_position) + 2)) if self._color == "white" else (
-                        col_position + str(int(row_position) - 2)))
+                    col_position + str(int(row_position) - 2)))
         return possible_moves
 
 
