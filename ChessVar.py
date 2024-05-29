@@ -27,7 +27,7 @@ class ChessVar:
         for m in range(self._rows):
             self._board.append([])
             for n in range(self._columns):
-                self._board[n].append(" ")
+                self._board[m].append(" ")
 
         # create black pawns
         for i in range(self._rows):
