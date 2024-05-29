@@ -21,6 +21,7 @@ class ChessVar:
         self._columns = self._rows
         self._game_state = "UNFINISHED"
         self.initialize_board()
+        self._chess_pieces = {}
 
     def initialize_board(self):
         """"""
@@ -30,14 +31,20 @@ class ChessVar:
                 self._board[m].append(" ")
 
         # initialize black pawns
-        for i in range(self._rows):
-            pawn = Pawn("pawn", "black")
-            self._board[6][i] = pawn
+        for col in range(self._columns):
+            col_coordinate = chr(col + 97)
+            row_coordinate = 7
+            coordinates = col_coordinate + str(row_coordinate)
+            pawn = Pawn("pawn", "black", coordinates)
+            self._board[row_coordinate - 1][col] = pawn
 
         # initialize white pawns
-        for row in range(self._rows):
-            pawn = Pawn("pawn", "white")
-            self._board[1][row] = pawn
+        for col in range(self._columns):
+            col_coordinate = chr(col + 97)
+            row_coordinate = 2
+            coordinates = col_coordinate + str(row_coordinate)
+            pawn = Pawn("pawn", "white", coordinates)
+            self._board[row_coordinate - 1][col] = pawn
 
     def print_board(self):
         """"""
@@ -79,7 +86,7 @@ class ChessPiece:
 class Pawn(ChessPiece):
     """"""
 
-    def __init__(self, name, color):
+    def __init__(self, name, color, coordinates):
         super().__init__(name, color)
         self._move_count = 0
         self._unicode = "\u2659" if self._color == "white" else "\u265F"
