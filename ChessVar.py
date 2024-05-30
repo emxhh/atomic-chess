@@ -137,15 +137,15 @@ class ChessVar:
         del self._chess_pieces[move_from]
         # update board with move
         col_coordinate = move_from[0]
-        row_coordinate = move_from[1:]
+        row_coordinate = int(move_from[1:])
         col_position = ord(col_coordinate) - 97
         row_position = row_coordinate - 1
-        self._board[col_position][row_position] = " "
+        self._board[row_position][col_position] = " "
         col_coordinate = move_to[0]
-        row_coordinate = move_to[1:]
+        row_coordinate = int(move_to[1:])
         col_position = ord(col_coordinate) - 97
         row_position = row_coordinate - 1
-        self._board[col_position][row_position] = self._chess_pieces[move_to]._unicode
+        self._board[row_position][col_position] = self._chess_pieces[move_to]._unicode
 
         # remove exploded pieces
         # update game_state if necessary
@@ -285,8 +285,10 @@ class King(ChessPiece):
         possible_moves = []
 
 
-game = ChessVar()
+# game = ChessVar()
 # print(game._chess_pieces)
 # print(game._chess_pieces["a7"]._coordinates)
 # print(game._chess_pieces["a7"].possible_moves())
+# game.print_board()
+# game.make_move("c2", "c5")
 # game.print_board()
