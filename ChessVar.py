@@ -103,10 +103,23 @@ class ChessVar:
         # if the game_state is won, return false
         if self.get_game_state() == "WHITE_WON" or self.get_game_state() == "BLACK_WON":
             return False
-        # else make the move
+        # make the move
+        # update chess_pieces dictionary
         self._chess_pieces[move_from].set_coordinates(move_to)
         self._chess_pieces[move_to] = self._chess_pieces[move_from]
         del self._chess_pieces[move_from]
+        # update board with move
+        col_coordinate = move_from[0]
+        row_coordinate = move_from[1:]
+        col_position = ord(col_coordinate) - 97
+        row_position = row_coordinate - 1
+        self._board[col_position][row_position] = " "
+        col_coordinate = move_to[0]
+        row_coordinate = move_to[1:]
+        col_position = ord(col_coordinate) - 97
+        row_position = row_coordinate - 1
+        self._board[col_position][row_position] = self._chess_pieces[move_to]._unicode
+
         # remove exploded pieces
         # update game_state if necessary
         # return true
