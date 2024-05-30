@@ -34,10 +34,7 @@ class ChessVar:
 
     def __init__(self):
         """
-        Initializes an instance of an atomic chess game.
-        Takes no parameters.
-        Initializes the board and places initial pieces in correct positions.
-        All data members are private
+        Initializes an instance of an atomic chess game. Takes no parameters.
         """
         self._board = []
         self._rows = 8
@@ -88,7 +85,7 @@ class ChessVar:
                 print("\n")
 
     def get_game_state(self):
-        """Returns the game state to indicate if the game is unfinished or if black or white has won"""
+        """Returns the game state to indicate if the game is unfinished or if black or white has won."""
         return self._game_state
 
     def create_player(self, player_name, color):
@@ -96,7 +93,7 @@ class ChessVar:
         pass
 
     def initialize_players(self):
-        """Creates the two players for the game"""
+        """Creates the two players for the game."""
         self.create_player("Player 1", "white")
         self.create_player("Player 2", "black")
 
@@ -121,7 +118,7 @@ class ChessVar:
     def make_move(self, move_from, move_to):
         """
         Makes a move for the chess piece in the move_from coordinates to the move_to coordinates.
-        Uses the ChessPiece class to update coordinates
+        Uses ChessPiece to update coordinates.
         """
         # if move_from does not have the player's piece, return false
         if move_from not in self._chess_pieces:
@@ -159,13 +156,13 @@ class ChessVar:
         pass
 
     def is_game_over(self):
-        """Checks if the game is over"""
+        """Checks if the game is over."""
         pass
 
 
 class ChessPiece:
     """
-    A class to represent a chess piece in the atomic chess game. Used by ChessVar
+    A class to represent a chess piece in the atomic chess game. Used by ChessVar.
 
     Attributes:
         name: A string that labels the name of the chess piece
@@ -174,30 +171,30 @@ class ChessPiece:
     """
 
     def __init__(self, name, color, coordinates):
-        """Initializes the instance based on name, color, and coordinates of the chess piece"""
+        """Initializes the instance based on name, color, and coordinates of the chess piece."""
         self._name = name
         self._color = color
         self._coordinates = coordinates
 
     def set_coordinates(self, coordinates):
-        """Updates coordinates of the chess piece"""
+        """Updates coordinates of the chess piece."""
         self._coordinates = coordinates
 
 
 class Pawn(ChessPiece):
     """
     A class to represent a pawn chess piece.
-    Inherits from Chess Piece
+    Inherits from Chess Piece.
     """
 
     def __init__(self, name, color, coordinates):
-        """Initializes the instance based on name, color, and coordinates of the chess piece"""
+        """Initializes the instance based on name, color, and coordinates of the chess piece."""
         super().__init__(name, color, coordinates)
         self._move_count = 0
         self._unicode = "\u2659" if self._color == "white" else "\u265F"
 
     def possible_moves(self):
-        """Returns a list of possible moves for the pawn from on its current position"""
+        """Returns a list of possible moves for the pawn from on its current position."""
         possible_moves = []
         row_position = self._coordinates[1:]
         col_position = self._coordinates[0]
@@ -215,71 +212,71 @@ class Pawn(ChessPiece):
 class Bishop(ChessPiece):
     """
     A class to represent a bishop chess piece.
-    Inherits from Chess Piece
+    Inherits from Chess Piece.
     """
 
     def __init__(self, name, color, coordinates):
-        """Initializes the instance based on name, color, and coordinates of the chess piece"""
+        """Initializes the instance based on name, color, and coordinates of the chess piece."""
         super().__init__(name, color, coordinates)
 
     def possible_moves(self):
-        """Returns a list of possible moves for the bishop from on its current position"""
+        """Returns a list of possible moves for the bishop from on its current position."""
         possible_moves = []
 
 
 class Knight(ChessPiece):
     """
     A class to represent a knight chess piece.
-    Inherits from Chess Piece
+    Inherits from Chess Piece.
     """
 
     def __init__(self, name, color, coordinates):
-        """Initializes the instance based on name, color, and coordinates of the chess piece"""
+        """Initializes the instance based on name, color, and coordinates of the chess piece."""
         super().__init__(name, color, coordinates)
 
     def possible_moves(self):
-        """Returns a list of possible moves for the knight from on its current position"""
+        """Returns a list of possible moves for the knight from on its current position."""
         possible_moves = []
 
 
 class Rook(ChessPiece):
     """
     A class to represent a rook chess piece.
-    Inherits from Chess Piece
+    Inherits from Chess Piece.
     """
 
     def __init__(self, name, color, coordinates):
-        """Initializes the instance based on name, color, and coordinates of the chess piece"""
+        """Initializes the instance based on name, color, and coordinates of the chess piece."""
         super().__init__(name, color, coordinates)
 
     def possible_moves(self):
-        """Returns a list of possible moves for the rook from on its current position"""
+        """Returns a list of possible moves for the rook from on its current position."""
         possible_moves = []
 
 
 class Queen(ChessPiece):
     """
     A class to represent a queen chess piece.
-    Inherits from Chess Piece
+    Inherits from Chess Piece.
     """
 
     def __init__(self, name, color, coordinates):
-        """Initializes the instance based on name, color, and coordinates of the chess piece"""
+        """Initializes the instance based on name, color, and coordinates of the chess piece."""
         super().__init__(name, color, coordinates)
 
     def possible_moves(self):
-        """Returns a list of possible moves for the queen from on its current position"""
+        """Returns a list of possible moves for the queen from on its current position."""
         possible_moves = []
 
 
 class King(ChessPiece):
     """
     A class to represent a king chess piece.
-    Inherits from Chess Piece
+    Inherits from Chess Piece.
     """
 
     def __init__(self, name, color, coordinates):
-        """Initializes the instance based on name, color, and coordinates of the chess piece"""
+        """Initializes the instance based on name, color, and coordinates of the chess piece."""
         super().__init__(name, color, coordinates)
 
     def possible_moves(self):
