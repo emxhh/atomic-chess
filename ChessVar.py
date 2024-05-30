@@ -124,7 +124,8 @@ class ChessVar:
         Uses ChessPiece to update coordinates.
         """
         # if move_from does not have the player's piece, return false
-        # if self._chess_pieces[move_from]._color
+        if self._chess_pieces[move_from]._color != self._current_player:
+            return False
         if move_from not in self._chess_pieces:
             return False
         # if the move is invalid, return false
