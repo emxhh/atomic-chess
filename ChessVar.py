@@ -5,16 +5,17 @@
 
 def convert_coordinates_to_algebraic(coordinates):
     """"""
-    col_position = ord(coordinates[0]) - 97 # a-h to ascii
-    row_position = int(coordinates[1:]) - 1 # 1-8 to index val 0-7
+    col_position = ord(coordinates[0]) - 97  # a-h to ascii
+    row_position = int(coordinates[1:]) - 1  # 1-8 to index val 0-7
     algebraic_position = [col_position, row_position]
     print('algebraic position', algebraic_position)
     return algebraic_position
 
+
 def convert_algebraic_to_coordinates(algebraic_position):
     """"""
-    col_coordinate = chr(algebraic_position[0])
-    row_coordinate = str(algebraic_position[1])
+    col_coordinate = chr(algebraic_position[0] + 97)
+    row_coordinate = str(algebraic_position[1] + 1)
     coordinates = col_coordinate + row_coordinate
     print('converted coordinates', coordinates)
     return coordinates
@@ -241,8 +242,9 @@ class Pawn(ChessPiece):
         current_position = convert_coordinates_to_algebraic(self._coordinates)
         for coordinate in possible_moves:
             if self._color == "white":
-                piece_in_front_coordinates = self._coordinates[0] + str(current_position[1] + 1)
-                print("piece in front", current_position[1], piece_in_front_coordinates)
+                piece_in_front_row_position = current_position[1] + 1
+                piece_in_front_coordinates = convert_algebraic_to_coordinates([current_position[0], piece_in_front_row_position])
+                print("piece in front coordinates", piece_in_front_coordinates)
         # print('board', board)
         return possible_moves
 
@@ -324,12 +326,12 @@ class King(ChessPiece):
 
 game = ChessVar()
 # game.print_board()
-game.make_move("a2", "a4") # white
-game.make_move("a7", "a6") # black
-game.make_move("a4", "a5") # white
-game.make_move("f7", "f6") # black
-game.make_move("g2", "g3") # white
-game.make_move("g7", "g5") # black
+game.make_move("a2", "a4")  # white
+game.make_move("a7", "a6")  # black
+game.make_move("a4", "a5")  # white
+game.make_move("f7", "f6")  # black
+game.make_move("g2", "g3")  # white
+game.make_move("g7", "g5")  # black
 # print(game._chess_pieces["a5"].possible_moves())
 print(game._chess_pieces["a5"]._move_count)
 print(game._chess_pieces["a5"].possible_moves(game._board))
