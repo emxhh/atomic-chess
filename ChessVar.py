@@ -102,10 +102,16 @@ class ChessVar:
 
     def switch_turns(self):
         """Switches the current player to the opposing player."""
-        pass
+        if self._current_player == "Player 1":
+            self._current_player = "Player 2"
+        else:
+            self._current_player = "Player 1"
 
     def is_valid_move(self, chess_piece, move_to):
-        """Checks if the move_to coordinates are valid for the chess piece"""
+        """
+        Checks if the move_to coordinates are valid for the chess piece.
+        Uses ChessPiece subclasses to get the possible moves.
+        """
         possible_moves = chess_piece.possible_moves()
         if move_to in possible_moves:
             return True
@@ -113,7 +119,10 @@ class ChessVar:
             return False
 
     def make_move(self, move_from, move_to):
-        """Makes a move for the chess piece in the move_from coordinates to the move_to coordinates"""
+        """
+        Makes a move for the chess piece in the move_from coordinates to the move_to coordinates.
+        Uses the ChessPiece class to update coordinates
+        """
         # if move_from does not have the player's piece, return false
         if move_from not in self._chess_pieces:
             return False
@@ -145,9 +154,14 @@ class ChessVar:
         # return true
         return True
 
+    def return_winner(self):
+        """Determines and returns the winner of the game based on the current board state."""
+        pass
+
     def is_game_over(self):
         """Checks if the game is over"""
         pass
+
 
 class ChessPiece:
     """
