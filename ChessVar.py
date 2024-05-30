@@ -59,7 +59,6 @@ class ChessVar:
             row_coordinate = 7
             coordinates = col_coordinate + str(row_coordinate)
             pawn = Pawn("pawn", "black", coordinates)
-            # pawn = Pawn("pawn", "white", coordinates)
             self._board[row_coordinate - 1][col] = pawn
             self._chess_pieces[coordinates] = pawn
 
@@ -69,7 +68,6 @@ class ChessVar:
             row_coordinate = 2
             coordinates = col_coordinate + str(row_coordinate)
             pawn = Pawn("pawn", "white", coordinates)
-            # pawn = Pawn("pawn", "black", coordinates)
             self._board[row_coordinate - 1][col] = pawn
             self._chess_pieces[coordinates] = pawn
 
@@ -123,9 +121,7 @@ class ChessVar:
         Makes a move for the chess piece in the move_from coordinates to the move_to coordinates.
         Uses ChessPiece to update coordinates.
         """
-        # if move_from does not have the player's piece, return false
-        print(move_from, move_to)
-        print(self._current_player)
+        # if move_from does not contain a piece belonging to current player, return false
         if self._chess_pieces[move_from]._color != self._current_player:
             return False
         if move_from not in self._chess_pieces:
@@ -209,15 +205,12 @@ class Pawn(ChessPiece):
         col_position = self._coordinates[0]
 
         if self._color == "white":
-        # if self._color == "black":
             possible_moves.append(col_position + str(int(row_position) + 1))
         else:
             possible_moves.append(col_position + str(int(row_position) - 1))
         if self._move_count == 0:
             possible_moves.append((col_position + str(int(row_position) + 2)) if self._color == "white" else (
                     col_position + str(int(row_position) - 2)))
-            # possible_moves.append((col_position + str(int(row_position) + 2)) if self._color == "black" else (
-            #         col_position + str(int(row_position) - 2)))
         return possible_moves
 
 
@@ -296,11 +289,7 @@ class King(ChessPiece):
         possible_moves = []
 
 
-# print(game._chess_pieces)
-# print(game._chess_pieces["a7"]._coordinates)
-# print(game._chess_pieces["a7"].possible_moves())
 # game = ChessVar()
-# # game.print_board()
 # game.make_move("a2", "a3")
 # game.make_move("b2", "b4")
 # game.print_board()
