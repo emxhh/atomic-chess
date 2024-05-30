@@ -96,7 +96,7 @@ class ChessVar:
         pass
 
     def initialize_players(self):
-        """"""
+        """Creates the two players for the game"""
         self.create_player("Player 1", "white")
         self.create_player("Player 2", "black")
 
