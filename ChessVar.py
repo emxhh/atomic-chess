@@ -145,6 +145,9 @@ class ChessVar:
         # return true
         return True
 
+    def is_game_over(self):
+        """Checks if the game is over"""
+        pass
 
 class ChessPiece:
     """
