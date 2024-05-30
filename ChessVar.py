@@ -6,6 +6,7 @@
 class Player:
     """
     A class to represent a player in the atomic chess game.
+    Used by the ChessVar class.
 
     Attributes:
         name: A string that labels the player name
