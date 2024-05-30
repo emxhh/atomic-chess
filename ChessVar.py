@@ -290,10 +290,10 @@ class King(ChessPiece):
         possible_moves = []
 
 
-game = ChessVar()
 # print(game._chess_pieces)
 # print(game._chess_pieces["a7"]._coordinates)
 # print(game._chess_pieces["a7"].possible_moves())
-game.print_board()
-game.make_move("e7", "e5")
-game.print_board()
+# game = ChessVar()
+# game.print_board()
+# game.make_move("e7", "e5")
+# game.print_board()
