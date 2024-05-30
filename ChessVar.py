@@ -90,7 +90,8 @@ class ChessVar:
 
     def create_player(self, player_name, color):
         """Creates a Player instance and stores it in the players dictionary."""
-        pass
+        player = Player(player_name, color)
+        self._players[player_name] = player
 
     def initialize_players(self):
         """Creates the two players for the game."""
