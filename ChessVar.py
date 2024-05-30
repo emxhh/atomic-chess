@@ -58,7 +58,8 @@ class ChessVar:
             col_coordinate = chr(col + 97)
             row_coordinate = 7
             coordinates = col_coordinate + str(row_coordinate)
-            pawn = Pawn("pawn", "black", coordinates)
+            # pawn = Pawn("pawn", "black", coordinates)
+            pawn = Pawn("pawn", "white", coordinates)
             self._board[row_coordinate - 1][col] = pawn
             self._chess_pieces[coordinates] = pawn
 
@@ -67,7 +68,8 @@ class ChessVar:
             col_coordinate = chr(col + 97)
             row_coordinate = 2
             coordinates = col_coordinate + str(row_coordinate)
-            pawn = Pawn("pawn", "white", coordinates)
+            # pawn = Pawn("pawn", "white", coordinates)
+            pawn = Pawn("pawn", "black", coordinates)
             self._board[row_coordinate - 1][col] = pawn
             self._chess_pieces[coordinates] = pawn
 
@@ -200,12 +202,15 @@ class Pawn(ChessPiece):
         row_position = self._coordinates[1:]
         col_position = self._coordinates[0]
 
-        if self._color == "white":
+        # if self._color == "white":
+        if self._color == "black":
             possible_moves.append(col_position + str(int(row_position) + 1))
         else:
             possible_moves.append(col_position + str(int(row_position) - 1))
         if self._move_count == 0:
-            possible_moves.append((col_position + str(int(row_position) + 2)) if self._color == "white" else (
+            # possible_moves.append((col_position + str(int(row_position) + 2)) if self._color == "white" else (
+            #         col_position + str(int(row_position) - 2)))
+            possible_moves.append((col_position + str(int(row_position) + 2)) if self._color == "black" else (
                     col_position + str(int(row_position) - 2)))
         return possible_moves
 
@@ -285,10 +290,10 @@ class King(ChessPiece):
         possible_moves = []
 
 
-# game = ChessVar()
+game = ChessVar()
 # print(game._chess_pieces)
 # print(game._chess_pieces["a7"]._coordinates)
 # print(game._chess_pieces["a7"].possible_moves())
-# game.print_board()
-# game.make_move("c2", "c5")
-# game.print_board()
+game.print_board()
+game.make_move("e7", "e5")
+game.print_board()
