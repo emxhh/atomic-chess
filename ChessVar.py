@@ -6,9 +6,19 @@
 def convert_coordinates_to_algebraic(coordinates):
     """"""
     col_position = ord(coordinates[0]) - 97 # a-h to ascii
-    row_position = coordinates[1:] - 1 # 1-8 to index val 0-7
+    row_position = int(coordinates[1:]) - 1 # 1-8 to index val 0-7
     algebraic_position = [col_position, row_position]
+    print('algebraic position', algebraic_position)
     return algebraic_position
+
+def convert_algebraic_to_coordinates(algebraic_position):
+    """"""
+    col_coordinate = chr(algebraic_position[0])
+    row_coordinate = str(algebraic_position[1])
+    coordinates = col_coordinate + row_coordinate
+    print('converted coordinates', coordinates)
+    return coordinates
+
 
 class Player:
     """
@@ -227,9 +237,12 @@ class Pawn(ChessPiece):
                     col_position + str(int(row_position) - 2)))
 
         # check possible moves if there is a chess piece in front of the current chess piece
+        print("current coord and poss moves", self._coordinates, possible_moves)
+        current_position = convert_coordinates_to_algebraic(self._coordinates)
         for coordinate in possible_moves:
-
-        print(self._coordinates, possible_moves)
+            if self._color == "white":
+                piece_in_front_coordinates = self._coordinates[0] + str(current_position[1] + 1)
+                print("piece in front", current_position[1], piece_in_front_coordinates)
         # print('board', board)
         return possible_moves
 
