@@ -53,21 +53,21 @@ class ChessVar:
             for col in range(self._columns):
                 self._board[row].append(" ")
 
-        # initialize black pawns
+        # initialize white pawns
         for col in range(self._columns):
             col_coordinate = chr(col + 97)
             row_coordinate = 7
             coordinates = col_coordinate + str(row_coordinate)
-            pawn = Pawn("pawn", "black", coordinates)
+            pawn = Pawn("pawn", "white", coordinates)
             self._board[row_coordinate - 1][col] = pawn
             self._chess_pieces[coordinates] = pawn
 
-        # initialize white pawns
+        # initialize black pawns
         for col in range(self._columns):
             col_coordinate = chr(col + 97)
             row_coordinate = 2
             coordinates = col_coordinate + str(row_coordinate)
-            pawn = Pawn("pawn", "white", coordinates)
+            pawn = Pawn("pawn", "black", coordinates)
             self._board[row_coordinate - 1][col] = pawn
             self._chess_pieces[coordinates] = pawn
 
