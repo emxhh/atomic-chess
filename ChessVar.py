@@ -93,6 +93,8 @@ class ChessVar:
         possible_moves = chess_piece.possible_moves()
         if move_to in possible_moves:
             return True
+        else:
+            return False
 
     def make_move(self, move_from, move_to):
         """Makes a move for the chess piece in the move_from coordinates to the move_to coordinates"""
@@ -139,7 +141,7 @@ class ChessPiece:
     """
 
     def __init__(self, name, color, coordinates):
-        """Initializes the instance based on name, color, and coordintates of the chess piece"""
+        """Initializes the instance based on name, color, and coordinates of the chess piece"""
         self._name = name
         self._color = color
         self._coordinates = coordinates
