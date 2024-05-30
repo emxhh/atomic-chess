@@ -3,6 +3,13 @@
 # Date: 5/28/24
 # Description: Atomic chess game
 
+def convert_coordinates_to_algebraic(coordinates):
+    """"""
+    col_position = ord(coordinates[0]) - 97 # a-h to ascii
+    row_position = coordinates[1:] - 1 # 1-8 to index val 0-7
+    algebraic_position = [col_position, row_position]
+    return algebraic_position
+
 class Player:
     """
     A class to represent a player in the atomic chess game.
@@ -105,12 +112,12 @@ class ChessVar:
         else:
             self._current_player = "white"
 
-    def is_valid_move(self, chess_piece, move_to):
+    def is_valid_move(self, board, chess_piece, move_to):
         """
         Checks if the move_to coordinates are valid for the chess piece.
         Uses ChessPiece subclasses to get the possible moves.
         """
-        possible_moves = chess_piece.possible_moves()
+        possible_moves = chess_piece.possible_moves(board)
         if move_to in possible_moves:
             return True
         else:
@@ -128,7 +135,7 @@ class ChessVar:
         if move_from not in self._chess_pieces:
             return False
         # if the move is invalid, return false
-        if not self.is_valid_move(self._chess_pieces[move_from], move_to):
+        if not self.is_valid_move(self._board, self._chess_pieces[move_from], move_to):
             return False
         # if the game_state is won, return false
         if self.get_game_state() == "WHITE_WON" or self.get_game_state() == "BLACK_WON":
@@ -204,12 +211,13 @@ class Pawn(ChessPiece):
         self._coordinates = coordinates
         self._move_count += 1
 
-    def possible_moves(self):
+    def possible_moves(self, board):
         """Returns a list of possible moves for the pawn from on its current position."""
         possible_moves = []
         row_position = self._coordinates[1:]
         col_position = self._coordinates[0]
 
+        # adds all possible moves
         if self._color == "white":
             possible_moves.append(col_position + str(int(row_position) + 1))
         else:
@@ -217,6 +225,12 @@ class Pawn(ChessPiece):
         if self._move_count == 0:
             possible_moves.append((col_position + str(int(row_position) + 2)) if self._color == "white" else (
                     col_position + str(int(row_position) - 2)))
+
+        # check possible moves if there is a chess piece in front of the current chess piece
+        for coordinate in possible_moves:
+
+        print(self._coordinates, possible_moves)
+        # print('board', board)
         return possible_moves
 
 
@@ -305,7 +319,7 @@ game.make_move("g2", "g3") # white
 game.make_move("g7", "g5") # black
 # print(game._chess_pieces["a5"].possible_moves())
 print(game._chess_pieces["a5"]._move_count)
-print(game._chess_pieces["a5"].possible_moves())
+print(game._chess_pieces["a5"].possible_moves(game._board))
 # print(game._chess_pieces["h2"].possible_moves())
 # game.make_move("a6", "a5") # white
 game.print_board()
