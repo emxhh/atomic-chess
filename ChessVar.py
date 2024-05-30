@@ -209,6 +209,20 @@ class Knight(ChessPiece):
         possible_moves = []
 
 
+class Rook(ChessPiece):
+    """
+    A class to represent a rook chess piece.
+    Inherits from Chess Piece
+    """
+
+    def __init__(self, name, color, coordinates):
+        """Initializes the instance based on name, color, and coordinates of the chess piece"""
+        super().__init__(name, color, coordinates)
+
+    def possible_moves(self):
+        """Returns a list of possible moves for the rook from on its current position"""
+        possible_moves = []
+
 game = ChessVar()
 # print(game._chess_pieces)
 # print(game._chess_pieces["a7"]._coordinates)
