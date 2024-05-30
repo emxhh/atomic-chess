@@ -121,6 +121,7 @@ class ChessVar:
         Makes a move for the chess piece in the move_from coordinates to the move_to coordinates.
         Uses ChessPiece to update coordinates.
         """
+        # print("chess dict", self._chess_pieces)
         # if move_from does not contain a piece belonging to current player, return false
         if self._chess_pieces[move_from]._color != self._current_player:
             return False
@@ -197,6 +198,11 @@ class Pawn(ChessPiece):
         super().__init__(name, color, coordinates)
         self._move_count = 0
         self._unicode = "\u2659" if self._color == "white" else "\u265F"
+
+    def set_coordinates(self, coordinates):
+        """Updates coordinates of the chess piece."""
+        self._coordinates = coordinates
+        self._move_count += 1
 
     def possible_moves(self):
         """Returns a list of possible moves for the pawn from on its current position."""
@@ -289,7 +295,17 @@ class King(ChessPiece):
         possible_moves = []
 
 
-# game = ChessVar()
-# game.make_move("a2", "a3")
-# game.make_move("b2", "b4")
+game = ChessVar()
 # game.print_board()
+game.make_move("a2", "a4") # white
+game.make_move("a7", "a6") # black
+game.make_move("a4", "a5") # white
+game.make_move("f7", "f6") # black
+game.make_move("g2", "g3") # white
+game.make_move("g7", "g5") # black
+# print(game._chess_pieces["a5"].possible_moves())
+print(game._chess_pieces["a5"]._move_count)
+print(game._chess_pieces["a5"].possible_moves())
+# print(game._chess_pieces["h2"].possible_moves())
+# game.make_move("a6", "a5") # white
+game.print_board()
