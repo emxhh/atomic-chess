@@ -194,6 +194,21 @@ class Bishop(ChessPiece):
         possible_moves = []
 
 
+class Knight(ChessPiece):
+    """
+    A class to represent a knight chess piece.
+    Inherits from Chess Piece
+    """
+
+    def __init__(self, name, color, coordinates):
+        """Initializes the instance based on name, color, and coordinates of the chess piece"""
+        super().__init__(name, color, coordinates)
+
+    def possible_moves(self):
+        """Returns a list of possible moves for the knight from on its current position"""
+        possible_moves = []
+
+
 game = ChessVar()
 # print(game._chess_pieces)
 # print(game._chess_pieces["a7"]._coordinates)
