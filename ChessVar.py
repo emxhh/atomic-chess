@@ -82,7 +82,7 @@ class ChessVar:
                 if col < self._rows:
                     print("|", end="")
             if row <= self._rows:
-                print("\n")
+                print()
 
     def get_game_state(self):
         """Returns the game state to indicate if the game is unfinished or if black or white has won."""
