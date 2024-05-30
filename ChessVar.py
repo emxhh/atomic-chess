@@ -24,6 +24,7 @@ class Player:
         self._name = name
         self._color = color
 
+
 class ChessVar:
     """
     A class to represent a game of atomic chess, played by two players.
