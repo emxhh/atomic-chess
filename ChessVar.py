@@ -44,7 +44,10 @@ class ChessVar:
         self._columns = self._rows
         self._game_state = "UNFINISHED"
         self._chess_pieces = {}
+        self._players = {}
+        self._current_player = "Player 1"
         self.initialize_board()
+        self.initialize_players()
 
     def initialize_board(self):
         """Initializes the game board and places the chess pieces in their starting positions."""
@@ -87,6 +90,19 @@ class ChessVar:
     def get_game_state(self):
         """Returns the game state to indicate if the game is unfinished or if black or white has won"""
         return self._game_state
+
+    def create_player(self, player_name, color):
+        """Creates a Player instance and stores it in the players dictionary."""
+        pass
+
+    def initialize_players(self):
+        """"""
+        self.create_player("Player 1", "white")
+        self.create_player("Player 2", "black")
+
+    def switch_turns(self):
+        """Switches the current player to the opposing player."""
+        pass
 
     def is_valid_move(self, chess_piece, move_to):
         """Checks if the move_to coordinates are valid for the chess piece"""
@@ -252,6 +268,7 @@ class King(ChessPiece):
     def possible_moves(self):
         """Returns a list of possible moves for the king from on its current position"""
         possible_moves = []
+
 
 game = ChessVar()
 # print(game._chess_pieces)
