@@ -124,6 +124,8 @@ class ChessVar:
         Uses ChessPiece to update coordinates.
         """
         # if move_from does not have the player's piece, return false
+        print(move_from, move_to)
+        print(self._current_player)
         if self._chess_pieces[move_from]._color != self._current_player:
             return False
         if move_from not in self._chess_pieces:
@@ -153,6 +155,8 @@ class ChessVar:
 
         # remove exploded pieces
         # update game_state if necessary
+        # switch turns
+        self.switch_turns()
         # return true
         return True
 
@@ -296,6 +300,7 @@ class King(ChessPiece):
 # print(game._chess_pieces["a7"]._coordinates)
 # print(game._chess_pieces["a7"].possible_moves())
 # game = ChessVar()
-# game.print_board()
-# game.make_move("e7", "e5")
+# # game.print_board()
+# game.make_move("a2", "a3")
+# game.make_move("b2", "b4")
 # game.print_board()
