@@ -42,7 +42,7 @@ class ChessVar:
         self._game_state = "UNFINISHED"
         self._chess_pieces = {}
         self._players = {}
-        self._current_player = "Player 1"
+        self._current_player = "white"
         self.initialize_board()
         self.initialize_players()
 
@@ -58,8 +58,8 @@ class ChessVar:
             col_coordinate = chr(col + 97)
             row_coordinate = 7
             coordinates = col_coordinate + str(row_coordinate)
-            # pawn = Pawn("pawn", "black", coordinates)
-            pawn = Pawn("pawn", "white", coordinates)
+            pawn = Pawn("pawn", "black", coordinates)
+            # pawn = Pawn("pawn", "white", coordinates)
             self._board[row_coordinate - 1][col] = pawn
             self._chess_pieces[coordinates] = pawn
 
@@ -68,8 +68,8 @@ class ChessVar:
             col_coordinate = chr(col + 97)
             row_coordinate = 2
             coordinates = col_coordinate + str(row_coordinate)
-            # pawn = Pawn("pawn", "white", coordinates)
-            pawn = Pawn("pawn", "black", coordinates)
+            pawn = Pawn("pawn", "white", coordinates)
+            # pawn = Pawn("pawn", "black", coordinates)
             self._board[row_coordinate - 1][col] = pawn
             self._chess_pieces[coordinates] = pawn
 
@@ -102,10 +102,10 @@ class ChessVar:
 
     def switch_turns(self):
         """Switches the current player to the opposing player."""
-        if self._current_player == "Player 1":
-            self._current_player = "Player 2"
+        if self._current_player == "white":
+            self._current_player = "black"
         else:
-            self._current_player = "Player 1"
+            self._current_player = "white"
 
     def is_valid_move(self, chess_piece, move_to):
         """
@@ -124,6 +124,7 @@ class ChessVar:
         Uses ChessPiece to update coordinates.
         """
         # if move_from does not have the player's piece, return false
+        # if self._chess_pieces[move_from]._color
         if move_from not in self._chess_pieces:
             return False
         # if the move is invalid, return false
@@ -202,16 +203,16 @@ class Pawn(ChessPiece):
         row_position = self._coordinates[1:]
         col_position = self._coordinates[0]
 
-        # if self._color == "white":
-        if self._color == "black":
+        if self._color == "white":
+        # if self._color == "black":
             possible_moves.append(col_position + str(int(row_position) + 1))
         else:
             possible_moves.append(col_position + str(int(row_position) - 1))
         if self._move_count == 0:
-            # possible_moves.append((col_position + str(int(row_position) + 2)) if self._color == "white" else (
-            #         col_position + str(int(row_position) - 2)))
-            possible_moves.append((col_position + str(int(row_position) + 2)) if self._color == "black" else (
+            possible_moves.append((col_position + str(int(row_position) + 2)) if self._color == "white" else (
                     col_position + str(int(row_position) - 2)))
+            # possible_moves.append((col_position + str(int(row_position) + 2)) if self._color == "black" else (
+            #         col_position + str(int(row_position) - 2)))
         return possible_moves
 
 
@@ -293,7 +294,7 @@ class King(ChessPiece):
 # print(game._chess_pieces)
 # print(game._chess_pieces["a7"]._coordinates)
 # print(game._chess_pieces["a7"].possible_moves())
-# game = ChessVar()
+game = ChessVar()
 # game.print_board()
-# game.make_move("e7", "e5")
-# game.print_board()
+game.make_move("e7", "e5")
+game.print_board()
