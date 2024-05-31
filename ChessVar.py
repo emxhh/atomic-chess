@@ -255,6 +255,10 @@ class ChessPiece:
         self._color = color
         self._coordinates = coordinates
 
+    def get_coordinates(self):
+        """Returns chess piece coordinates"""
+        return self._coordinates
+
     def set_coordinates(self, coordinates):
         """Updates coordinates of the chess piece."""
         self._coordinates = coordinates
