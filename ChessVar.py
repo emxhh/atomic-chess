@@ -224,8 +224,10 @@ class ChessVar:
         Makes a move for the chess piece in the move_from coordinates to the move_to coordinates.
         Uses ChessPiece to update coordinates.
         """
+        print(move_from, move_to, self._current_player)
         # if move_from does not contain a piece belonging to current player, return false
         if self._chess_pieces[move_from].get_color() != self._current_player:
+            print("not player's piece")
             return False
         if move_from not in self._chess_pieces:
             return False
@@ -237,13 +239,13 @@ class ChessVar:
         if self.get_game_state() == "WHITE_WON" or self.get_game_state() == "BLACK_WON":
             return False
         # make the move
-
         # if captured piece is the opposing color, remove exploded surrounding pieces and attacking/capturing pieces
         if move_to in self._chess_pieces and self._chess_pieces[move_to].get_color() != self._current_player:
             self.remove_exploded_pieces(self._chess_pieces[move_to])
             self.remove_battle_pieces(self._chess_pieces[move_from], self._chess_pieces[move_to])
         else:
             # update chess_pieces dictionary
+
             self._chess_pieces[move_from].set_coordinates(move_to)
             self._chess_pieces[move_to] = self._chess_pieces[move_from]
             del self._chess_pieces[move_from]
@@ -254,6 +256,7 @@ class ChessVar:
         # update game_state if necessary
         # switch turns
         self.switch_turns()
+
         # return true
         return True
 
@@ -478,6 +481,7 @@ class Rook(ChessPiece):
         # check down moves
         down_moves = []
         for i in range(1, current_position[0] + 1):
+            print("printing down moves", self, self.get_coordinates())
             if current_position[0] - i >= 0:
                 square = [current_position[0] - i, current_position[1]]
                 square_is_empty = board[square[0]][square[1]] == " "
@@ -485,6 +489,7 @@ class Rook(ChessPiece):
                     down_moves.append(convert_board_index_to_coordinates(square))
         possible_moves += down_moves
 
+        print("rook poss moves", possible_moves)
         return possible_moves
 
 
@@ -520,12 +525,11 @@ class King(ChessPiece):
 
 # game = ChessVar()
 # game.make_move("a2", "a4")  # white
-# game.make_move("b7", "b5")  # black
-# game.make_move("a4", "b5")  # white
-# game.make_move("h7", "h5")  # black
-# game.make_move("a4", "b5")  # white
-# game.make_move("f7", "f5")  # black
-# game.make_move("a1", "a7")  # white
-# game.make_move("h8", "h6")  # black
-# game.make_move("a1", "a7")  # white
+# game.make_move("e7", "e5")  # black
+# game.make_move("c2", "c4")  # white
+# game.make_move("h8", "e8")  # black
+# game.make_move("b2", "b4")  # white
+# game.make_move("e5", "e4")  # black
+# game.make_move("d2", "d4")  # white
+# game.make_move("e8", "e4")  # black
 # game.print_board()
