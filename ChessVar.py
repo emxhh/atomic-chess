@@ -198,8 +198,9 @@ class ChessVar:
             return False
         # make the move
         # if captured piece is the opposing color, then remove exploded pieces
-        if self._chess_pieces[move_to]._color != self._current_player:
-            self.remove_exploded_pieces(self._chess_pieces[move_to])
+        # if self._chess_pieces[move_to]._color != self._current_player:
+        #     self.remove_exploded_pieces(self._chess_pieces[move_to])
+
         # update chess_pieces dictionary
         self._chess_pieces[move_from].set_coordinates(move_to)
         self._chess_pieces[move_to] = self._chess_pieces[move_from]
