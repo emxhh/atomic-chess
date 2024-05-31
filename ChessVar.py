@@ -184,16 +184,6 @@ class ChessVar:
         del self._chess_pieces[move_from]
         # update board with move
         self.update_board(move_from, move_to)
-        # col_coordinate = move_from[0]
-        # row_coordinate = int(move_from[1:])
-        # col_position = ord(col_coordinate) - 97
-        # row_position = row_coordinate - 1
-        # self._board[row_position][col_position] = " "
-        # col_coordinate = move_to[0]
-        # row_coordinate = int(move_to[1:])
-        # col_position = ord(col_coordinate) - 97
-        # row_position = row_coordinate - 1
-        # self._board[row_position][col_position] = self._chess_pieces[move_to]
 
         # remove exploded pieces
         # update game_state if necessary
