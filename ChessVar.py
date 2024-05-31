@@ -189,7 +189,7 @@ class ChessVar:
         row_coordinate = int(move_to[1:])
         col_position = ord(col_coordinate) - 97
         row_position = row_coordinate - 1
-        self._board[row_position][col_position] = self._chess_pieces[move_to]._unicode
+        self._board[row_position][col_position] = self._chess_pieces[move_to]
 
         # remove exploded pieces
         # update game_state if necessary
@@ -263,6 +263,9 @@ class Pawn(ChessPiece):
         # check in possible moves if there is a chess piece in front of the current chess piece
         current_position = convert_coordinates_to_grid(self._coordinates)
         print('all poss moves', self._coordinates, self._color, possible_moves)
+        print('board', board)
+        # print(board[1][0]._color, board[1][0]._name)
+
         for possible_next_move in possible_moves:
             if self._color == "white":
                 possible_next_move_position = convert_coordinates_to_grid(possible_next_move)
@@ -272,7 +275,10 @@ class Pawn(ChessPiece):
             if self._color == "black":
                 possible_next_move_position = convert_coordinates_to_grid(possible_next_move)
                 chess_piece_in_front_position = [current_position[0], current_position[1] - 1]
-                if possible_next_move_position == chess_piece_in_front_position and board[chess_piece_in_front_position[0]][chess_piece_in_front_position[1]] != " ":
+                print('test', possible_next_move_position, chess_piece_in_front_position, board[chess_piece_in_front_position[1]][chess_piece_in_front_position[0]], len(board[chess_piece_in_front_position[0]][chess_piece_in_front_position[1]]))
+                print(board[chess_piece_in_front_position[0]][chess_piece_in_front_position[1]] == " ")
+                print(" " == " ")
+                if possible_next_move_position == chess_piece_in_front_position and board[chess_piece_in_front_position[1]][chess_piece_in_front_position[0]] != " ":
                     possible_moves.remove(possible_next_move)
                 print('new poss moves', self._coordinates, self._color, possible_moves)
 
@@ -370,6 +376,9 @@ class King(ChessPiece):
 # game.make_move("a6", "a5") # white
 # game.print_board()
 
-# game = ChessVar()
-# game.make_move("a2", "a4")  # white
-# game.make_move("a7", "a6")  # black
+game = ChessVar()
+game.make_move("a2", "a4")  # white
+game.make_move("a7", "a6")  # black
+game.make_move("a4", "a5")  # white
+game.make_move("a6", "a5")  # black
+game.print_board()
