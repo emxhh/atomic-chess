@@ -223,7 +223,6 @@ class ChessVar:
         # update board with move
         self.update_board(move_from, move_to)
 
-
         # update game_state if necessary
         # switch turns
         self.switch_turns()
@@ -264,7 +263,6 @@ class ChessPiece:
         self._coordinates = coordinates
 
 
-
 class Pawn(ChessPiece):
     """
     A class to represent a pawn chess piece.
@@ -276,6 +274,10 @@ class Pawn(ChessPiece):
         super().__init__(name, color, coordinates)
         self._move_count = 0
         self._unicode = "\u2659" if self._color == "white" else "\u265F"
+
+    def get_unicode(self):
+        """Returns unicode of chess piece"""
+        return self._unicode
 
     def set_coordinates(self, coordinates):
         """Updates coordinates of the chess piece."""
@@ -337,13 +339,13 @@ class Pawn(ChessPiece):
             if self._color == "white":
                 chess_piece_in_front_position = [current_position[0] + 1, current_position[1]]
                 square_in_front_is_occupied = (
-                            board[chess_piece_in_front_position[0]][chess_piece_in_front_position[1]] != " ")
+                        board[chess_piece_in_front_position[0]][chess_piece_in_front_position[1]] != " ")
                 if possible_next_move_position == chess_piece_in_front_position and square_in_front_is_occupied:
                     possible_moves.remove(possible_next_move)
             if self._color == "black":
                 chess_piece_in_front_position = [current_position[0] - 1, current_position[1]]
                 square_in_front_is_occupied = (
-                            board[chess_piece_in_front_position[0]][chess_piece_in_front_position[1]] != " ")
+                        board[chess_piece_in_front_position[0]][chess_piece_in_front_position[1]] != " ")
                 if possible_next_move_position == chess_piece_in_front_position and square_in_front_is_occupied:
                     possible_moves.remove(possible_next_move)
         # print('new poss moves', self._coordinates, self._color, possible_moves)
