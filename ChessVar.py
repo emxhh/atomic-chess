@@ -3,26 +3,26 @@
 # Date: 5/28/24
 # Description: Atomic chess game
 
-class InvalidMoveError(Exception):
-    """User-defined exception for invalid move."""
-    pass
-
-def convert_coordinates_to_ascii(coordinates):
-    """"""
-    col_position = ord(coordinates[0]) - 97  # a-h to ascii
-    row_position = int(coordinates[1:]) - 1  # 1-8 to index val 0-7
-    ascii_position = [col_position, row_position]
-    # print('algebraic position', ascii_position)
-    return ascii_position
-
-
-def convert_ascii_to_coordinates(ascii_position):
-    """"""
-    col_coordinate = chr(ascii_position[0] + 97)
-    row_coordinate = str(ascii_position[1] + 1)
-    coordinates = col_coordinate + row_coordinate
-    # print('converted coordinates', coordinates)
-    return coordinates
+# class InvalidMoveError(Exception):
+#     """User-defined exception for invalid move."""
+#     pass
+#
+# def convert_coordinates_to_ascii(coordinates):
+#     """"""
+#     col_position = ord(coordinates[0]) - 97  # a-h to ascii
+#     row_position = int(coordinates[1:]) - 1  # 1-8 to index val 0-7
+#     ascii_position = [col_position, row_position]
+#     # print('algebraic position', ascii_position)
+#     return ascii_position
+#
+#
+# def convert_ascii_to_coordinates(ascii_position):
+#     """"""
+#     col_coordinate = chr(ascii_position[0] + 97)
+#     row_coordinate = str(ascii_position[1] + 1)
+#     coordinates = col_coordinate + row_coordinate
+#     # print('converted coordinates', coordinates)
+#     return coordinates
 
 
 def convert_coordinates_to_grid(coordinates):
@@ -169,6 +169,7 @@ class ChessVar:
             return False
         # if the move is invalid, return false
         if not self.is_valid_move(self._board, self._chess_pieces[move_from], move_to):
+            print('invalid move')
             return False
         # if the game_state is won, return false
         if self.get_game_state() == "WHITE_WON" or self.get_game_state() == "BLACK_WON":
@@ -360,7 +361,7 @@ game.make_move("a4", "a5")  # white
 # game.make_move("g2", "g3")  # white
 # game.make_move("g7", "g5")  # black
 # print(game._chess_pieces["a5"].possible_moves())
-print(game._chess_pieces)
+# print(game._chess_pieces)
 # print(game._chess_pieces["a5"]._move_count)
 # print(game._chess_pieces["a5"].possible_moves(game._board))
 # print(game._chess_pieces["h2"].possible_moves())
