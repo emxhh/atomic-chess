@@ -183,6 +183,11 @@ class ChessVar:
         captured_piece_position = convert_coordinates_to_board_index(captured_piece.get_coordinates())
         self._board[captured_piece_position[0]][captured_piece_position[1]] = " "
         coordinates = captured_piece.get_coordinates()
+        if self._chess_pieces[coordinates].get_name() == "king":
+            if self._current_player == "white":
+                self._game_state = "WHITE_WON"
+            else:
+                self._game_state = "BLACK_WON"
         del self._chess_pieces[coordinates]
 
     def remove_exploded_pieces(self, captured_piece):
@@ -218,6 +223,12 @@ class ChessVar:
                     self._board[square[0]][square[1]] = " "
                     coordinates = convert_board_index_to_coordinates(square)
                     del self._chess_pieces[coordinates]
+                # if a king explodes
+                if self._board[square[0]][square[1]].get_name() == "king":
+                    if self._current_player == "white":
+                        self._game_state = "WHITE_WON"
+                    else:
+                        self._game_state = "BLACK_WON"
 
     def make_move(self, move_from, move_to):
         """
