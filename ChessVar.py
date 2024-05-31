@@ -25,8 +25,8 @@
 #     return coordinates
 
 
-def convert_coordinates_to_grid(coordinates):
-    """Converts algebraic coordinates to grid/list index position"""
+def convert_coordinates_to_board_index(coordinates):
+    """Converts algebraic coordinates to board grid list index positions"""
     column_dict = {
         "a": 0,
         "b": 1,
@@ -37,10 +37,10 @@ def convert_coordinates_to_grid(coordinates):
         "g": 6,
         "h": 7
     }
-    row_position = int(coordinates[1]) - 1
-    col_position = column_dict[coordinates[0]]
-    grid_position = [row_position, col_position]
-    return grid_position
+    row_index = int(coordinates[1]) - 1
+    col_index = column_dict[coordinates[0]]
+    board_index_position = [row_index, col_index]
+    return board_index_position
 
 
 class Player:
