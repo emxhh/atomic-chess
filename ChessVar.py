@@ -451,12 +451,13 @@ class Rook(ChessPiece):
         if down_square[0] < 8:
             square_is_empty = board[down_square[0]][down_square[1]] == " "
             while square_is_empty:
-                up_moves.append(convert_board_index_to_coordinates(down_square))
+                down_moves.append(convert_board_index_to_coordinates(down_square))
                 down_square[0] -= 1
                 square_is_empty = board[down_square[0]][down_square[1]] == " "
             down_moves.append(convert_board_index_to_coordinates(down_square))
         possible_moves += down_moves
 
+        print(possible_moves)
         return possible_moves
 
 
@@ -493,12 +494,12 @@ class King(ChessPiece):
 
 # game = ChessVar()
 # game.make_move("a2", "a4")  # white
-# game.make_move("b7", "b5")  # black
+# game.make_move("h7", "h5")  # black
 # game.make_move("c2", "c4")  # white
-# game.make_move("b5", "b4")  # black
+# game.make_move("h5", "h4")  # black
 # game.make_move("d2", "d4")  # white
-# game.make_move("b4", "b3")  # black
+# game.make_move("b7", "b5")  # black
 # game.make_move("a1", "a3")  # white
-# game.make_move("h7", "h6")  # black
+# game.make_move("h8", "h6")  # black
 # game.make_move("a3", "b3")  # white
 # game.print_board()
