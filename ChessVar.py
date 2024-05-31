@@ -273,21 +273,30 @@ class Pawn(ChessPiece):
 
         # adds all possible moves
         if self._color == "white":
-            # coordinates = col_coordinate + str(current_position[0] + 2)
-            possible_moves.append(col_coordinate + str(int(row_position) + 1))
+            # 1 square forward
+            forward_coordinates = convert_board_index_to_coordinates([current_position[0] + 1, current_position[1]])
+            possible_moves.append(forward_coordinates)
+            # check diagonal left
+            diagonal_left = [current_position[0] + 1, current_position[1] - 1]
+            square_is_occupied = (board[diagonal_left[0]][diagonal_left[1]] != " ")
+            if square_is_occupied:
+                diagonal_left_coordinates = convert_board_index_to_coordinates(diagonal_left)
+                possible_moves.append(diagonal_left_coordinates)
+            # check diagonal right
+            diagonal_right = [current_position[0] + 1, current_position[1] + 1]
+            square_is_occupied = (board[diagonal_right[0]][diagonal_right[1]] != " ")
+            if square_is_occupied:
+                diagonal_right_coordinates = convert_board_index_to_coordinates(diagonal_right)
+                possible_moves.append(diagonal_right_coordinates)
+
         else:
             possible_moves.append(col_coordinate + str(int(row_position) - 1))
         if self._move_count == 0:
             possible_moves.append((col_coordinate + str(int(row_position) + 2)) if self._color == "white" else (
                     col_coordinate + str(int(row_position) - 2)))
 
-        # check diagonal left
-        diagonal_left = [current_position[0] + 1, current_position[1] - 1]
-        diagonal_right = [current_position[0] + 1, current_position[1] + 1]
-        square_is_occupied = (board[diagonal_left[0]][diagonal_left[1]] != " ")
-
         # check in possible moves if there is a chess piece in front of the current chess piece
-        # print('all poss moves', self._coordinates, self._color, possible_moves)
+        print('all poss moves', self._coordinates, self._color, possible_moves)
         for possible_next_move in possible_moves:
             possible_next_move_position = convert_coordinates_to_board_index(possible_next_move)
             if self._color == "white":
@@ -300,7 +309,7 @@ class Pawn(ChessPiece):
                 square_in_front_is_occupied = (board[chess_piece_in_front_position[0]][chess_piece_in_front_position[1]] != " ")
                 if possible_next_move_position == chess_piece_in_front_position and square_in_front_is_occupied:
                     possible_moves.remove(possible_next_move)
-                # print('new poss moves', self._coordinates, self._color, possible_moves)
+        print('new poss moves', self._coordinates, self._color, possible_moves)
 
         return possible_moves
 
@@ -398,7 +407,7 @@ class King(ChessPiece):
 
 game = ChessVar()
 game.make_move("a2", "a4")  # white
-# game.make_move("a7", "a6")  # black
-# game.make_move("a4", "a5")  # white
+game.make_move("b7", "b5")  # black
+game.make_move("a4", "a5")  # white
 # game.make_move("a6", "a5")  # black
 game.print_board()
