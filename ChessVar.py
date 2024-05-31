@@ -259,18 +259,13 @@ class ChessVar:
             self.remove_battle_pieces(self._chess_pieces[move_from], self._chess_pieces[move_to])
         else:
             # update chess_pieces dictionary
-
             self._chess_pieces[move_from].set_coordinates(move_to)
             self._chess_pieces[move_to] = self._chess_pieces[move_from]
             del self._chess_pieces[move_from]
-
             # update board with move
             self.update_board(move_from, move_to)
-
-        # update game_state if necessary
         # switch turns
         self.switch_turns()
-
         # return true
         return True
 
@@ -535,12 +530,13 @@ class King(ChessPiece):
         possible_moves = []
 
 
-# game = ChessVar()
-# game.make_move("a2", "a4")  # white
-# game.make_move("g7", "g5")  # black
-# game.make_move("a4", "a5")  # white
-# game.make_move("g5", "g4")  # black
-# game.make_move("a5", "a6")  # white
-# game.make_move("g4", "g3")  # black
-# game.make_move("a6", "b7")  # white
-# game.print_board()
+game = ChessVar()
+game.make_move("a2", "a4")  # white
+game.make_move("h7", "h5")  # black
+game.make_move("a1", "a3")  # white
+game.make_move("h8", "h6")  # black
+game.make_move("a3", "e3")  # white
+game.make_move("h6", "h7")  # black
+game.make_move("e3", "e5")  # white
+# game.make_move("e7", "e5")  # black
+game.print_board()
