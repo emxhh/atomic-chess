@@ -276,21 +276,35 @@ class Pawn(ChessPiece):
             # 1 square forward
             forward_coordinates = convert_board_index_to_coordinates([current_position[0] + 1, current_position[1]])
             possible_moves.append(forward_coordinates)
-            # check diagonal left
+            # check diagonal up left
             diagonal_left = [current_position[0] + 1, current_position[1] - 1]
             square_is_occupied = (board[diagonal_left[0]][diagonal_left[1]] != " ")
             if square_is_occupied:
                 diagonal_left_coordinates = convert_board_index_to_coordinates(diagonal_left)
                 possible_moves.append(diagonal_left_coordinates)
-            # check diagonal right
+            # check diagonal up right
             diagonal_right = [current_position[0] + 1, current_position[1] + 1]
             square_is_occupied = (board[diagonal_right[0]][diagonal_right[1]] != " ")
             if square_is_occupied:
                 diagonal_right_coordinates = convert_board_index_to_coordinates(diagonal_right)
                 possible_moves.append(diagonal_right_coordinates)
+        if self._color == "black":
+            # 1 square forward
+            forward_coordinates = convert_board_index_to_coordinates([current_position[0] - 1, current_position[1]])
+            possible_moves.append(forward_coordinates)
+            # check diagonal down left
+            diagonal_left = [current_position[0] - 1, current_position[1] - 1]
+            square_is_occupied = (board[diagonal_left[0]][diagonal_left[1]] != " ")
+            if square_is_occupied:
+                diagonal_left_coordinates = convert_board_index_to_coordinates(diagonal_left)
+                possible_moves.append(diagonal_left_coordinates)
+            # check diagonal down right
+            diagonal_right = [current_position[0] - 1, current_position[1] + 1]
+            square_is_occupied = (board[diagonal_right[0]][diagonal_right[1]] != " ")
+            if square_is_occupied:
+                diagonal_right_coordinates = convert_board_index_to_coordinates(diagonal_right)
+                possible_moves.append(diagonal_right_coordinates)
 
-        else:
-            possible_moves.append(col_coordinate + str(int(row_position) - 1))
         if self._move_count == 0:
             possible_moves.append((col_coordinate + str(int(row_position) + 2)) if self._color == "white" else (
                     col_coordinate + str(int(row_position) - 2)))
