@@ -159,6 +159,25 @@ class ChessVar:
         new_position = convert_coordinates_to_board_index(move_to)
         self._board[new_position[0]][new_position[1]] = self._chess_pieces[move_to]
 
+    def remove_exploded_pieces(self, captured_piece):
+        """"""
+        surrounding_squares = []
+        captured_piece_position = convert_coordinates_to_board_index(captured_piece._coordinates)
+        surrounding_squares.append([captured_piece_position[0] + 1, captured_piece_position[1] - 1])
+        surrounding_squares.append([captured_piece_position[0] + 1, captured_piece_position[1]])
+        surrounding_squares.append([captured_piece_position[0] + 1, captured_piece_position[1] + 1])
+        surrounding_squares.append([captured_piece_position[0] - 1, captured_piece_position[1] - 1])
+        surrounding_squares.append([captured_piece_position[0] - 1, captured_piece_position[1]])
+        surrounding_squares.append([captured_piece_position[0] - 1, captured_piece_position[1] + 1])
+
+        for square in surrounding_squares:
+            square_is_occupied = (self._board[square[0]][square[1]] != " ")
+            square_is_not_pawn = self._board[square[0]][square[1]]._name != "pawn"
+            if square_is_occupied and square_is_not_pawn:
+                self._board[square[0]][square[1]] = " "
+                coordinates = convert_board_index_to_coordinates(square)
+                del self._chess_pieces[coordinates]
+
     def make_move(self, move_from, move_to):
         """
         Makes a move for the chess piece in the move_from coordinates to the move_to coordinates.
@@ -178,6 +197,9 @@ class ChessVar:
         if self.get_game_state() == "WHITE_WON" or self.get_game_state() == "BLACK_WON":
             return False
         # make the move
+        # if captured piece is the opposing color, then remove exploded pieces
+        if self._chess_pieces[move_to]._color != self._current_player:
+            self.remove_exploded_pieces(self._chess_pieces[move_to])
         # update chess_pieces dictionary
         self._chess_pieces[move_from].set_coordinates(move_to)
         self._chess_pieces[move_to] = self._chess_pieces[move_from]
@@ -185,7 +207,7 @@ class ChessVar:
         # update board with move
         self.update_board(move_from, move_to)
 
-        # remove exploded pieces
+
         # update game_state if necessary
         # switch turns
         self.switch_turns()
