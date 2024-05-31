@@ -200,7 +200,7 @@ class ChessVar:
         """
         # print("chess dict", self._chess_pieces)
         # if move_from does not contain a piece belonging to current player, return false
-        if self._chess_pieces[move_from]._color != self._current_player:
+        if self._chess_pieces[move_from].get_color() != self._current_player:
             return False
         if move_from not in self._chess_pieces:
             return False
@@ -213,7 +213,7 @@ class ChessVar:
             return False
         # make the move
         # if captured piece is the opposing color, then remove exploded pieces
-        if move_to in self._chess_pieces and self._chess_pieces[move_to]._color != self._current_player:
+        if move_to in self._chess_pieces and self._chess_pieces[move_to].get_color() != self._current_player:
             self.remove_exploded_pieces(self._chess_pieces[move_to])
 
         # update chess_pieces dictionary
