@@ -128,7 +128,7 @@ class ChessVar:
             print(str(row) + " ", end="")
             for col in range(self._columns):
                 position = self._board[row - 1][col]
-                print(position if isinstance(position, str) else position._unicode, end="")
+                print(position if isinstance(position, str) else position.get_unicode(), end="")
                 if col < self._rows:
                     print("|", end="")
             if row <= self._rows:
@@ -253,6 +253,11 @@ class ChessPiece:
         self._name = name
         self._color = color
         self._coordinates = coordinates
+        self._unicode = ""
+
+    def get_unicode(self):
+        """Returns unicode of chess piece"""
+        return self._unicode
 
     def get_coordinates(self):
         """Returns chess piece coordinates"""
@@ -274,10 +279,6 @@ class Pawn(ChessPiece):
         super().__init__(name, color, coordinates)
         self._move_count = 0
         self._unicode = "\u2659" if self._color == "white" else "\u265F"
-
-    def get_unicode(self):
-        """Returns unicode of chess piece"""
-        return self._unicode
 
     def set_coordinates(self, coordinates):
         """Updates coordinates of the chess piece."""
@@ -428,12 +429,12 @@ class King(ChessPiece):
         """Returns a list of possible moves for the king from on its current position"""
         possible_moves = []
 
-# game = ChessVar()
-# game.make_move("a2", "a4")  # white
-# game.make_move("b7", "b5")  # black
-# game.make_move("c2", "c4")  # white
-# game.make_move("d7", "d5")  # black
-# game.make_move("b2", "b4")  # white
-# game.make_move("c7", "c5")  # black
-# game.make_move("b4", "c5")  # white
-# game.print_board()
+game = ChessVar()
+game.make_move("a2", "a4")  # white
+game.make_move("b7", "b5")  # black
+game.make_move("c2", "c4")  # white
+game.make_move("d7", "d5")  # black
+game.make_move("b2", "b4")  # white
+game.make_move("c7", "c5")  # black
+game.make_move("b4", "c5")  # white
+game.print_board()
