@@ -110,16 +110,16 @@ class ChessVar:
         # initialize rooks
         rook = Rook("rook", "white", "a1")
         self._board[0][0] = rook
-        self._chess_pieces[rook._coordinates] = rook
+        self._chess_pieces[rook.get_coordinates()] = rook
         rook = Rook("rook", "white", "h1")
         self._board[0][7] = rook
-        self._chess_pieces[rook._coordinates] = rook
+        self._chess_pieces[rook.get_coordinates()] = rook
         rook = Rook("rook", "black", "a8")
         self._board[7][0] = rook
-        self._chess_pieces[rook._coordinates] = rook
+        self._chess_pieces[rook.get_coordinates()] = rook
         rook = Rook("rook", "black", "h8")
         self._board[7][7] = rook
-        self._chess_pieces[rook._coordinates] = rook
+        self._chess_pieces[rook.get_coordinates()] = rook
 
     def print_board(self):
         """Prints the current state of the game board."""
