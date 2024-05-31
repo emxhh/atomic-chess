@@ -37,9 +37,10 @@ def convert_coordinates_to_grid(coordinates):
         "g": 6,
         "h": 7
     }
-    col_position = column_dict[coordinates[0]]
     row_position = int(coordinates[1]) - 1
-    grid_position = [col_position, row_position]
+    col_position = column_dict[coordinates[0]]
+    # grid_position = [col_position, row_position]
+    grid_position = [row_position, col_position]
     return grid_position
 
 
