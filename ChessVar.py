@@ -155,7 +155,7 @@ class ChessVar:
         else:
             self._current_player = "white"
 
-    def is_valid_move(self, board, chess_piece, move_to):
+    def is_valid_move(self, chess_piece, move_to):
         """
         Checks if the move_to coordinates are valid for the chess piece.
         Uses ChessPiece subclasses to get the possible moves.
@@ -205,7 +205,7 @@ class ChessVar:
         if move_from not in self._chess_pieces:
             return False
         # if the move is invalid, return false
-        if not self.is_valid_move(self._board, self._chess_pieces[move_from], move_to):
+        if not self.is_valid_move(self._chess_pieces[move_from], move_to):
             print('invalid move')
             return False
         # if the game_state is won, return false
