@@ -3,6 +3,10 @@
 # Date: 5/28/24
 # Description: Atomic chess game
 
+class InvalidMoveError(Exception):
+    """User-defined exception for invalid move."""
+    pass
+
 def convert_coordinates_to_ascii(coordinates):
     """"""
     col_position = ord(coordinates[0]) - 97  # a-h to ascii
