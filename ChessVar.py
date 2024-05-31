@@ -250,7 +250,7 @@ class Pawn(ChessPiece):
         possible_moves = []
         row_position = self._coordinates[1:]
         col_position = self._coordinates[0]
-        current_position = convert_coordinates_to_grid(self._coordinates)
+        current_position = convert_coordinates_to_board_index(self._coordinates)
 
         # adds all possible moves
         if self._color == "white":
@@ -269,7 +269,7 @@ class Pawn(ChessPiece):
         # check in possible moves if there is a chess piece in front of the current chess piece
         # print('all poss moves', self._coordinates, self._color, possible_moves)
         for possible_next_move in possible_moves:
-            possible_next_move_position = convert_coordinates_to_grid(possible_next_move)
+            possible_next_move_position = convert_coordinates_to_board_index(possible_next_move)
             if self._color == "white":
                 chess_piece_in_front_position = [current_position[0] + 1, current_position[1]]
                 square_in_front_is_occupied = (board[chess_piece_in_front_position[0]][chess_piece_in_front_position[1]] != " ")
