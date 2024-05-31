@@ -173,8 +173,17 @@ class ChessVar:
         new_position = convert_coordinates_to_board_index(move_to)
         self._board[new_position[0]][new_position[1]] = self._chess_pieces[move_to]
 
-    def remove_captured_piece(self, captured_piece):
-        """Removes captured piece"""
+    def remove_battle_pieces(self, attacking_piece, captured_piece):
+        """Removes attacking and captured pieces"""
+        attacking_piece_position = convert_coordinates_to_board_index(attacking_piece.get_coordinates())
+        self._board[attacking_piece_position[0]][attacking_piece_position[1]] = " "
+        coordinates = attacking_piece.get_coordinates()
+        del self._chess_pieces[coordinates]
+
+        captured_piece_position = convert_coordinates_to_board_index(captured_piece.get_coordinates())
+        self._board[captured_piece_position[0]][captured_piece_position[1]] = " "
+        coordinates = captured_piece.get_coordinates()
+        del self._chess_pieces[coordinates]
 
     def remove_exploded_pieces(self, captured_piece):
         """Removes exploded chess pieces"""
@@ -229,18 +238,18 @@ class ChessVar:
             return False
         # make the move
 
-        # remove exploded pieces
+        # if captured piece is the opposing color, remove exploded surrounding pieces and attacking/capturing pieces
         if move_to in self._chess_pieces and self._chess_pieces[move_to].get_color() != self._current_player:
             self.remove_exploded_pieces(self._chess_pieces[move_to])
+            self.remove_battle_pieces(self._chess_pieces[move_from], self._chess_pieces[move_to])
+        else:
+            # update chess_pieces dictionary
+            self._chess_pieces[move_from].set_coordinates(move_to)
+            self._chess_pieces[move_to] = self._chess_pieces[move_from]
+            del self._chess_pieces[move_from]
 
-        # if captured piece is the opposing color, then remove both capturing piece and captured piece
-
-        # update chess_pieces dictionary
-        self._chess_pieces[move_from].set_coordinates(move_to)
-        self._chess_pieces[move_to] = self._chess_pieces[move_from]
-        del self._chess_pieces[move_from]
-        # update board with move
-        self.update_board(move_from, move_to)
+            # update board with move
+            self.update_board(move_from, move_to)
 
         # update game_state if necessary
         # switch turns
@@ -509,14 +518,14 @@ class King(ChessPiece):
         possible_moves = []
 
 
-game = ChessVar()
-game.make_move("a2", "a4")  # white
-game.make_move("b7", "b5")  # black
-game.make_move("c2", "c4")  # white
-game.make_move("h7", "h5")  # black
-game.make_move("a4", "b5")  # white
-game.make_move("f7", "f5")  # black
-game.make_move("a1", "a7")  # white
+# game = ChessVar()
+# game.make_move("a2", "a4")  # white
+# game.make_move("b7", "b5")  # black
+# game.make_move("a4", "b5")  # white
+# game.make_move("h7", "h5")  # black
+# game.make_move("a4", "b5")  # white
+# game.make_move("f7", "f5")  # black
+# game.make_move("a1", "a7")  # white
 # game.make_move("h8", "h6")  # black
-# game.make_move("a3", "c3")  # white
-game.print_board()
+# game.make_move("a1", "a7")  # white
+# game.print_board()
