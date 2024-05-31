@@ -255,6 +255,10 @@ class ChessPiece:
         self._coordinates = coordinates
         self._unicode = ""
 
+    def get_name(self):
+        """Returns the name of the chess piece"""
+        return self._name
+
     def get_color(self):
         """Returns the color of the chess piece"""
         return self._color
