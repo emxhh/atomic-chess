@@ -198,7 +198,6 @@ class ChessVar:
         Makes a move for the chess piece in the move_from coordinates to the move_to coordinates.
         Uses ChessPiece to update coordinates.
         """
-        # print("chess dict", self._chess_pieces)
         # if move_from does not contain a piece belonging to current player, return false
         if self._chess_pieces[move_from].get_color() != self._current_player:
             return False
@@ -409,57 +408,47 @@ class Rook(ChessPiece):
         possible_moves = []
         current_position = convert_coordinates_to_board_index(self._coordinates)
 
-        # move left
+        # check left moves
         left_moves = []
-        left_square = [current_position[0], current_position[1] - 1]
-        if left_square[1] >= 0:
-            square_is_empty = board[left_square[0]][left_square[1]] == " "
-            while square_is_empty:
-                left_moves.append(convert_board_index_to_coordinates(left_square))
-                left_square[1] -= 1
-                square_is_empty = board[left_square[0]][left_square[1]] == " "
-            left_moves.append(convert_board_index_to_coordinates(left_square))
+        for i in range(1, current_position[1] + 1):
+            if current_position[1] - i >= 0:
+                square = [current_position[0], current_position[1] - i]
+                square_is_empty = board[square[0]][square[1]] == " "
+                if square_is_empty:
+                    left_moves.append(convert_board_index_to_coordinates(square))
         possible_moves += left_moves
 
-        # move right
+        # check right moves
         right_moves = []
-        right_square = [current_position[0], current_position[1] + 1]
-        if right_square[1] < 8:
-            square_is_empty = board[right_square[0]][right_square[1]] == " "
-            while square_is_empty:
-                right_moves.append(convert_board_index_to_coordinates(right_square))
-                right_square[1] += 1
-                square_is_empty = board[right_square[0]][right_square[1]] == " "
-            right_moves.append(convert_board_index_to_coordinates(right_square))
+        for i in range(1, 8 - current_position[1]):
+            if current_position[1] - i < 8:
+                square = [current_position[0], current_position[1] + i]
+                square_is_empty = board[square[0]][square[1]] == " "
+                if square_is_empty:
+                    right_moves.append(convert_board_index_to_coordinates(square))
         possible_moves += right_moves
 
-        # move up
+        # check up moves
         up_moves = []
-        up_square = [current_position[0] + 1, current_position[1]]
-        if up_square[0] < 8:
-            square_is_empty = board[up_square[0]][up_square[1]] == " "
-            while square_is_empty:
-                up_moves.append(convert_board_index_to_coordinates(up_square))
-                up_square[0] += 1
-                square_is_empty = board[up_square[0]][up_square[1]] == " "
-            up_moves.append(convert_board_index_to_coordinates(up_square))
+        for i in range(1, 8 - current_position[0]):
+            if current_position[0] - i < 8:
+                square = [current_position[0] + i, current_position[1]]
+                square_is_empty = board[square[0]][square[1]] == " "
+                if square_is_empty:
+                    up_moves.append(convert_board_index_to_coordinates(square))
         possible_moves += up_moves
 
-        # move down
+        # check down moves
         down_moves = []
-        down_square = [current_position[0] - 1, current_position[1]]
-        if down_square[0] >= 0:
-            square_is_empty = board[down_square[0]][down_square[1]] == " "
-            while square_is_empty:
-                down_moves.append(convert_board_index_to_coordinates(down_square))
-                down_square[0] -= 1
-                square_is_empty = board[down_square[0]][down_square[1]] == " "
-            down_moves.append(convert_board_index_to_coordinates(down_square))
+        for i in range(1, current_position[0] + 1):
+            if current_position[0] - i >= 0:
+                square = [current_position[0] - i, current_position[1]]
+                square_is_empty = board[square[0]][square[1]] == " "
+                if square_is_empty:
+                    down_moves.append(convert_board_index_to_coordinates(square))
         possible_moves += down_moves
 
-        print(possible_moves)
         return possible_moves
-
 
 
 class Queen(ChessPiece):
@@ -501,5 +490,5 @@ class King(ChessPiece):
 # game.make_move("b7", "b5")  # black
 # game.make_move("a1", "a3")  # white
 # game.make_move("h8", "h6")  # black
-# game.make_move("a3", "b3")  # white
+# game.make_move("a3", "c3")  # white
 # game.print_board()
