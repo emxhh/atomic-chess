@@ -3,24 +3,6 @@
 # Date: 5/28/24
 # Description: Atomic chess game
 
-# def convert_coordinates_to_ascii(coordinates):
-#     """"""
-#     col_position = ord(coordinates[0]) - 97  # a-h to ascii
-#     row_position = int(coordinates[1:]) - 1  # 1-8 to index val 0-7
-#     ascii_position = [col_position, row_position]
-#     # print('algebraic position', ascii_position)
-#     return ascii_position
-#
-#
-# def convert_ascii_to_coordinates(ascii_position):
-#     """"""
-#     col_coordinate = chr(ascii_position[0] + 97)
-#     row_coordinate = str(ascii_position[1] + 1)
-#     coordinates = col_coordinate + row_coordinate
-#     # print('converted coordinates', coordinates)
-#     return coordinates
-
-
 def convert_coordinates_to_board_index(coordinates):
     """Converts algebraic coordinates to board grid list index positions"""
     column_dict = {
