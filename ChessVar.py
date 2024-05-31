@@ -176,7 +176,7 @@ class ChessVar:
     def remove_exploded_pieces(self, captured_piece):
         """Removes exploded chess pieces"""
         surrounding_squares = []
-        captured_piece_position = convert_coordinates_to_board_index(captured_piece._coordinates)
+        captured_piece_position = convert_coordinates_to_board_index(captured_piece.get_coordinates())
         surrounding_squares.append([captured_piece_position[0] + 1, captured_piece_position[1] - 1])
         surrounding_squares.append([captured_piece_position[0] + 1, captured_piece_position[1]])
         surrounding_squares.append([captured_piece_position[0] + 1, captured_piece_position[1] + 1])
@@ -187,7 +187,7 @@ class ChessVar:
         for square in surrounding_squares:
             square_is_occupied = (self._board[square[0]][square[1]] != " ")
             if square_is_occupied:
-                square_is_not_pawn = self._board[square[0]][square[1]]._name != "pawn"
+                square_is_not_pawn = self._board[square[0]][square[1]].get_name() != "pawn"
                 if square_is_not_pawn:
                     self._board[square[0]][square[1]] = " "
                     coordinates = convert_board_index_to_coordinates(square)
