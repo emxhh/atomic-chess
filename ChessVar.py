@@ -43,6 +43,24 @@ def convert_coordinates_to_board_index(coordinates):
     return board_index_position
 
 
+def convert_board_index_to_coordinates(board_index):
+    """Converts board index to algebraic coordinates"""
+    column_dict = {
+        0: "a",
+        1: "b",
+        2: "c",
+        3: "d",
+        4: "e",
+        5: "f",
+        6: "g",
+        7: "h"
+    }
+    col_coordinate = column_dict[board_index[1]]
+    row_coordinate = str(board_index[0] + 1)
+    coordinates = col_coordinate + row_coordinate
+    return coordinates
+
+
 class Player:
     """
     A class to represent a player in the atomic chess game.
@@ -249,17 +267,19 @@ class Pawn(ChessPiece):
         """Returns a list of possible moves for the pawn from on its current position."""
         possible_moves = []
         row_position = self._coordinates[1:]
-        col_position = self._coordinates[0]
+        col_coordinate = self._coordinates[0]
         current_position = convert_coordinates_to_board_index(self._coordinates)
+        print('curr pos', current_position)
 
         # adds all possible moves
         if self._color == "white":
-            possible_moves.append(col_position + str(int(row_position) + 1))
+            # coordinates = col_coordinate + str(current_position[0] + 2)
+            possible_moves.append(col_coordinate + str(int(row_position) + 1))
         else:
-            possible_moves.append(col_position + str(int(row_position) - 1))
+            possible_moves.append(col_coordinate + str(int(row_position) - 1))
         if self._move_count == 0:
-            possible_moves.append((col_position + str(int(row_position) + 2)) if self._color == "white" else (
-                    col_position + str(int(row_position) - 2)))
+            possible_moves.append((col_coordinate + str(int(row_position) + 2)) if self._color == "white" else (
+                    col_coordinate + str(int(row_position) - 2)))
 
         # check diagonal left
         diagonal_left = [current_position[0] + 1, current_position[1] - 1]
@@ -376,9 +396,9 @@ class King(ChessPiece):
 # game.make_move("a6", "a5") # white
 # game.print_board()
 
-# game = ChessVar()
-# game.make_move("a2", "a4")  # white
+game = ChessVar()
+game.make_move("a2", "a4")  # white
 # game.make_move("a7", "a6")  # black
 # game.make_move("a4", "a5")  # white
 # game.make_move("a6", "a5")  # black
-# game.print_board()
+game.print_board()
