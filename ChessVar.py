@@ -160,7 +160,7 @@ class ChessVar:
         self._board[new_position[0]][new_position[1]] = self._chess_pieces[move_to]
 
     def remove_exploded_pieces(self, captured_piece):
-        """"""
+        """Removes exploded chess pieces"""
         surrounding_squares = []
         captured_piece_position = convert_coordinates_to_board_index(captured_piece._coordinates)
         surrounding_squares.append([captured_piece_position[0] + 1, captured_piece_position[1] - 1])
@@ -172,11 +172,12 @@ class ChessVar:
 
         for square in surrounding_squares:
             square_is_occupied = (self._board[square[0]][square[1]] != " ")
-            square_is_not_pawn = self._board[square[0]][square[1]]._name != "pawn"
-            if square_is_occupied and square_is_not_pawn:
-                self._board[square[0]][square[1]] = " "
-                coordinates = convert_board_index_to_coordinates(square)
-                del self._chess_pieces[coordinates]
+            if square_is_occupied:
+                square_is_not_pawn = self._board[square[0]][square[1]]._name != "pawn"
+                if square_is_not_pawn:
+                    self._board[square[0]][square[1]] = " "
+                    coordinates = convert_board_index_to_coordinates(square)
+                    del self._chess_pieces[coordinates]
 
     def make_move(self, move_from, move_to):
         """
@@ -198,8 +199,8 @@ class ChessVar:
             return False
         # make the move
         # if captured piece is the opposing color, then remove exploded pieces
-        # if self._chess_pieces[move_to]._color != self._current_player:
-        #     self.remove_exploded_pieces(self._chess_pieces[move_to])
+        if move_to in self._chess_pieces and self._chess_pieces[move_to]._color != self._current_player:
+            self.remove_exploded_pieces(self._chess_pieces[move_to])
 
         # update chess_pieces dictionary
         self._chess_pieces[move_from].set_coordinates(move_to)
@@ -408,6 +409,7 @@ class King(ChessPiece):
 # game = ChessVar()
 # game.make_move("a2", "a4")  # white
 # game.make_move("b7", "b5")  # black
-# game.make_move("a4", "a5")  # white
-# game.make_move("a6", "a5")  # black
+# game.make_move("c2", "c4")  # white
+# game.make_move("d7", "d5")  # black
+# game.make_move("a4", "b5")  # white
 # game.print_board()
