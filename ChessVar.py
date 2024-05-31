@@ -160,7 +160,7 @@ class ChessVar:
         Checks if the move_to coordinates are valid for the chess piece.
         Uses ChessPiece subclasses to get the possible moves.
         """
-        possible_moves = chess_piece.possible_moves(board)
+        possible_moves = chess_piece.possible_moves(self._board)
         if move_to in possible_moves:
             return True
         else:
@@ -403,9 +403,57 @@ class Rook(ChessPiece):
         super().__init__(name, color, coordinates)
         self._unicode = "\u2656" if self._color == "white" else "\u265C"
 
-    def possible_moves(self):
+    def possible_moves(self, board):
         """Returns a list of possible moves for the rook from on its current position."""
         possible_moves = []
+        current_position = convert_coordinates_to_board_index(self._coordinates)
+
+        # move left
+        left_moves = []
+        left_square = [current_position[0], current_position[1] - 1]
+        if left_square[1] >= 0:
+            square_is_empty = board[left_square[0]][left_square[1]] == " "
+            while square_is_empty:
+                left_moves.append(convert_board_index_to_coordinates(left_square))
+                left_square[1] -= 1
+                square_is_empty = board[left_square[0]][left_square[1]] == " "
+        possible_moves += left_moves
+
+        # move right
+        right_moves = []
+        right_square = [current_position[0], current_position[1] + 1]
+        if right_square[1] < 8:
+            square_is_empty = board[right_square[0]][right_square[1]] == " "
+            while square_is_empty:
+                right_moves.append(convert_board_index_to_coordinates(right_square))
+                right_square[1] += 1
+                square_is_empty = board[right_square[0]][right_square[1]] == " "
+        possible_moves += right_moves
+
+        # move up
+        up_moves = []
+        up_square = [current_position[0] + 1, current_position[1]]
+        if up_square[0] < 8:
+            square_is_empty = board[up_square[0]][up_square[1]] == " "
+            while square_is_empty:
+                up_moves.append(convert_board_index_to_coordinates(up_square))
+                up_square[0] += 1
+                square_is_empty = board[up_square[0]][up_square[1]] == " "
+        possible_moves += up_moves
+
+        # move down
+        down_moves = []
+        down_square = [current_position[0] - 1, current_position[1]]
+        if down_square[0] < 8:
+            square_is_empty = board[down_square[0]][down_square[1]] == " "
+            while square_is_empty:
+                up_moves.append(convert_board_index_to_coordinates(down_square))
+                down_square[0] -= 1
+                square_is_empty = board[down_square[0]][down_square[1]] == " "
+        possible_moves += up_moves
+
+        return possible_moves
+
 
 
 class Queen(ChessPiece):
@@ -442,8 +490,10 @@ game = ChessVar()
 game.make_move("a2", "a4")  # white
 game.make_move("b7", "b5")  # black
 game.make_move("c2", "c4")  # white
-game.make_move("d7", "d5")  # black
-game.make_move("b2", "b4")  # white
-game.make_move("c7", "c5")  # black
-game.make_move("b4", "c5")  # white
+game.make_move("b5", "b4")  # black
+game.make_move("d2", "d4")  # white
+game.make_move("b4", "b3")  # black
+game.make_move("a1", "a3")  # white
+game.make_move("h7", "h6")  # black
+# game.make_move("a3", "b3")  # white
 game.print_board()
