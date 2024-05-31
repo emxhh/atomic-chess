@@ -371,6 +371,7 @@ class Rook(ChessPiece):
     def __init__(self, name, color, coordinates):
         """Initializes the instance based on name, color, and coordinates of the chess piece."""
         super().__init__(name, color, coordinates)
+        self._unicode = "\u2656" if self._color == "white" else "\u265C"
 
     def possible_moves(self):
         """Returns a list of possible moves for the rook from on its current position."""
@@ -411,5 +412,7 @@ class King(ChessPiece):
 # game.make_move("b7", "b5")  # black
 # game.make_move("c2", "c4")  # white
 # game.make_move("d7", "d5")  # black
-# game.make_move("a4", "b5")  # white
+# game.make_move("b2", "b4")  # white
+# game.make_move("c7", "c5")  # black
+# game.make_move("b4", "c5")  # white
 # game.print_board()
