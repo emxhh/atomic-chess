@@ -183,6 +183,7 @@ class ChessVar:
         captured_piece_position = convert_coordinates_to_board_index(captured_piece.get_coordinates())
         self._board[captured_piece_position[0]][captured_piece_position[1]] = " "
         coordinates = captured_piece.get_coordinates()
+        print("remove battle pieces", self._chess_pieces[coordinates])
         if self._chess_pieces[coordinates].get_name() == "king":
             if self._current_player == "white":
                 self._game_state = "WHITE_WON"
@@ -480,7 +481,6 @@ class Rook(ChessPiece):
             if current_position[0] - i < 8:
                 square = [current_position[0] + i, current_position[1]]
                 square_is_empty = board[square[0]][square[1]] == " "
-                print("sq empty", square_is_empty)
                 if square_is_empty:
                     up_moves.append(convert_board_index_to_coordinates(square))
                 else:
@@ -492,7 +492,6 @@ class Rook(ChessPiece):
         # check down moves
         down_moves = []
         for i in range(1, current_position[0] + 1):
-            print("printing down moves", self, self.get_coordinates())
             if current_position[0] - i >= 0:
                 square = [current_position[0] - i, current_position[1]]
                 square_is_empty = board[square[0]][square[1]] == " "
@@ -500,7 +499,7 @@ class Rook(ChessPiece):
                     down_moves.append(convert_board_index_to_coordinates(square))
         possible_moves += down_moves
 
-        print("rook poss moves", possible_moves)
+        # print("rook poss moves", possible_moves)
         return possible_moves
 
 
@@ -534,13 +533,13 @@ class King(ChessPiece):
         possible_moves = []
 
 
-# game = ChessVar()
-# game.make_move("a2", "a4")  # white
-# game.make_move("e7", "e5")  # black
-# game.make_move("c2", "c4")  # white
-# game.make_move("h8", "e8")  # black
-# game.make_move("b2", "b4")  # white
-# game.make_move("e5", "e4")  # black
-# game.make_move("d2", "d4")  # white
-# game.make_move("e8", "e4")  # black
-# game.print_board()
+game = ChessVar()
+game.make_move("a2", "a4")  # white
+game.make_move("e7", "e5")  # black
+game.make_move("c2", "c4")  # white
+game.make_move("h8", "e8")  # black
+game.make_move("b2", "b4")  # white
+game.make_move("e5", "e4")  # black
+game.make_move("d2", "d4")  # white
+game.make_move("e8", "e4")  # black
+game.print_board()
