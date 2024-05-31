@@ -39,7 +39,6 @@ def convert_coordinates_to_grid(coordinates):
     }
     row_position = int(coordinates[1]) - 1
     col_position = column_dict[coordinates[0]]
-    # grid_position = [col_position, row_position]
     grid_position = [row_position, col_position]
     return grid_position
 
@@ -263,25 +262,20 @@ class Pawn(ChessPiece):
 
         # check in possible moves if there is a chess piece in front of the current chess piece
         current_position = convert_coordinates_to_grid(self._coordinates)
-        print('all poss moves', self._coordinates, self._color, possible_moves)
-        print('board', board)
-        # print(board[1][0]._color, board[1][0]._name)
-
+        # print('all poss moves', self._coordinates, self._color, possible_moves)
         for possible_next_move in possible_moves:
+            possible_next_move_position = convert_coordinates_to_grid(possible_next_move)
             if self._color == "white":
-                possible_next_move_position = convert_coordinates_to_grid(possible_next_move)
-                chess_piece_in_front_position = [current_position[0], current_position[1] + 1]
-                if possible_next_move_position == chess_piece_in_front_position and board[chess_piece_in_front_position[0]][chess_piece_in_front_position[1]] != " ":
+                chess_piece_in_front_position = [current_position[0] + 1, current_position[1]]
+                square_in_front_is_occupied = (board[chess_piece_in_front_position[0]][chess_piece_in_front_position[1]] != " ")
+                if possible_next_move_position == chess_piece_in_front_position and square_in_front_is_occupied:
                     possible_moves.remove(possible_next_move)
             if self._color == "black":
-                possible_next_move_position = convert_coordinates_to_grid(possible_next_move)
-                chess_piece_in_front_position = [current_position[0], current_position[1] - 1]
-                print('test', possible_next_move_position, chess_piece_in_front_position, board[chess_piece_in_front_position[1]][chess_piece_in_front_position[0]], len(board[chess_piece_in_front_position[0]][chess_piece_in_front_position[1]]))
-                print(board[chess_piece_in_front_position[0]][chess_piece_in_front_position[1]] == " ")
-                print(" " == " ")
-                if possible_next_move_position == chess_piece_in_front_position and board[chess_piece_in_front_position[1]][chess_piece_in_front_position[0]] != " ":
+                chess_piece_in_front_position = [current_position[0] - 1, current_position[1]]
+                square_in_front_is_occupied = (board[chess_piece_in_front_position[0]][chess_piece_in_front_position[1]] != " ")
+                if possible_next_move_position == chess_piece_in_front_position and square_in_front_is_occupied:
                     possible_moves.remove(possible_next_move)
-                print('new poss moves', self._coordinates, self._color, possible_moves)
+                # print('new poss moves', self._coordinates, self._color, possible_moves)
 
         return possible_moves
 
