@@ -406,22 +406,6 @@ class King(ChessPiece):
 
 
 # game = ChessVar()
-# game.print_board()
-# game.make_move("a2", "a4")  # white
-# game.make_move("a7", "a5")  # black
-# game.make_move("a4", "a5")  # white
-# game.make_move("f7", "f6")  # black
-# game.make_move("g2", "g3")  # white
-# game.make_move("g7", "g5")  # black
-# print(game._chess_pieces["a5"].possible_moves())
-# print(game._chess_pieces)
-# print(game._chess_pieces["a5"]._move_count)
-# print(game._chess_pieces["a5"].possible_moves(game._board))
-# print(game._chess_pieces["h2"].possible_moves())
-# game.make_move("a6", "a5") # white
-# game.print_board()
-
-# game = ChessVar()
 # game.make_move("a2", "a4")  # white
 # game.make_move("b7", "b5")  # black
 # game.make_move("a4", "a5")  # white
