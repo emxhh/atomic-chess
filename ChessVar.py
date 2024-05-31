@@ -448,7 +448,7 @@ class Rook(ChessPiece):
         # move down
         down_moves = []
         down_square = [current_position[0] - 1, current_position[1]]
-        if down_square[0] < 8:
+        if down_square[0] >= 0:
             square_is_empty = board[down_square[0]][down_square[1]] == " "
             while square_is_empty:
                 down_moves.append(convert_board_index_to_coordinates(down_square))
