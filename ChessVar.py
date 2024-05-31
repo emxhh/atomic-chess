@@ -173,16 +173,33 @@ class ChessVar:
         new_position = convert_coordinates_to_board_index(move_to)
         self._board[new_position[0]][new_position[1]] = self._chess_pieces[move_to]
 
+    def remove_captured_piece(self, captured_piece):
+        """Removes captured piece"""
+
     def remove_exploded_pieces(self, captured_piece):
         """Removes exploded chess pieces"""
         surrounding_squares = []
         captured_piece_position = convert_coordinates_to_board_index(captured_piece.get_coordinates())
-        surrounding_squares.append([captured_piece_position[0] + 1, captured_piece_position[1] - 1])
-        surrounding_squares.append([captured_piece_position[0] + 1, captured_piece_position[1]])
-        surrounding_squares.append([captured_piece_position[0] + 1, captured_piece_position[1] + 1])
-        surrounding_squares.append([captured_piece_position[0] - 1, captured_piece_position[1] - 1])
-        surrounding_squares.append([captured_piece_position[0] - 1, captured_piece_position[1]])
-        surrounding_squares.append([captured_piece_position[0] - 1, captured_piece_position[1] + 1])
+        # top 3 squares
+        if captured_piece_position[1] - 1 >= 0 and captured_piece_position[0] + 1 < 8:
+            surrounding_squares.append([captured_piece_position[0] + 1, captured_piece_position[1] - 1])
+        if captured_piece_position[0] + 1 < 8:
+            surrounding_squares.append([captured_piece_position[0] + 1, captured_piece_position[1]])
+        if captured_piece_position[0] + 1 < 8 and captured_piece_position[1] + 1 < 8:
+            surrounding_squares.append([captured_piece_position[0] + 1, captured_piece_position[1] + 1])
+        # bottom 3 squares
+        if captured_piece_position[0] - 1 >= 0 and captured_piece_position[1] - 1 >= 0:
+            surrounding_squares.append([captured_piece_position[0] - 1, captured_piece_position[1] - 1])
+        if captured_piece_position[0] - 1 >= 0:
+            surrounding_squares.append([captured_piece_position[0] - 1, captured_piece_position[1]])
+        if captured_piece_position[0] - 1 >= 0 and captured_piece_position[1] + 1 < 8:
+            surrounding_squares.append([captured_piece_position[0] - 1, captured_piece_position[1] + 1])
+        # left square
+        if captured_piece_position[1] - 1 >= 0:
+            surrounding_squares.append([captured_piece_position[0], captured_piece_position[1] - 1])
+        # right square
+        if captured_piece_position[1] + 1 < 8:
+            surrounding_squares.append([captured_piece_position[0], captured_piece_position[1] + 1])
 
         for square in surrounding_squares:
             square_is_occupied = (self._board[square[0]][square[1]] != " ")
@@ -211,9 +228,12 @@ class ChessVar:
         if self.get_game_state() == "WHITE_WON" or self.get_game_state() == "BLACK_WON":
             return False
         # make the move
-        # if captured piece is the opposing color, then remove exploded pieces
+
+        # remove exploded pieces
         if move_to in self._chess_pieces and self._chess_pieces[move_to].get_color() != self._current_player:
             self.remove_exploded_pieces(self._chess_pieces[move_to])
+
+        # if captured piece is the opposing color, then remove both capturing piece and captured piece
 
         # update chess_pieces dictionary
         self._chess_pieces[move_from].set_coordinates(move_to)
@@ -304,29 +324,32 @@ class Pawn(ChessPiece):
             possible_moves.append(forward_coordinates)
             # check diagonal up left
             diagonal_left = [current_position[0] + 1, current_position[1] - 1]
-            square_is_occupied = (board[diagonal_left[0]][diagonal_left[1]] != " ")
-            if square_is_occupied:
-                diagonal_left_coordinates = convert_board_index_to_coordinates(diagonal_left)
-                possible_moves.append(diagonal_left_coordinates)
+            if current_position[0] + 1 < 8 and current_position[1] - 1 >= 0:
+                square_is_occupied = (board[diagonal_left[0]][diagonal_left[1]] != " ")
+                if square_is_occupied:
+                    diagonal_left_coordinates = convert_board_index_to_coordinates(diagonal_left)
+                    possible_moves.append(diagonal_left_coordinates)
             # check diagonal up right
             diagonal_right = [current_position[0] + 1, current_position[1] + 1]
-            square_is_occupied = (board[diagonal_right[0]][diagonal_right[1]] != " ")
-            if square_is_occupied:
-                diagonal_right_coordinates = convert_board_index_to_coordinates(diagonal_right)
-                possible_moves.append(diagonal_right_coordinates)
+            if current_position[0] + 1 < 8 and current_position[1] + 1 < 8:
+                square_is_occupied = (board[diagonal_right[0]][diagonal_right[1]] != " ")
+                if square_is_occupied:
+                    diagonal_right_coordinates = convert_board_index_to_coordinates(diagonal_right)
+                    possible_moves.append(diagonal_right_coordinates)
         if self._color == "black":
             # 1 square forward
             forward_coordinates = convert_board_index_to_coordinates([current_position[0] - 1, current_position[1]])
             possible_moves.append(forward_coordinates)
             # check diagonal down left
             diagonal_left = [current_position[0] - 1, current_position[1] - 1]
-            square_is_occupied = (board[diagonal_left[0]][diagonal_left[1]] != " ")
-            if square_is_occupied:
-                diagonal_left_coordinates = convert_board_index_to_coordinates(diagonal_left)
-                possible_moves.append(diagonal_left_coordinates)
+            if current_position[0] - 1 >= 0 and current_position[1] - 1 >= 0:
+                square_is_occupied = (board[diagonal_left[0]][diagonal_left[1]] != " ")
+                if square_is_occupied:
+                    diagonal_left_coordinates = convert_board_index_to_coordinates(diagonal_left)
+                    possible_moves.append(diagonal_left_coordinates)
             # check diagonal down right
             diagonal_right = [current_position[0] - 1, current_position[1] + 1]
-            if diagonal_right[1] < 8:
+            if current_position[0] - 1 >= 0 and current_position[1] + 1 < 8:
                 square_is_occupied = (board[diagonal_right[0]][diagonal_right[1]] != " ")
                 if square_is_occupied:
                     diagonal_right_coordinates = convert_board_index_to_coordinates(diagonal_right)
@@ -434,8 +457,13 @@ class Rook(ChessPiece):
             if current_position[0] - i < 8:
                 square = [current_position[0] + i, current_position[1]]
                 square_is_empty = board[square[0]][square[1]] == " "
+                print("sq empty", square_is_empty)
                 if square_is_empty:
                     up_moves.append(convert_board_index_to_coordinates(square))
+                else:
+                    if board[square[0]][square[1]].get_color() != self._color:
+                        up_moves.append(convert_board_index_to_coordinates(square))
+                    break
         possible_moves += up_moves
 
         # check down moves
@@ -481,14 +509,14 @@ class King(ChessPiece):
         possible_moves = []
 
 
-# game = ChessVar()
-# game.make_move("a2", "a4")  # white
-# game.make_move("h7", "h5")  # black
-# game.make_move("c2", "c4")  # white
-# game.make_move("h5", "h4")  # black
-# game.make_move("d2", "d4")  # white
-# game.make_move("b7", "b5")  # black
-# game.make_move("a1", "a3")  # white
+game = ChessVar()
+game.make_move("a2", "a4")  # white
+game.make_move("b7", "b5")  # black
+game.make_move("c2", "c4")  # white
+game.make_move("h7", "h5")  # black
+game.make_move("a4", "b5")  # white
+game.make_move("f7", "f5")  # black
+game.make_move("a1", "a7")  # white
 # game.make_move("h8", "h6")  # black
 # game.make_move("a3", "c3")  # white
-# game.print_board()
+game.print_board()
