@@ -175,15 +175,16 @@ class ChessVar:
 
     def remove_battle_pieces(self, attacking_piece, captured_piece):
         """Removes attacking and captured pieces"""
+        # remove attacking piece
         attacking_piece_position = convert_coordinates_to_board_index(attacking_piece.get_coordinates())
         self._board[attacking_piece_position[0]][attacking_piece_position[1]] = " "
         coordinates = attacking_piece.get_coordinates()
         del self._chess_pieces[coordinates]
-
+        # remove captured piece
         captured_piece_position = convert_coordinates_to_board_index(captured_piece.get_coordinates())
         self._board[captured_piece_position[0]][captured_piece_position[1]] = " "
         coordinates = captured_piece.get_coordinates()
-        print("remove battle pieces", self._chess_pieces[coordinates])
+        # if king is captured
         if self._chess_pieces[coordinates].get_name() == "king":
             if self._current_player == "white":
                 self._game_state = "WHITE_WON"
@@ -221,15 +222,16 @@ class ChessVar:
             if square_is_occupied:
                 square_is_not_pawn = self._board[square[0]][square[1]].get_name() != "pawn"
                 if square_is_not_pawn:
+                    # if a king is exploding
+                    if self._board[square[0]][square[1]].get_name() == "king":
+                        if self._current_player == "white":
+                            self._game_state = "WHITE_WON"
+                        else:
+                            self._game_state = "BLACK_WON"
+                    # remove exploding chess pieces
                     self._board[square[0]][square[1]] = " "
                     coordinates = convert_board_index_to_coordinates(square)
                     del self._chess_pieces[coordinates]
-                # if a king explodes
-                if self._board[square[0]][square[1]].get_name() == "king":
-                    if self._current_player == "white":
-                        self._game_state = "WHITE_WON"
-                    else:
-                        self._game_state = "BLACK_WON"
 
     def make_move(self, move_from, move_to):
         """
@@ -535,11 +537,10 @@ class King(ChessPiece):
 
 # game = ChessVar()
 # game.make_move("a2", "a4")  # white
-# game.make_move("e7", "e5")  # black
-# game.make_move("c2", "c4")  # white
-# game.make_move("h8", "e8")  # black
-# game.make_move("b2", "b4")  # white
-# game.make_move("e5", "e4")  # black
-# game.make_move("d2", "d4")  # white
-# game.make_move("e8", "e4")  # black
+# game.make_move("g7", "g5")  # black
+# game.make_move("a4", "a5")  # white
+# game.make_move("g5", "g4")  # black
+# game.make_move("a5", "a6")  # white
+# game.make_move("g4", "g3")  # black
+# game.make_move("a6", "b7")  # white
 # game.print_board()
