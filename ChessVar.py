@@ -174,6 +174,13 @@ class ChessVar:
         else:
             return False
 
+    def update_board(self, move_from, move_to):
+        """Updates board with newly made move"""
+        current_position = convert_coordinates_to_board_index(move_from)
+        self._board[current_position[0]][current_position[1]] = " "
+        new_position = convert_coordinates_to_board_index(move_to)
+        self._board[new_position[0]][new_position[1]] = self._chess_pieces[move_to]
+
     def make_move(self, move_from, move_to):
         """
         Makes a move for the chess piece in the move_from coordinates to the move_to coordinates.
@@ -198,16 +205,17 @@ class ChessVar:
         self._chess_pieces[move_to] = self._chess_pieces[move_from]
         del self._chess_pieces[move_from]
         # update board with move
-        col_coordinate = move_from[0]
-        row_coordinate = int(move_from[1:])
-        col_position = ord(col_coordinate) - 97
-        row_position = row_coordinate - 1
-        self._board[row_position][col_position] = " "
-        col_coordinate = move_to[0]
-        row_coordinate = int(move_to[1:])
-        col_position = ord(col_coordinate) - 97
-        row_position = row_coordinate - 1
-        self._board[row_position][col_position] = self._chess_pieces[move_to]
+        self.update_board(move_from, move_to)
+        # col_coordinate = move_from[0]
+        # row_coordinate = int(move_from[1:])
+        # col_position = ord(col_coordinate) - 97
+        # row_position = row_coordinate - 1
+        # self._board[row_position][col_position] = " "
+        # col_coordinate = move_to[0]
+        # row_coordinate = int(move_to[1:])
+        # col_position = ord(col_coordinate) - 97
+        # row_position = row_coordinate - 1
+        # self._board[row_position][col_position] = self._chess_pieces[move_to]
 
         # remove exploded pieces
         # update game_state if necessary
@@ -317,12 +325,14 @@ class Pawn(ChessPiece):
             possible_next_move_position = convert_coordinates_to_board_index(possible_next_move)
             if self._color == "white":
                 chess_piece_in_front_position = [current_position[0] + 1, current_position[1]]
-                square_in_front_is_occupied = (board[chess_piece_in_front_position[0]][chess_piece_in_front_position[1]] != " ")
+                square_in_front_is_occupied = (
+                            board[chess_piece_in_front_position[0]][chess_piece_in_front_position[1]] != " ")
                 if possible_next_move_position == chess_piece_in_front_position and square_in_front_is_occupied:
                     possible_moves.remove(possible_next_move)
             if self._color == "black":
                 chess_piece_in_front_position = [current_position[0] - 1, current_position[1]]
-                square_in_front_is_occupied = (board[chess_piece_in_front_position[0]][chess_piece_in_front_position[1]] != " ")
+                square_in_front_is_occupied = (
+                            board[chess_piece_in_front_position[0]][chess_piece_in_front_position[1]] != " ")
                 if possible_next_move_position == chess_piece_in_front_position and square_in_front_is_occupied:
                     possible_moves.remove(possible_next_move)
         # print('new poss moves', self._coordinates, self._color, possible_moves)
@@ -403,7 +413,6 @@ class King(ChessPiece):
     def possible_moves(self):
         """Returns a list of possible moves for the king from on its current position"""
         possible_moves = []
-
 
 # game = ChessVar()
 # game.make_move("a2", "a4")  # white
