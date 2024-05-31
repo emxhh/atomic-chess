@@ -107,6 +107,20 @@ class ChessVar:
             self._board[row_coordinate - 1][col] = pawn
             self._chess_pieces[coordinates] = pawn
 
+        # initialize rooks
+        rook = Rook("rook", "white", "a1")
+        self._board[0][0] = rook
+        self._chess_pieces[rook._coordinates] = rook
+        rook = Rook("rook", "white", "h1")
+        self._board[0][7] = rook
+        self._chess_pieces[rook._coordinates] = rook
+        rook = Rook("rook", "black", "a8")
+        self._board[7][0] = rook
+        self._chess_pieces[rook._coordinates] = rook
+        rook = Rook("rook", "black", "h8")
+        self._board[7][7] = rook
+        self._chess_pieces[rook._coordinates] = rook
+
     def print_board(self):
         """Prints the current state of the game board."""
         print("  a", "b", "c", "d", "e", "f", "g", "h")
@@ -244,6 +258,7 @@ class ChessPiece:
     def set_coordinates(self, coordinates):
         """Updates coordinates of the chess piece."""
         self._coordinates = coordinates
+
 
 
 class Pawn(ChessPiece):
