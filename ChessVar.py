@@ -255,6 +255,10 @@ class ChessPiece:
         self._coordinates = coordinates
         self._unicode = ""
 
+    def get_color(self):
+        """Returns the color of the chess piece"""
+        return self._color
+
     def get_unicode(self):
         """Returns unicode of chess piece"""
         return self._unicode
@@ -428,6 +432,7 @@ class King(ChessPiece):
     def possible_moves(self):
         """Returns a list of possible moves for the king from on its current position"""
         possible_moves = []
+
 
 game = ChessVar()
 game.make_move("a2", "a4")  # white
