@@ -327,10 +327,11 @@ class Pawn(ChessPiece):
                 possible_moves.append(diagonal_left_coordinates)
             # check diagonal down right
             diagonal_right = [current_position[0] - 1, current_position[1] + 1]
-            square_is_occupied = (board[diagonal_right[0]][diagonal_right[1]] != " ")
-            if square_is_occupied:
-                diagonal_right_coordinates = convert_board_index_to_coordinates(diagonal_right)
-                possible_moves.append(diagonal_right_coordinates)
+            if diagonal_right[1] < 8:
+                square_is_occupied = (board[diagonal_right[0]][diagonal_right[1]] != " ")
+                if square_is_occupied:
+                    diagonal_right_coordinates = convert_board_index_to_coordinates(diagonal_right)
+                    possible_moves.append(diagonal_right_coordinates)
 
         if self._move_count == 0:
             if self._color == "white":
@@ -417,6 +418,7 @@ class Rook(ChessPiece):
                 left_moves.append(convert_board_index_to_coordinates(left_square))
                 left_square[1] -= 1
                 square_is_empty = board[left_square[0]][left_square[1]] == " "
+            left_moves.append(convert_board_index_to_coordinates(left_square))
         possible_moves += left_moves
 
         # move right
@@ -428,6 +430,7 @@ class Rook(ChessPiece):
                 right_moves.append(convert_board_index_to_coordinates(right_square))
                 right_square[1] += 1
                 square_is_empty = board[right_square[0]][right_square[1]] == " "
+            right_moves.append(convert_board_index_to_coordinates(right_square))
         possible_moves += right_moves
 
         # move up
@@ -439,6 +442,7 @@ class Rook(ChessPiece):
                 up_moves.append(convert_board_index_to_coordinates(up_square))
                 up_square[0] += 1
                 square_is_empty = board[up_square[0]][up_square[1]] == " "
+            up_moves.append(convert_board_index_to_coordinates(up_square))
         possible_moves += up_moves
 
         # move down
@@ -450,7 +454,8 @@ class Rook(ChessPiece):
                 up_moves.append(convert_board_index_to_coordinates(down_square))
                 down_square[0] -= 1
                 square_is_empty = board[down_square[0]][down_square[1]] == " "
-        possible_moves += up_moves
+            down_moves.append(convert_board_index_to_coordinates(down_square))
+        possible_moves += down_moves
 
         return possible_moves
 
@@ -495,5 +500,5 @@ game.make_move("d2", "d4")  # white
 game.make_move("b4", "b3")  # black
 game.make_move("a1", "a3")  # white
 game.make_move("h7", "h6")  # black
-# game.make_move("a3", "b3")  # white
+game.make_move("a3", "b3")  # white
 game.print_board()
