@@ -491,14 +491,14 @@ class King(ChessPiece):
         possible_moves = []
 
 
-game = ChessVar()
-game.make_move("a2", "a4")  # white
-game.make_move("b7", "b5")  # black
-game.make_move("c2", "c4")  # white
-game.make_move("b5", "b4")  # black
-game.make_move("d2", "d4")  # white
-game.make_move("b4", "b3")  # black
-game.make_move("a1", "a3")  # white
-game.make_move("h7", "h6")  # black
-game.make_move("a3", "b3")  # white
-game.print_board()
+# game = ChessVar()
+# game.make_move("a2", "a4")  # white
+# game.make_move("b7", "b5")  # black
+# game.make_move("c2", "c4")  # white
+# game.make_move("b5", "b4")  # black
+# game.make_move("d2", "d4")  # white
+# game.make_move("b4", "b3")  # black
+# game.make_move("a1", "a3")  # white
+# game.make_move("h7", "h6")  # black
+# game.make_move("a3", "b3")  # white
+# game.print_board()
