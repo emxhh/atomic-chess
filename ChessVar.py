@@ -338,11 +338,12 @@ class Pawn(ChessPiece):
         possible_moves = []
         current_position = convert_coordinates_to_board_index(self._coordinates)
 
-        # add all possible moves
+        # add possible moves
         if self._color == "white":
             # 1 square forward
             forward_coordinates = convert_board_index_to_coordinates([current_position[0] + 1, current_position[1]])
-            possible_moves.append(forward_coordinates)
+            if board[current_position[0] + 1][current_position[1]] == " ":
+                possible_moves.append(forward_coordinates)
             # check diagonal up left
             diagonal_left = [current_position[0] + 1, current_position[1] - 1]
             if current_position[0] + 1 < 8 and current_position[1] - 1 >= 0:
@@ -360,7 +361,8 @@ class Pawn(ChessPiece):
         if self._color == "black":
             # 1 square forward
             forward_coordinates = convert_board_index_to_coordinates([current_position[0] - 1, current_position[1]])
-            possible_moves.append(forward_coordinates)
+            if board[current_position[0] - 1][current_position[1]] == " ":
+                possible_moves.append(forward_coordinates)
             # check diagonal down left
             diagonal_left = [current_position[0] - 1, current_position[1] - 1]
             if current_position[0] - 1 >= 0 and current_position[1] - 1 >= 0:
@@ -380,28 +382,12 @@ class Pawn(ChessPiece):
             if self._color == "white":
                 # 2 squares forward
                 forward_coordinates = convert_board_index_to_coordinates([current_position[0] + 2, current_position[1]])
-                possible_moves.append(forward_coordinates)
+                if board[current_position[0] + 2][current_position[1]] == " ":
+                    possible_moves.append(forward_coordinates)
             if self._color == "black":
                 forward_coordinates = convert_board_index_to_coordinates([current_position[0] - 2, current_position[1]])
-                possible_moves.append(forward_coordinates)
-
-        # check in possible moves if there is a chess piece in front of the current chess piece
-        # print('all poss moves', self._coordinates, self._color, possible_moves)
-        for possible_next_move in possible_moves:
-            possible_next_move_position = convert_coordinates_to_board_index(possible_next_move)
-            if self._color == "white":
-                chess_piece_in_front_position = [current_position[0] + 1, current_position[1]]
-                square_in_front_is_occupied = (
-                        board[chess_piece_in_front_position[0]][chess_piece_in_front_position[1]] != " ")
-                if possible_next_move_position == chess_piece_in_front_position and square_in_front_is_occupied:
-                    possible_moves.remove(possible_next_move)
-            if self._color == "black":
-                chess_piece_in_front_position = [current_position[0] - 1, current_position[1]]
-                square_in_front_is_occupied = (
-                        board[chess_piece_in_front_position[0]][chess_piece_in_front_position[1]] != " ")
-                if possible_next_move_position == chess_piece_in_front_position and square_in_front_is_occupied:
-                    possible_moves.remove(possible_next_move)
-        # print('new poss moves', self._coordinates, self._color, possible_moves)
+                if board[current_position[0] - 2][current_position[1]] == " ":
+                    possible_moves.append(forward_coordinates)
 
         return possible_moves
 
@@ -530,13 +516,13 @@ class King(ChessPiece):
         possible_moves = []
 
 
-game = ChessVar()
-game.make_move("a2", "a4")  # white
-game.make_move("h7", "h5")  # black
-game.make_move("a1", "a3")  # white
-game.make_move("h8", "h6")  # black
-game.make_move("a3", "e3")  # white
-game.make_move("h6", "h7")  # black
-game.make_move("e3", "e5")  # white
+# game = ChessVar()
+# game.make_move("a2", "a4")  # white
+# game.make_move("h7", "h5")  # black
+# game.make_move("a1", "a3")  # white
+# game.make_move("h8", "h6")  # black
+# game.make_move("a3", "e3")  # white
+# game.make_move("h6", "h7")  # black
+# game.make_move("e3", "e5")  # white
 # game.make_move("e7", "e5")  # black
-game.print_board()
+# game.print_board()
