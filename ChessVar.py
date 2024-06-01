@@ -577,21 +577,21 @@ class King(ChessPiece):
         possible_moves = []
 
 
-game = ChessVar()
-game.make_move("a2", "a4")  # white
-game.make_move("h7", "h5")  # black
-game.make_move("a1", "a3")  # white
-game.make_move("h8", "h6")  # black
-game.make_move("a3", "e3")  # white
-game.make_move("h6", "h7")  # black
-game.make_move("e3", "e5")  # white
-
-game.make_move("e7", "e6")  # black
-game.make_move("h2", "h4")  # white
-game.make_move("h7", "h6")  # black
-game.make_move("h1", "h3")  # white
-game.make_move("h6", "f6")  # black
-game.make_move("e5", "e6")  # white
-
-game.make_move("f8", "e7")  # black
-game.print_board()
+# game = ChessVar()
+# game.make_move("a2", "a4")  # white
+# game.make_move("h7", "h5")  # black
+# game.make_move("a1", "a3")  # white
+# game.make_move("h8", "h6")  # black
+# game.make_move("a3", "e3")  # white
+# game.make_move("h6", "h7")  # black
+# game.make_move("e3", "e5")  # white
+#
+# game.make_move("e7", "e6")  # black
+# game.make_move("h2", "h4")  # white
+# game.make_move("h7", "h6")  # black
+# game.make_move("h1", "h3")  # white
+# game.make_move("h6", "f6")  # black
+# game.make_move("e5", "e6")  # white
+#
+# game.make_move("f8", "e7")  # black
+# game.print_board()
