@@ -419,9 +419,53 @@ class Bishop(ChessPiece):
         super().__init__(name, color, coordinates)
         self._unicode = "\u2657" if self._color == "white" else "\u265D"
 
-    def possible_moves(self):
+    def possible_moves(self, board):
         """Returns a list of possible moves for the bishop from on its current position."""
         possible_moves = []
+        current_position = convert_coordinates_to_board_index(self._coordinates)
+
+        # check diagonal up left
+        diagonal_up_left_moves = []
+        end = max(8 - current_position[0], current_position[1] + 1)
+        for i in range(1, end):
+            if current_position[0] + i < 8 and current_position[1] - i >= 0:
+                square = [current_position[0] + i, current_position[1] - i]
+                square_is_empty = board[square[0]][square[1]] == " "
+                if square_is_empty:
+                    diagonal_up_left_moves.append(convert_board_index_to_coordinates(square))
+        possible_moves += diagonal_up_left_moves
+        # check diagonal up right
+        diagonal_up_right_moves = []
+        end = max(8 - current_position[0], current_position[1] - 1)
+        for i in range(1, end):
+            if current_position[0] + i < 8 and current_position[1] + i < 8:
+                square = [current_position[0] + i, current_position[1] + i]
+                square_is_empty = board[square[0]][square[1]] == " "
+                if square_is_empty:
+                    diagonal_up_right_moves.append(convert_board_index_to_coordinates(square))
+        possible_moves += diagonal_up_right_moves
+        # check diagonal down left
+        diagonal_down_left_moves = []
+        end = max(current_position[0] + 1, current_position[1] + 1)
+        for i in range(1, end):
+            if current_position[0] - i >= 0 and current_position[1] - i >= 0:
+                square = [current_position[0] - i, current_position[1] - i]
+                square_is_empty = board[square[0]][square[1]] == " "
+                if square_is_empty:
+                    diagonal_down_left_moves.append(convert_board_index_to_coordinates(square))
+        possible_moves += diagonal_down_left_moves
+        # check diagonal down right
+        diagonal_down_right_moves = []
+        end = max(current_position[0] + 1, 8 - current_position[1])
+        for i in range(1, end):
+            if current_position[0] - i >= 0 and current_position[1] + i < 8:
+                square = [current_position[0] - i, current_position[1] + i]
+                square_is_empty = board[square[0]][square[1]] == " "
+                if square_is_empty:
+                    diagonal_down_right_moves.append(convert_board_index_to_coordinates(square))
+        possible_moves += diagonal_down_right_moves
+
+        return possible_moves
 
 
 class Knight(ChessPiece):
@@ -533,19 +577,21 @@ class King(ChessPiece):
         possible_moves = []
 
 
-# game = ChessVar()
-# game.make_move("a2", "a4")  # white
-# game.make_move("h7", "h5")  # black
-# game.make_move("a1", "a3")  # white
-# game.make_move("h8", "h6")  # black
-# game.make_move("a3", "e3")  # white
-# game.make_move("h6", "h7")  # black
-# game.make_move("e3", "e5")  # white
-#
-# game.make_move("e7", "e6")  # black
-# game.make_move("h2", "h4")  # white
-# game.make_move("h7", "h6")  # black
-# game.make_move("h1", "h3")  # white
-# game.make_move("h6", "f6")  # black
-# game.make_move("e5", "e6")  # white
-# game.print_board()
+game = ChessVar()
+game.make_move("a2", "a4")  # white
+game.make_move("h7", "h5")  # black
+game.make_move("a1", "a3")  # white
+game.make_move("h8", "h6")  # black
+game.make_move("a3", "e3")  # white
+game.make_move("h6", "h7")  # black
+game.make_move("e3", "e5")  # white
+
+game.make_move("e7", "e6")  # black
+game.make_move("h2", "h4")  # white
+game.make_move("h7", "h6")  # black
+game.make_move("h1", "h3")  # white
+game.make_move("h6", "f6")  # black
+game.make_move("e5", "e6")  # white
+
+game.make_move("f8", "e7")  # black
+game.print_board()
