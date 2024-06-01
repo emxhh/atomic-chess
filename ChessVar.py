@@ -121,6 +121,21 @@ class ChessVar:
         self._board[7][7] = rook
         self._chess_pieces[rook.get_coordinates()] = rook
 
+        # initialize bishops
+        bishop = Bishop("bishop", "white", "c1")
+        self._board[0][2] = bishop
+        self._chess_pieces[bishop.get_coordinates()] = bishop
+        bishop = Bishop("bishop", "white", "f1")
+        self._board[0][5] = bishop
+        self._chess_pieces[bishop.get_coordinates()] = bishop
+        bishop = Bishop("bishop", "black", "c8")
+        self._board[7][2] = bishop
+        self._chess_pieces[bishop.get_coordinates()] = bishop
+        bishop = Bishop("bishop", "black", "f8")
+        self._board[7][5] = bishop
+        self._chess_pieces[bishop.get_coordinates()] = bishop
+
+
     def print_board(self):
         """Prints the current state of the game board."""
         print("  a", "b", "c", "d", "e", "f", "g", "h")
