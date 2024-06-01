@@ -255,8 +255,9 @@ class ChessVar:
         # make the move
         # if captured piece is the opposing color, remove exploded surrounding pieces and attacking/capturing pieces
         if move_to in self._chess_pieces and self._chess_pieces[move_to].get_color() != self._current_player:
-            self.remove_exploded_pieces(self._chess_pieces[move_to])
-            self.remove_battle_pieces(self._chess_pieces[move_from], self._chess_pieces[move_to])
+            captured_piece = self._chess_pieces[move_to]
+            self.remove_battle_pieces(self._chess_pieces[move_from], captured_piece)
+            self.remove_exploded_pieces(captured_piece)
         else:
             # update chess_pieces dictionary
             self._chess_pieces[move_from].set_coordinates(move_to)
@@ -524,5 +525,11 @@ class King(ChessPiece):
 # game.make_move("a3", "e3")  # white
 # game.make_move("h6", "h7")  # black
 # game.make_move("e3", "e5")  # white
-# game.make_move("e7", "e5")  # black
+#
+# game.make_move("e7", "e6")  # black
+# game.make_move("h2", "h4")  # white
+# game.make_move("h7", "h6")  # black
+# game.make_move("h1", "h3")  # white
+# game.make_move("h6", "f6")  # black
+# game.make_move("e5", "e6")  # white
 # game.print_board()
