@@ -523,6 +523,10 @@ class Rook(ChessPiece):
                 square_is_empty = board[square[0]][square[1]] == " "
                 if square_is_empty:
                     left_moves.append(convert_board_index_to_coordinates(square))
+                else:
+                    if board[square[0]][square[1]].get_color() != self._color:
+                        left_moves.append(convert_board_index_to_coordinates(square))
+                    break
         possible_moves += left_moves
 
         # check right moves
@@ -533,6 +537,10 @@ class Rook(ChessPiece):
                 square_is_empty = board[square[0]][square[1]] == " "
                 if square_is_empty:
                     right_moves.append(convert_board_index_to_coordinates(square))
+                else:
+                    if board[square[0]][square[1]].get_color() != self._color:
+                        right_moves.append(convert_board_index_to_coordinates(square))
+                    break
         possible_moves += right_moves
 
         # check up moves
@@ -557,9 +565,12 @@ class Rook(ChessPiece):
                 square_is_empty = board[square[0]][square[1]] == " "
                 if square_is_empty:
                     down_moves.append(convert_board_index_to_coordinates(square))
+                else:
+                    if board[square[0]][square[1]].get_color() != self._color:
+                        down_moves.append(convert_board_index_to_coordinates(square))
+                    break
         possible_moves += down_moves
 
-        # print("rook poss moves", possible_moves)
         return possible_moves
 
 
