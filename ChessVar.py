@@ -623,8 +623,8 @@ class King(ChessPiece):
 # game.make_move("f8", "e7")  # black
 # game.print_board()
 
-game = ChessVar()
-game.make_move("d2", "d4")  # white
-game.make_move("e7", "e5")  # black
-game.make_move("c1", "a3")  # white
-game.print_board()
+# game = ChessVar()
+# game.make_move("d2", "d4")  # white
+# game.make_move("e7", "e5")  # black
+# game.make_move("c1", "a3")  # white
+# game.print_board()
