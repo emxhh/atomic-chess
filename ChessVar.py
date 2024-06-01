@@ -433,6 +433,10 @@ class Bishop(ChessPiece):
                 square_is_empty = board[square[0]][square[1]] == " "
                 if square_is_empty:
                     diagonal_up_left_moves.append(convert_board_index_to_coordinates(square))
+                else:
+                    if board[square[0]][square[1]].get_color() != self._color:
+                        diagonal_up_left_moves.append(convert_board_index_to_coordinates(square))
+                    break
         possible_moves += diagonal_up_left_moves
         # check diagonal up right
         diagonal_up_right_moves = []
@@ -443,6 +447,10 @@ class Bishop(ChessPiece):
                 square_is_empty = board[square[0]][square[1]] == " "
                 if square_is_empty:
                     diagonal_up_right_moves.append(convert_board_index_to_coordinates(square))
+                else:
+                    if board[square[0]][square[1]].get_color() != self._color:
+                        diagonal_up_right_moves.append(convert_board_index_to_coordinates(square))
+                    break
         possible_moves += diagonal_up_right_moves
         # check diagonal down left
         diagonal_down_left_moves = []
@@ -453,6 +461,10 @@ class Bishop(ChessPiece):
                 square_is_empty = board[square[0]][square[1]] == " "
                 if square_is_empty:
                     diagonal_down_left_moves.append(convert_board_index_to_coordinates(square))
+                else:
+                    if board[square[0]][square[1]].get_color() != self._color:
+                        diagonal_down_left_moves.append(convert_board_index_to_coordinates(square))
+                    break
         possible_moves += diagonal_down_left_moves
         # check diagonal down right
         diagonal_down_right_moves = []
@@ -463,6 +475,10 @@ class Bishop(ChessPiece):
                 square_is_empty = board[square[0]][square[1]] == " "
                 if square_is_empty:
                     diagonal_down_right_moves.append(convert_board_index_to_coordinates(square))
+                else:
+                    if board[square[0]][square[1]].get_color() != self._color:
+                        diagonal_down_right_moves.append(convert_board_index_to_coordinates(square))
+                    break
         possible_moves += diagonal_down_right_moves
 
         return possible_moves
@@ -595,3 +611,9 @@ class King(ChessPiece):
 #
 # game.make_move("f8", "e7")  # black
 # game.print_board()
+
+game = ChessVar()
+game.make_move("d2", "d4")  # white
+game.make_move("e7", "e5")  # black
+game.make_move("c1", "a3")  # white
+game.print_board()
