@@ -135,6 +135,19 @@ class ChessVar:
         self._board[7][5] = bishop
         self._chess_pieces[bishop.get_coordinates()] = bishop
 
+        # initialize knights
+        knight = Knight("knight", "white", "b1")
+        self._board[0][1] = knight
+        self._chess_pieces[knight.get_coordinates()] = knight
+        knight = Knight("knight", "white", "g1")
+        self._board[0][6] = knight
+        self._chess_pieces[knight.get_coordinates()] = knight
+        knight = Knight("knight", "black", "b8")
+        self._board[7][1] = knight
+        self._chess_pieces[knight.get_coordinates()] = knight
+        knight = Knight("knight", "black", "g8")
+        self._board[7][6] = knight
+        self._chess_pieces[knight.get_coordinates()] = knight
 
     def print_board(self):
         """Prints the current state of the game board."""
