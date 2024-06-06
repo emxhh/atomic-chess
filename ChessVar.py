@@ -561,7 +561,7 @@ class Knight(ChessPiece):
     Inherits from ChessPiece.
     """
 
-    def __init__(self, name, color, coordinates):
+    def __init__(self, name: str, color: str, coordinates: str) -> None:
         """Initializes the instance based on name, color, and coordinates of the chess piece."""
         super().__init__(name, color, coordinates)
         self._unicode = "\u2658" if self._color == "white" else "\u265E"
@@ -583,7 +583,7 @@ class Rook(ChessPiece):
     Inherits from ChessPiece.
     """
 
-    def __init__(self, name, color, coordinates):
+    def __init__(self, name: str, color: str, coordinates: str) -> None:
         """Initializes the instance based on name, color, and coordinates of the chess piece."""
         super().__init__(name, color, coordinates)
         self._unicode = "\u2656" if self._color == "white" else "\u265C"
@@ -657,7 +657,7 @@ class Queen(ChessPiece):
     Inherits from ChessPiece.
     """
 
-    def __init__(self, name, color, coordinates):
+    def __init__(self, name: str, color: str, coordinates: str) -> None:
         """Initializes the instance based on name, color, and coordinates of the chess piece."""
         super().__init__(name, color, coordinates)
         self._unicode = "\u2655" if self._color == "white" else "\u265B"
@@ -677,7 +677,7 @@ class King(ChessPiece):
     Inherits from ChessPiece.
     """
 
-    def __init__(self, name, color, coordinates):
+    def __init__(self, name: str, color: str, coordinates: str) -> None:
         """Initializes the instance based on name, color, and coordinates of the chess piece."""
         super().__init__(name, color, coordinates)
         self._unicode = "\u2654" if self._color == "white" else "\u265A"
