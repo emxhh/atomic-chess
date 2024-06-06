@@ -603,7 +603,10 @@ class Knight(ChessPiece):
         for step in possible_steps:
             square = [current_position[0] + step[0], current_position[1] + step[1]]
             if 0 <= square[0] < 8 and 0 <= square[1] < 8:
-                if board[square[0]][square[1]].get_color() != self._color:
+                if not self.square_is_empty(board, square):
+                    if board[square[0]][square[1]].get_color() != self._color:
+                        possible_moves.append(convert_board_index_to_coordinates(square))
+                else:
                     possible_moves.append(convert_board_index_to_coordinates(square))
         return possible_moves
 
