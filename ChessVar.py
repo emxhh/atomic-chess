@@ -217,17 +217,26 @@ class ChessVar:
         new_position = convert_coordinates_to_board_index(move_to)
         self._board[new_position[0]][new_position[1]] = self._chess_pieces[move_to]
 
+    def both_kings_killed(self, attacking_piece, captured_piece):
+        """Checks if a move would kill both kings in one step"""
+        pass
+
     def remove_battle_pieces(self, attacking_piece, captured_piece):
         """Removes attacking and captured pieces"""
+        captured_piece_position = convert_coordinates_to_board_index(captured_piece.get_coordinates())
+        captured_coordinates = captured_piece.get_coordinates()
+        if self._chess_pieces[captured_coordinates].get_name() == "king":
+            pass
+
         # remove attacking piece
         attacking_piece_position = convert_coordinates_to_board_index(attacking_piece.get_coordinates())
         self._board[attacking_piece_position[0]][attacking_piece_position[1]] = " "
         coordinates = attacking_piece.get_coordinates()
         del self._chess_pieces[coordinates]
+
         # remove captured piece
-        captured_piece_position = convert_coordinates_to_board_index(captured_piece.get_coordinates())
         self._board[captured_piece_position[0]][captured_piece_position[1]] = " "
-        coordinates = captured_piece.get_coordinates()
+
         # if king is captured
         if self._chess_pieces[coordinates].get_name() == "king":
             if self._current_player == "white":
@@ -273,6 +282,7 @@ class ChessVar:
                         else:
                             self._game_state = "BLACK_WON"
                         self.return_winner()
+
                     # remove exploding chess pieces
                     self._board[square[0]][square[1]] = " "
                     coordinates = convert_board_index_to_coordinates(square)
@@ -302,6 +312,8 @@ class ChessVar:
         # if captured piece is the opposing color, remove exploded surrounding pieces and attacking/capturing pieces
         if move_to in self._chess_pieces and self._chess_pieces[move_to].get_color() != self._current_player:
             captured_piece = self._chess_pieces[move_to]
+            if self.both_kings_killed(self._chess_pieces[move_from], captured_piece):
+                return False
             self.remove_battle_pieces(self._chess_pieces[move_from], captured_piece)
             self.remove_exploded_pieces(captured_piece)
         else:
