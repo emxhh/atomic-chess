@@ -405,6 +405,13 @@ class ChessPiece:
         """Updates coordinates of the chess piece."""
         self._coordinates = coordinates
 
+    def square_is_empty(self, board, board_index):
+        """"""
+        if board[board_index[0]][board_index[1]] == " ":
+            return True
+        else:
+            return False
+
 
 class Pawn(ChessPiece):
     """A class to represent a pawn chess piece.
@@ -429,16 +436,16 @@ class Pawn(ChessPiece):
 
         # add possible moves
 
-        # # forward steps
-        # forward_step = 1 if self._color == "white" else -1
-        # coordinates = convert_board_index_to_coordinates([current_position[0] + forward_step, current_position[1]])
-        # if board[current_position[0] + forward_step][current_position[1]] == " ":
-        #     possible_moves.append(coordinates)
-        # if self._first_move:
-        #     forward_step *= 2
-        #     coordinates = convert_board_index_to_coordinates([current_position[0] + forward_step, current_position[1]])
-        #     if board[current_position[0] + forward_step][current_position[1]] == " ":
-        #         possible_moves.append(coordinates)
+        # forward steps
+        forward_step = 1 if self._color == "white" else -1
+        coordinates = convert_board_index_to_coordinates([current_position[0] + forward_step, current_position[1]])
+        if board[current_position[0] + forward_step][current_position[1]] == " ":
+            possible_moves.append(coordinates)
+        if self._first_move:
+            forward_step *= 2
+            coordinates = convert_board_index_to_coordinates([current_position[0] + forward_step, current_position[1]])
+            if board[current_position[0] + forward_step][current_position[1]] == " ":
+                possible_moves.append(coordinates)
 
 
         if self._color == "white":
