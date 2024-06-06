@@ -375,13 +375,14 @@ class ChessPiece:
     """A class to represent a chess piece in the atomic chess game. Used by ChessVar.
 
     Attributes:
-        name: A string that labels the name of the chess piece
-        color: A string that labels the chess piece as white or black
-        coordinates: A string that indicates the position of the chess piece on the game board
+        name: A string that labels the name of the chess piece.
+        color: A string that labels the chess piece as white or black.
+        coordinates: A string that indicates the position of the chess piece on the game board.
+        unicode: A string labeling the unicode to represent the chess piece type and color.
     """
 
     def __init__(self, name: str, color: str, coordinates: str) -> None:
-        """Initializes the instance based on name, color, and coordinates of the chess piece."""
+        """Initializes the instance based on name, color, coordinates, and unicode of the chess piece."""
         self._name = name
         self._color = color
         self._coordinates = coordinates
@@ -419,8 +420,7 @@ class Pawn(ChessPiece):
     """A class to represent a pawn chess piece.
     Inherits from ChessPiece.
 
-    Attributes:
-        unicode: A string labeling the unicode to represent the chess piece type and color.
+    Additional Attributes:
         first_move: A boolean determining if it is the Pawn's first move or not.
     """
 
