@@ -4,6 +4,8 @@
 # Description: Create an Atomic chess game for 2 players that includes capability
 # to print the board, move chess pieces, and determine the winner.
 
+from typing import Union
+
 def convert_coordinates_to_board_index(coordinates):
     """Converts algebraic coordinates to board grid index position"""
     column_dict = {
@@ -429,12 +431,17 @@ class Pawn(ChessPiece):
         self._coordinates = coordinates
         self._first_move = False
 
-    def possible_moves(self, board) -> list[str]:
-        """Returns a list of possible moves for the pawn from on its current position."""
+    def possible_moves(self, board: list[list[[Union[str, ChessPiece]]]]) -> list[str]:
+        """Retrieves possible moves that the pawn can make from its current position.
+
+        Args:
+            board: A list that represents the current state of the game board.
+
+        Returns:
+            A list of possible moves for the pawn. Each move is represented by its algebraic coordinates.
+        """
         possible_moves = []
         current_position = convert_coordinates_to_board_index(self._coordinates)
-
-        # add possible moves
 
         # forward steps
         # pawn can move forward 1 square
@@ -451,36 +458,33 @@ class Pawn(ChessPiece):
             if self.square_is_empty(board, forward_square):
                 possible_moves.append(square_coordinates)
 
-        # capturing steps
+        # capturing a chess piece steps
         if self._color == "white":
             # check diagonal up left square
             diagonal_up_left_square = [current_position[0] + 1, current_position[1] - 1]
-            if current_position[0] + 1 < 8 and current_position[1] - 1 >= 0:
-                if not self.square_is_empty(board, square):
+            if diagonal_up_left_square[0] < 8 and diagonal_up_left_square[1] >= 0:
+                if not self.square_is_empty(board, diagonal_up_left_square):
                     square_coordinates = convert_board_index_to_coordinates(diagonal_up_left_square)
                     possible_moves.append(square_coordinates)
-            # check diagonal up right
-            diagonal_right = [current_position[0] + 1, current_position[1] + 1]
-            if current_position[0] + 1 < 8 and current_position[1] + 1 < 8:
-                square_is_occupied = (board[diagonal_right[0]][diagonal_right[1]] != " ")
-                if square_is_occupied:
-                    diagonal_right_coordinates = convert_board_index_to_coordinates(diagonal_right)
-                    possible_moves.append(diagonal_right_coordinates)
+            # check diagonal up right square
+            diagonal_up_right_square = [current_position[0] + 1, current_position[1] + 1]
+            if diagonal_up_right_square[0] < 8 and diagonal_up_right_square[1] < 8:
+                if not self.square_is_empty(board, diagonal_up_right_square):
+                    square_coordinates = convert_board_index_to_coordinates(diagonal_up_right_square)
+                    possible_moves.append(square_coordinates)
         if self._color == "black":
-            # check diagonal down left
-            diagonal_left = [current_position[0] - 1, current_position[1] - 1]
-            if current_position[0] - 1 >= 0 and current_position[1] - 1 >= 0:
-                square_is_occupied = (board[diagonal_left[0]][diagonal_left[1]] != " ")
-                if square_is_occupied:
-                    diagonal_left_coordinates = convert_board_index_to_coordinates(diagonal_left)
-                    possible_moves.append(diagonal_left_coordinates)
-            # check diagonal down right
-            diagonal_right = [current_position[0] - 1, current_position[1] + 1]
-            if current_position[0] - 1 >= 0 and current_position[1] + 1 < 8:
-                square_is_occupied = (board[diagonal_right[0]][diagonal_right[1]] != " ")
-                if square_is_occupied:
-                    diagonal_right_coordinates = convert_board_index_to_coordinates(diagonal_right)
-                    possible_moves.append(diagonal_right_coordinates)
+            # check diagonal down left square
+            diagonal_left_down_square = [current_position[0] - 1, current_position[1] - 1]
+            if diagonal_left_down_square[0] >= 0 and diagonal_left_down_square[1] >= 0:
+                if not self.square_is_empty(board, diagonal_left_down_square):
+                    square_coordinates = convert_board_index_to_coordinates(diagonal_left_down_square)
+                    possible_moves.append(square_coordinates)
+            # check diagonal down right square
+            diagonal_down_right_square = [current_position[0] - 1, current_position[1] + 1]
+            if diagonal_down_right_square[0] >= 0 and diagonal_down_right_square[1] < 8:
+                if not self.square_is_empty(board, diagonal_down_right_square):
+                    square_coordinates = convert_board_index_to_coordinates(diagonal_down_right_square)
+                    possible_moves.append(square_coordinates)
 
         return possible_moves
 
