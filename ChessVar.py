@@ -232,11 +232,6 @@ class ChessVar:
 
     def remove_battle_pieces(self, attacking_piece, captured_piece):
         """Removes attacking and captured pieces"""
-        captured_piece_position = convert_coordinates_to_board_index(captured_piece.get_coordinates())
-        captured_coordinates = captured_piece.get_coordinates()
-        if self._chess_pieces[captured_coordinates].get_name() == "king":
-            pass
-
         # remove attacking piece
         attacking_piece_position = convert_coordinates_to_board_index(attacking_piece.get_coordinates())
         self._board[attacking_piece_position[0]][attacking_piece_position[1]] = " "
@@ -244,7 +239,9 @@ class ChessVar:
         del self._chess_pieces[coordinates]
 
         # remove captured piece
+        captured_piece_position = convert_coordinates_to_board_index(captured_piece.get_coordinates())
         self._board[captured_piece_position[0]][captured_piece_position[1]] = " "
+        coordinates = captured_piece.get_coordinates()
 
         # if king is captured
         if self._chess_pieces[coordinates].get_name() == "king":
