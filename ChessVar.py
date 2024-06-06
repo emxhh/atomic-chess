@@ -276,10 +276,11 @@ class ChessVar:
         """
         print(move_from, move_to, self._current_player)
         # if move_from does not contain a piece belonging to current player, return false
+        if move_from not in self._chess_pieces:
+            print('no chess piece there')
+            return False
         if self._chess_pieces[move_from].get_color() != self._current_player:
             print("not player's piece")
-            return False
-        if move_from not in self._chess_pieces:
             return False
         # if the move is invalid, return false
         if not self.is_valid_move(self._chess_pieces[move_from], move_to):
@@ -637,6 +638,5 @@ class King(ChessPiece):
     def possible_moves(self):
         """Returns a list of possible moves for the king from on its current position"""
         possible_moves = []
-
 
 
