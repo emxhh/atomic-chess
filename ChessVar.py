@@ -658,10 +658,10 @@ class King(ChessPiece):
 # game.make_move("f8", "e7")  # black
 # game.print_board()
 
-game = ChessVar()
+# game = ChessVar()
 # game.make_move("b1", "c3")  # white
 # game.make_move("g8", "h6")  # black
 # game.make_move("c3", "b5")  # white
 # game.make_move("h6", "f5")  # black
 # game.make_move("b5", "c7")  # white
-game.print_board()
+# game.print_board()
