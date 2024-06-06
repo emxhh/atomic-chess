@@ -101,21 +101,20 @@ class ChessVar:
             for col in range(self._columns):
                 self._board[row].append(" ")
 
+        # initialize white pawns
+        for col in range(self._columns):
+            row_index = 1
+            coordinates = convert_board_index_to_coordinates([row_index, col])
+            pawn = Pawn("pawn", "white", coordinates)
+            self._board[row_index][col] = pawn
+            self._chess_pieces[coordinates] = pawn
+
         # initialize black pawns
         for col in range(self._columns):
             row_index = 6
             coordinates = convert_board_index_to_coordinates([row_index, col])
             pawn = Pawn("pawn", "black", coordinates)
             self._board[row_index][col] = pawn
-            self._chess_pieces[coordinates] = pawn
-
-        # initialize white pawns
-        for col in range(self._columns):
-            col_coordinate = chr(col + 97)
-            row_coordinate = 2
-            coordinates = col_coordinate + str(row_coordinate)
-            pawn = Pawn("pawn", "white", coordinates)
-            self._board[row_coordinate - 1][col] = pawn
             self._chess_pieces[coordinates] = pawn
 
         # initialize rooks
