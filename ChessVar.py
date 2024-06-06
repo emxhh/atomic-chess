@@ -272,6 +272,7 @@ class ChessVar:
                             self._game_state = "WHITE_WON"
                         else:
                             self._game_state = "BLACK_WON"
+                        self.return_winner()
                     # remove exploding chess pieces
                     self._board[square[0]][square[1]] = " "
                     coordinates = convert_board_index_to_coordinates(square)
@@ -316,11 +317,11 @@ class ChessVar:
         return True
 
     def return_winner(self):
-        """Determines and returns the winner of the game based on the current board state."""
+        """Prints a message indicating the winner of the game."""
         if self._game_state == "WHITE_WON":
-            return self._players["Player 1"]
+            print("Player 1 wins!")
         if self._game_state == "BLACK_WON":
-            return self._players["Player 2"]
+            print("Player 2 wins!")
 
     def is_game_over(self):
         """Checks if the game is over."""
