@@ -584,7 +584,7 @@ class Knight(ChessPiece):
     """
 
     def __init__(self, name: str, color: str, coordinates: str) -> None:
-        """Initializes the instance based on name, color, and coordinates of the chess piece."""
+        """Initializes the instance based on name, color, coordinates, and unicode of the chess piece."""
         super().__init__(name, color, coordinates)
         self._unicode = "\u2658" if self._color == "white" else "\u265E"
 
@@ -606,7 +606,7 @@ class Rook(ChessPiece):
     """
 
     def __init__(self, name: str, color: str, coordinates: str) -> None:
-        """Initializes the instance based on name, color, and coordinates of the chess piece."""
+        """Initializes the instance based on name, color, coordinates, and unicode of the chess piece."""
         super().__init__(name, color, coordinates)
         self._unicode = "\u2656" if self._color == "white" else "\u265C"
 
@@ -680,7 +680,7 @@ class Queen(ChessPiece):
     """
 
     def __init__(self, name: str, color: str, coordinates: str) -> None:
-        """Initializes the instance based on name, color, and coordinates of the chess piece."""
+        """Initializes the instance based on name, color, coordinates, and unicode of the chess piece."""
         super().__init__(name, color, coordinates)
         self._unicode = "\u2655" if self._color == "white" else "\u265B"
 
@@ -700,7 +700,7 @@ class King(ChessPiece):
     """
 
     def __init__(self, name: str, color: str, coordinates: str) -> None:
-        """Initializes the instance based on name, color, and coordinates of the chess piece."""
+        """Initializes the instance based on name, color, coordinates, and unicode of the chess piece."""
         super().__init__(name, color, coordinates)
         self._unicode = "\u2654" if self._color == "white" else "\u265A"
 
