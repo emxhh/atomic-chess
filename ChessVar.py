@@ -605,9 +605,14 @@ class Queen(ChessPiece):
         """Initializes the instance based on name, color, and coordinates of the chess piece."""
         super().__init__(name, color, coordinates)
 
-    def possible_moves(self):
+    def possible_moves(self, board):
         """Returns a list of possible moves for the queen from on its current position."""
         possible_moves = []
+        rook_temp = Rook("rook", self._color, self._coordinates)
+        bishop_temp = Bishop("bishop", self._color, self._coordinates)
+        possible_moves += rook_temp.possible_moves(board)
+        possible_moves += bishop_temp.possible_moves(board)
+        return possible_moves
 
 
 class King(ChessPiece):
