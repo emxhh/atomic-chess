@@ -634,9 +634,12 @@ class King(ChessPiece):
     def __init__(self, name, color, coordinates):
         """Initializes the instance based on name, color, and coordinates of the chess piece."""
         super().__init__(name, color, coordinates)
+        self._unicode = "\u2654" if self._color == "white" else "\u265A"
 
     def possible_moves(self):
         """Returns a list of possible moves for the king from on its current position"""
         possible_moves = []
+
+
 
 
