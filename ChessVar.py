@@ -245,8 +245,8 @@ class ChessVar:
                 self._game_state = "BLACK_WON"
         del self._chess_pieces[coordinates]
 
-    def remove_exploded_pieces(self, captured_piece):
-        """Removes exploded chess pieces"""
+    def get_surrounding_squares(self, captured_piece):
+        """Returns a list of the surrounding squares of the captured piece"""
         surrounding_squares = []
         captured_piece_position = convert_coordinates_to_board_index(captured_piece.get_coordinates())
         # top 3 squares
@@ -269,7 +269,11 @@ class ChessVar:
         # right square
         if captured_piece_position[1] + 1 < 8:
             surrounding_squares.append([captured_piece_position[0], captured_piece_position[1] + 1])
+        return surrounding_squares
 
+    def remove_exploded_pieces(self, captured_piece):
+        """Removes exploded chess pieces"""
+        surrounding_squares = self.get_surrounding_squares()
         for square in surrounding_squares:
             square_is_occupied = (self._board[square[0]][square[1]] != " ")
             if square_is_occupied:
