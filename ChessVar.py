@@ -428,6 +428,19 @@ class Pawn(ChessPiece):
         current_position = convert_coordinates_to_board_index(self._coordinates)
 
         # add possible moves
+
+        # # forward steps
+        # forward_step = 1 if self._color == "white" else -1
+        # coordinates = convert_board_index_to_coordinates([current_position[0] + forward_step, current_position[1]])
+        # if board[current_position[0] + forward_step][current_position[1]] == " ":
+        #     possible_moves.append(coordinates)
+        # if self._first_move:
+        #     forward_step *= 2
+        #     coordinates = convert_board_index_to_coordinates([current_position[0] + forward_step, current_position[1]])
+        #     if board[current_position[0] + forward_step][current_position[1]] == " ":
+        #         possible_moves.append(coordinates)
+
+
         if self._color == "white":
             # 1 square forward
             forward_coordinates = convert_board_index_to_coordinates([current_position[0] + 1, current_position[1]])
