@@ -103,11 +103,10 @@ class ChessVar:
 
         # initialize black pawns
         for col in range(self._columns):
-            col_coordinate = chr(col + 97)
-            row_coordinate = 7
-            coordinates = col_coordinate + str(row_coordinate)
+            row_index = 6
+            coordinates = convert_board_index_to_coordinates([row_index, col])
             pawn = Pawn("pawn", "black", coordinates)
-            self._board[row_coordinate - 1][col] = pawn
+            self._board[row_index][col] = pawn
             self._chess_pieces[coordinates] = pawn
 
         # initialize white pawns
