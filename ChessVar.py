@@ -407,8 +407,8 @@ class ChessPiece:
         """Updates coordinates of the chess piece."""
         self._coordinates = coordinates
 
-    def square_is_empty(self, board, square):
-        """"""
+    def square_is_empty(self, board: list[list[[Union[str, "ChessPiece"]]]], square: list[int]):
+        """Returns true or false depending on if the square is empty"""
         if board[square[0]][square[1]] == " ":
             return True
         else:
