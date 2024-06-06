@@ -440,13 +440,13 @@ class Pawn(ChessPiece):
         self._first_move = False
 
     def possible_moves(self, board: list[list[[Union[str, ChessPiece]]]]) -> list[str]:
-        """Retrieves possible moves that the pawn can make from its current position.
+        """Retrieves possible moves that the instance of Pawn can make from its current position.
 
         Args:
             board: A list that represents the current state of the game board.
 
         Returns:
-            A list of possible moves for the pawn. Each move is represented by its algebraic coordinates.
+            A list of the instance's possible moves. Each move is represented by its algebraic coordinates.
         """
         possible_moves = []
         current_position = convert_coordinates_to_board_index(self._coordinates)
@@ -503,12 +503,19 @@ class Bishop(ChessPiece):
     """
 
     def __init__(self, name: str, color: str, coordinates: str) -> None:
-        """Initializes the instance based on name, color, and coordinates of the chess piece."""
+        """Initializes the instance based on name, color, coordinates, and unicode of the chess piece."""
         super().__init__(name, color, coordinates)
         self._unicode = "\u2657" if self._color == "white" else "\u265D"
 
     def possible_moves(self, board) -> list[str]:
-        """Returns a list of possible moves for the bishop from on its current position."""
+        """Retrieves possible moves that the instance of Bishop can make from its current position.
+
+        Args:
+            board: A list that represents the current state of the game board.
+
+        Returns:
+            A list of the instance's possible moves. Each move is represented by its algebraic coordinates.
+        """
         possible_moves = []
         current_position = convert_coordinates_to_board_index(self._coordinates)
 
