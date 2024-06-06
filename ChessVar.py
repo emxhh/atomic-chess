@@ -46,18 +46,12 @@ class Player:
     Used by the ChessVar class.
 
     Attributes:
-        name: A string that labels the player name
-        color: A string that indicates if the player will be playing the white or black chess pieces
+        name: A string that defines the player's name as either Player 1 or Player 2
+        color: A string that indicates if the player will be playing white or black chess pieces
     """
 
-    def __init__(self, name, color):
-        """
-        Initializes the instance based on name and color. All data members are private.
-
-        Args:
-            name: Defines the player's name
-            color: Defines the color of the player's chess pieces of either white or black
-        """
+    def __init__(self, name: str, color: str):
+        """Initializes the instance based on name and color. All data members are private."""
         self._name = name
         self._color = color
 
@@ -66,12 +60,27 @@ class ChessVar:
     """
     A class to represent a game of atomic chess, played by two players.
     Player 1 always starts first.
-    Uses Player class for players' data
+    Uses Player class for players' data.
+    Uses ChessPiece subclasses to initialize chess pieces on the board.
+
+    Attributes:
+        board: A list of lists that each represent a row on the game board.
+            Each row list contains list items ordered based on their column on the board.
+            The list items are either an empty string to represent an empty square
+            or the unicode of a chess piece.
+        rows: An integer count of how many rows the board has.
+        columns: An integer count of how many columns the board has.
+        game_state: A string indicating the current status of the game.
+        chess_pieces: A dictionary of all chess pieces currently on the board.
+            The keys are algebraic coordinates and the values are the ChessPiece instances.
+        players: A dictionary of the 2 players of the game.
+        current_player: A string that indicates the color of the current player.
     """
 
     def __init__(self):
         """
-        Initializes an instance of an atomic chess game. Takes no parameters.
+        Initializes an instance of an atomic chess game. All data members are private.
+        Takes no parameters.
         """
         self._board = []
         self._rows = 8
@@ -85,6 +94,8 @@ class ChessVar:
 
     def initialize_board(self):
         """Initializes the game board and places the chess pieces in their starting positions."""
+
+        # generate blank board
         for row in range(self._rows):
             self._board.append([])
             for col in range(self._columns):
@@ -688,3 +699,7 @@ class King(ChessPiece):
                 if square_is_empty:
                     possible_moves.append(convert_board_index_to_coordinates(square))
         return possible_moves
+
+
+game = ChessVar()
+game.print_board()
