@@ -157,6 +157,14 @@ class ChessVar:
         self._board[7][3] = queen
         self._chess_pieces[queen.get_coordinates()] = queen
 
+        # initialize kings
+        king = King("king", "white", "e1")
+        self._board[0][4] = king
+        self._chess_pieces[king.get_coordinates()] = king
+        king = King("king", "black", "e8")
+        self._board[7][4] = king
+        self._chess_pieces[king.get_coordinates()] = king
+
     def print_board(self):
         """Prints the current state of the game board."""
         print("  a", "b", "c", "d", "e", "f", "g", "h")
