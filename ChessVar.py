@@ -149,6 +149,14 @@ class ChessVar:
         self._board[7][6] = knight
         self._chess_pieces[knight.get_coordinates()] = knight
 
+        # initialize queens
+        queen = Queen("queen", "white", "e1")
+        self._board[0][4] = queen
+        self._chess_pieces[queen.get_coordinates()] = queen
+        queen = Queen("queen", "black", "e8")
+        self._board[7][4] = queen
+        self._chess_pieces[queen.get_coordinates()] = queen
+
     def print_board(self):
         """Prints the current state of the game board."""
         print("  a", "b", "c", "d", "e", "f", "g", "h")
@@ -604,6 +612,7 @@ class Queen(ChessPiece):
     def __init__(self, name, color, coordinates):
         """Initializes the instance based on name, color, and coordinates of the chess piece."""
         super().__init__(name, color, coordinates)
+        self._unicode = "\u2655" if self._color == "white" else "\u265B"
 
     def possible_moves(self, board):
         """Returns a list of possible moves for the queen from on its current position."""
@@ -649,10 +658,10 @@ class King(ChessPiece):
 # game.make_move("f8", "e7")  # black
 # game.print_board()
 
-# game = ChessVar()
+game = ChessVar()
 # game.make_move("b1", "c3")  # white
 # game.make_move("g8", "h6")  # black
 # game.make_move("c3", "b5")  # white
 # game.make_move("h6", "f5")  # black
 # game.make_move("b5", "c7")  # white
-# game.print_board()
+game.print_board()
