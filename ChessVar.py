@@ -620,7 +620,7 @@ class Rook(ChessPiece):
         super().__init__(name, color, coordinates)
         self._unicode = "\u2656" if self._color == "white" else "\u265C"
 
-    def possible_moves(self, board):
+    def possible_moves(self, board: list[list[[Union[str, ChessPiece]]]]) -> list[str]:
         """Retrieves possible moves that the instance of Rook can make from its current position.
 
         Args:
@@ -697,7 +697,7 @@ class Queen(ChessPiece):
         super().__init__(name, color, coordinates)
         self._unicode = "\u2655" if self._color == "white" else "\u265B"
 
-    def possible_moves(self, board):
+    def possible_moves(self, board: list[list[[Union[str, ChessPiece]]]]) -> list[str]:
         """Returns a list of possible moves for the queen from on its current position."""
         possible_moves = []
         rook_temp = Rook("rook", self._color, self._coordinates)
@@ -717,7 +717,7 @@ class King(ChessPiece):
         super().__init__(name, color, coordinates)
         self._unicode = "\u2654" if self._color == "white" else "\u265A"
 
-    def possible_moves(self, board):
+    def possible_moves(self, board: list[list[[Union[str, ChessPiece]]]]) -> list[str]:
         """Returns a list of possible moves for the king from on its current position"""
         possible_moves = []
         current_position = convert_coordinates_to_board_index(self._coordinates)
