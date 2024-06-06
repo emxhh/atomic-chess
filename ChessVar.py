@@ -418,16 +418,24 @@ class ChessPiece:
 class Pawn(ChessPiece):
     """A class to represent a pawn chess piece.
     Inherits from ChessPiece.
+
+    Attributes:
+        unicode: A string labeling the unicode to represent the chess piece type and color.
+        first_move: A boolean determining if it is the Pawn's first move or not.
     """
 
     def __init__(self, name: str, color: str, coordinates: str) -> None:
-        """Initializes the instance based on name, color, and coordinates of the chess piece."""
+        """Initializes the instance based on name, color, coordinates, unicode,
+        and if this is the instance's first move of the chess piece.
+        """
         super().__init__(name, color, coordinates)
         self._unicode = "\u2659" if self._color == "white" else "\u265F"
         self._first_move = True
 
     def set_coordinates(self, coordinates: str) -> None:
-        """Updates coordinates of the chess piece."""
+        """Updates coordinates and first_move boolean of the pawn.
+        Overrides parent method.
+        """
         self._coordinates = coordinates
         self._first_move = False
 
