@@ -219,13 +219,13 @@ class ChessVar:
 
     def both_kings_killed(self, captured_piece):
         """Checks if a move would kill both kings in one step"""
-        kings_killed_count = 0
+        kings_killed = 0
         for square in self.get_surrounding_squares(captured_piece):
             if self._board[square[0]][square[1]].get_name() == "king":
-                kings_killed_count += 1
+                kings_killed += 1
         if captured_piece.get_name() == "king":
-            kings_killed_count += 1
-        if kings_killed_count > 1:
+            kings_killed += 1
+        if kings_killed > 1:
             return True
         else:
             return False
