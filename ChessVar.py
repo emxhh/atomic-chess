@@ -317,7 +317,10 @@ class ChessVar:
 
     def return_winner(self):
         """Determines and returns the winner of the game based on the current board state."""
-        pass
+        if self._game_state == "WHITE_WON":
+            return self._players["Player 1"]
+        if self._game_state == "BLACK_WON":
+            return self._players["Player 2"]
 
     def is_game_over(self):
         """Checks if the game is over."""
