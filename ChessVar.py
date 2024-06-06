@@ -387,19 +387,19 @@ class ChessPiece:
         self._unicode = ""
 
     def get_name(self):
-        """Returns the name of the chess piece"""
+        """Returns the name of the chess piece."""
         return self._name
 
     def get_color(self):
-        """Returns the color of the chess piece"""
+        """Returns the color of the chess piece."""
         return self._color
 
     def get_unicode(self):
-        """Returns unicode of chess piece"""
+        """Returns unicode of chess piece."""
         return self._unicode
 
     def get_coordinates(self):
-        """Returns chess piece coordinates"""
+        """Returns coordinates of chess piece."""
         return self._coordinates
 
     def set_coordinates(self, coordinates):
