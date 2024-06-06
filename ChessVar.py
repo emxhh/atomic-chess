@@ -516,9 +516,7 @@ class Knight(ChessPiece):
         for step in possible_steps:
             square = [current_position[0] + step[0], current_position[1] + step[1]]
             if 0 <= square[0] < 8 and 0 <= square[1] < 8:
-                square_is_empty = board[square[0]][square[1]] == " "
-                if square_is_empty:
-                    possible_moves.append(convert_board_index_to_coordinates(square))
+                possible_moves.append(convert_board_index_to_coordinates(square))
         return possible_moves
 
 
@@ -647,7 +645,9 @@ class King(ChessPiece):
 # game.print_board()
 
 # game = ChessVar()
-# game.make_move("b1", "a3")  # white
-# game.make_move("e7", "e5")  # black
-# game.make_move("a3", "a4")  # white
+# game.make_move("b1", "c3")  # white
+# game.make_move("g8", "h6")  # black
+# game.make_move("c3", "b5")  # white
+# game.make_move("h6", "f5")  # black
+# game.make_move("b5", "c7")  # white
 # game.print_board()
