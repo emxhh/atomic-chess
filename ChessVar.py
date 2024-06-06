@@ -379,30 +379,30 @@ class ChessPiece:
         coordinates: A string that indicates the position of the chess piece on the game board
     """
 
-    def __init__(self, name, color, coordinates):
+    def __init__(self, name: str, color: str, coordinates: str) -> None:
         """Initializes the instance based on name, color, and coordinates of the chess piece."""
         self._name = name
         self._color = color
         self._coordinates = coordinates
         self._unicode = ""
 
-    def get_name(self):
+    def get_name(self) -> str:
         """Returns the name of the chess piece."""
         return self._name
 
-    def get_color(self):
+    def get_color(self) -> str:
         """Returns the color of the chess piece."""
         return self._color
 
-    def get_unicode(self):
+    def get_unicode(self) -> str:
         """Returns unicode of chess piece."""
         return self._unicode
 
-    def get_coordinates(self):
+    def get_coordinates(self) -> str:
         """Returns coordinates of chess piece."""
         return self._coordinates
 
-    def set_coordinates(self, coordinates):
+    def set_coordinates(self, coordinates: str) -> None:
         """Updates coordinates of the chess piece."""
         self._coordinates = coordinates
 
