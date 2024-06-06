@@ -644,9 +644,18 @@ class King(ChessPiece):
         super().__init__(name, color, coordinates)
         self._unicode = "\u2654" if self._color == "white" else "\u265A"
 
-    def possible_moves(self):
+    def possible_moves(self, board):
         """Returns a list of possible moves for the king from on its current position"""
         possible_moves = []
+        current_position = convert_coordinates_to_board_index(self._coordinates)
+        possible_steps = [(-1, 0), (-1, 1), (0, 1), (1, 1), (1, 0), (1, -1), (0, -1), (-1, -1)]
+        for step in possible_steps:
+            square = [current_position[0] + step[0], current_position[1] + step[1]]
+            if 0 <= square[0] < 8 and 0 <= square[1] < 8:
+                square_is_empty = board[square[0]][square[1]] == " "
+                if square_is_empty:
+                    possible_moves.append(convert_board_index_to_coordinates(square))
+        return possible_moves
 
 
 
