@@ -5,7 +5,7 @@
 # to print the board, move chess pieces, and determine the winner.
 
 def convert_coordinates_to_board_index(coordinates):
-    """Converts algebraic coordinates to board grid list index positions"""
+    """Converts algebraic coordinates to board grid index position"""
     column_dict = {
         "a": 0,
         "b": 1,
@@ -23,7 +23,7 @@ def convert_coordinates_to_board_index(coordinates):
 
 
 def convert_board_index_to_coordinates(board_index):
-    """Converts board index to algebraic coordinates"""
+    """Converts board grid index position to algebraic coordinates"""
     column_dict = {
         0: "a",
         1: "b",
