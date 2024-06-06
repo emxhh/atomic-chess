@@ -208,7 +208,7 @@ class ChessVar:
         else:
             self._current_player = "white"
 
-    def is_valid_move(self, chess_piece, move_to: str) -> bool:
+    def is_valid_move(self, chess_piece: "ChessPiece", move_to: str) -> bool:
         """Checks if the move_to coordinates are valid for the chess piece.
         Uses ChessPiece subclasses to get the possible moves.
         """
@@ -225,7 +225,7 @@ class ChessVar:
         new_position = convert_coordinates_to_board_index(move_to)
         self._board[new_position[0]][new_position[1]] = self._chess_pieces[move_to]
 
-    def both_kings_killed(self, captured_piece) -> bool:
+    def both_kings_killed(self, captured_piece: "ChessPiece") -> bool:
         """Checks if a move would kill both kings in one step"""
         kings_killed = 0
         for square in self.get_surrounding_squares(captured_piece):
@@ -240,7 +240,7 @@ class ChessVar:
         else:
             return False
 
-    def remove_battle_pieces(self, attacking_piece, captured_piece) -> None:
+    def remove_battle_pieces(self, attacking_piece: "ChessPiece", captured_piece: "ChessPiece") -> None:
         """Removes attacking and captured pieces"""
         # remove attacking piece
         attacking_piece_position = convert_coordinates_to_board_index(attacking_piece.get_coordinates())
