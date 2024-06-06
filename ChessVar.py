@@ -325,7 +325,10 @@ class ChessVar:
 
     def is_game_over(self):
         """Checks if the game is over."""
-        pass
+        if self._game_state == "UNFINISHED":
+            print("Game is unfinished")
+        if self._game_state == "WHITE_WON" or self._game_state == "BLACK_WON":
+            self.return_winner()
 
 
 class ChessPiece:
