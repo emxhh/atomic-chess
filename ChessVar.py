@@ -281,7 +281,7 @@ class ChessVar:
 
     def remove_exploded_pieces(self, captured_piece):
         """Removes exploded chess pieces"""
-        surrounding_squares = self.get_surrounding_squares()
+        surrounding_squares = self.get_surrounding_squares(captured_piece)
         for square in surrounding_squares:
             square_is_occupied = (self._board[square[0]][square[1]] != " ")
             if square_is_occupied:
