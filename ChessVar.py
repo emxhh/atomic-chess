@@ -489,12 +489,12 @@ class Bishop(ChessPiece):
     Inherits from Chess Piece.
     """
 
-    def __init__(self, name, color, coordinates):
+    def __init__(self, name: str, color: str, coordinates: str) -> None:
         """Initializes the instance based on name, color, and coordinates of the chess piece."""
         super().__init__(name, color, coordinates)
         self._unicode = "\u2657" if self._color == "white" else "\u265D"
 
-    def possible_moves(self, board):
+    def possible_moves(self, board) -> list[str]:
         """Returns a list of possible moves for the bishop from on its current position."""
         possible_moves = []
         current_position = convert_coordinates_to_board_index(self._coordinates)
