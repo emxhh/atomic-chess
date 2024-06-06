@@ -698,7 +698,14 @@ class Queen(ChessPiece):
         self._unicode = "\u2655" if self._color == "white" else "\u265B"
 
     def possible_moves(self, board: list[list[[Union[str, ChessPiece]]]]) -> list[str]:
-        """Returns a list of possible moves for the queen from on its current position."""
+        """Retrieves possible moves that the instance of Queen can make from its current position.
+
+        Args:
+            board: A list that represents the current state of the game board.
+
+        Returns:
+            A list of the instance's possible moves. Each move is represented by its algebraic coordinates.
+        """
         possible_moves = []
         rook_temp = Rook("rook", self._color, self._coordinates)
         bishop_temp = Bishop("bishop", self._color, self._coordinates)
@@ -718,7 +725,14 @@ class King(ChessPiece):
         self._unicode = "\u2654" if self._color == "white" else "\u265A"
 
     def possible_moves(self, board: list[list[[Union[str, ChessPiece]]]]) -> list[str]:
-        """Returns a list of possible moves for the king from on its current position"""
+        """Retrieves possible moves that the instance of King can make from its current position.
+
+        Args:
+            board: A list that represents the current state of the game board.
+
+        Returns:
+            A list of the instance's possible moves. Each move is represented by its algebraic coordinates.
+        """
         possible_moves = []
         current_position = convert_coordinates_to_board_index(self._coordinates)
         possible_steps = [(-1, 0), (-1, 1), (0, 1), (1, 1), (1, 0), (1, -1), (0, -1), (-1, -1)]
