@@ -370,8 +370,7 @@ class ChessVar:
 
 
 class ChessPiece:
-    """
-    A class to represent a chess piece in the atomic chess game. Used by ChessVar.
+    """A class to represent a chess piece in the atomic chess game. Used by ChessVar.
 
     Attributes:
         name: A string that labels the name of the chess piece
@@ -408,9 +407,8 @@ class ChessPiece:
 
 
 class Pawn(ChessPiece):
-    """
-    A class to represent a pawn chess piece.
-    Inherits from Chess Piece.
+    """A class to represent a pawn chess piece.
+    Inherits from ChessPiece.
     """
 
     def __init__(self, name: str, color: str, coordinates: str) -> None:
@@ -484,9 +482,8 @@ class Pawn(ChessPiece):
 
 
 class Bishop(ChessPiece):
-    """
-    A class to represent a bishop chess piece.
-    Inherits from Chess Piece.
+    """A class to represent a bishop chess piece.
+    Inherits from ChessPiece.
     """
 
     def __init__(self, name: str, color: str, coordinates: str) -> None:
@@ -560,9 +557,8 @@ class Bishop(ChessPiece):
 
 
 class Knight(ChessPiece):
-    """
-    A class to represent a knight chess piece.
-    Inherits from Chess Piece.
+    """A class to represent a knight chess piece.
+    Inherits from ChessPiece.
     """
 
     def __init__(self, name, color, coordinates):
@@ -583,9 +579,8 @@ class Knight(ChessPiece):
 
 
 class Rook(ChessPiece):
-    """
-    A class to represent a rook chess piece.
-    Inherits from Chess Piece.
+    """A class to represent a rook chess piece.
+    Inherits from ChessPiece.
     """
 
     def __init__(self, name, color, coordinates):
@@ -658,9 +653,8 @@ class Rook(ChessPiece):
 
 
 class Queen(ChessPiece):
-    """
-    A class to represent a queen chess piece.
-    Inherits from Chess Piece.
+    """A class to represent a queen chess piece.
+    Inherits from ChessPiece.
     """
 
     def __init__(self, name, color, coordinates):
@@ -679,9 +673,8 @@ class Queen(ChessPiece):
 
 
 class King(ChessPiece):
-    """
-    A class to represent a king chess piece.
-    Inherits from Chess Piece.
+    """A class to represent a king chess piece.
+    Inherits from ChessPiece.
     """
 
     def __init__(self, name, color, coordinates):
