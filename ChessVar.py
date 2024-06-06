@@ -217,9 +217,18 @@ class ChessVar:
         new_position = convert_coordinates_to_board_index(move_to)
         self._board[new_position[0]][new_position[1]] = self._chess_pieces[move_to]
 
-    def both_kings_killed(self, attacking_piece, captured_piece):
+    def both_kings_killed(self, captured_piece):
         """Checks if a move would kill both kings in one step"""
-        pass
+        kings_killed_count = 0
+        for square in self.get_surrounding_squares(captured_piece):
+            if self._board[square[0]][square[1]].get_name() == "king":
+                kings_killed_count += 1
+        if captured_piece.get_name() == "king":
+            kings_killed_count += 1
+        if kings_killed_count > 1:
+            return True
+        else:
+            return False
 
     def remove_battle_pieces(self, attacking_piece, captured_piece):
         """Removes attacking and captured pieces"""
@@ -316,7 +325,7 @@ class ChessVar:
         # if captured piece is the opposing color, remove exploded surrounding pieces and attacking/capturing pieces
         if move_to in self._chess_pieces and self._chess_pieces[move_to].get_color() != self._current_player:
             captured_piece = self._chess_pieces[move_to]
-            if self.both_kings_killed(self._chess_pieces[move_from], captured_piece):
+            if self.both_kings_killed(captured_piece):
                 return False
             self.remove_battle_pieces(self._chess_pieces[move_from], captured_piece)
             self.remove_exploded_pieces(captured_piece)
