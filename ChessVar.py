@@ -622,17 +622,23 @@ class Rook(ChessPiece):
         self._unicode = "\u2656" if self._color == "white" else "\u265C"
 
     def possible_moves(self, board):
-        """Returns a list of possible moves for the rook from on its current position."""
+        """Retrieves possible moves that the instance of Rook can make from its current position.
+
+        Args:
+            board: A list that represents the current state of the game board.
+
+        Returns:
+            A list of the instance's possible moves. Each move is represented by its algebraic coordinates.
+        """
         possible_moves = []
         current_position = convert_coordinates_to_board_index(self._coordinates)
 
-        # check left moves
+        # check continuous left moves
         left_moves = []
-        for i in range(1, current_position[1] + 1):
-            if current_position[1] - i >= 0:
-                square = [current_position[0], current_position[1] - i]
-                square_is_empty = board[square[0]][square[1]] == " "
-                if square_is_empty:
+        for step in range(1, current_position[1] + 1):
+            square = [current_position[0], current_position[1] - step]
+            if square[1] >= 0:
+                if self.square_is_empty(board, square):
                     left_moves.append(convert_board_index_to_coordinates(square))
                 else:
                     if board[square[0]][square[1]].get_color() != self._color:
@@ -640,13 +646,12 @@ class Rook(ChessPiece):
                     break
         possible_moves += left_moves
 
-        # check right moves
+        # check continuous right moves
         right_moves = []
-        for i in range(1, 8 - current_position[1]):
-            if current_position[1] - i < 8:
-                square = [current_position[0], current_position[1] + i]
-                square_is_empty = board[square[0]][square[1]] == " "
-                if square_is_empty:
+        for step in range(1, 8 - current_position[1]):
+            square = [current_position[0], current_position[1] + step]
+            if square[1] < 8:
+                if self.square_is_empty(board, square):
                     right_moves.append(convert_board_index_to_coordinates(square))
                 else:
                     if board[square[0]][square[1]].get_color() != self._color:
@@ -654,13 +659,12 @@ class Rook(ChessPiece):
                     break
         possible_moves += right_moves
 
-        # check up moves
+        # check continuous up moves
         up_moves = []
-        for i in range(1, 8 - current_position[0]):
-            if current_position[0] - i < 8:
-                square = [current_position[0] + i, current_position[1]]
-                square_is_empty = board[square[0]][square[1]] == " "
-                if square_is_empty:
+        for step in range(1, 8 - current_position[0]):
+            square = [current_position[0] + step, current_position[1]]
+            if square[0] < 8:
+                if self.square_is_empty(board, square):
                     up_moves.append(convert_board_index_to_coordinates(square))
                 else:
                     if board[square[0]][square[1]].get_color() != self._color:
@@ -668,13 +672,12 @@ class Rook(ChessPiece):
                     break
         possible_moves += up_moves
 
-        # check down moves
+        # check continuous down moves
         down_moves = []
-        for i in range(1, current_position[0] + 1):
-            if current_position[0] - i >= 0:
-                square = [current_position[0] - i, current_position[1]]
-                square_is_empty = board[square[0]][square[1]] == " "
-                if square_is_empty:
+        for step in range(1, current_position[0] + 1):
+            square = [current_position[0] - step, current_position[1]]
+            if square[0] >= 0:
+                if self.square_is_empty(board, square):
                     down_moves.append(convert_board_index_to_coordinates(square))
                 else:
                     if board[square[0]][square[1]].get_color() != self._color:
