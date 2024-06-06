@@ -41,8 +41,7 @@ def convert_board_index_to_coordinates(board_index):
 
 
 class Player:
-    """
-    A class to represent a player in the atomic chess game.
+    """A class to represent a player in the atomic chess game.
     Used by the ChessVar class.
 
     Attributes:
@@ -57,8 +56,7 @@ class Player:
 
 
 class ChessVar:
-    """
-    A class to represent a game of atomic chess, played by two players.
+    """A class to represent a game of atomic chess, played by two players.
     Player 1 always starts first.
     Uses Player class for players' data.
     Uses ChessPiece subclasses to initialize chess pieces on the board.
@@ -78,8 +76,7 @@ class ChessVar:
     """
 
     def __init__(self):
-        """
-        Initializes an instance of an atomic chess game. All data members are private.
+        """Initializes an instance of an atomic chess game. All data members are private.
         Takes no parameters.
         """
         self._board = []
@@ -93,7 +90,9 @@ class ChessVar:
         self.initialize_players()
 
     def initialize_board(self):
-        """Initializes the game board and places the chess pieces in their starting positions."""
+        """Initializes the game board, places the chess pieces in their starting positions,
+        and adds the chess pieces to the chess pieces dictionary.
+        """
 
         # generate blank board
         for row in range(self._rows):
