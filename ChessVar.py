@@ -6,6 +6,7 @@
 
 from typing import Union
 
+
 def convert_coordinates_to_board_index(coordinates):
     """Converts algebraic coordinates to board grid index position"""
     column_dict = {
