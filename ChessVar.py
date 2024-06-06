@@ -701,7 +701,3 @@ class King(ChessPiece):
                 if square_is_empty:
                     possible_moves.append(convert_board_index_to_coordinates(square))
         return possible_moves
-
-
-game = ChessVar()
-game.print_board()
