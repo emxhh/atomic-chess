@@ -180,8 +180,8 @@ class ChessVar:
         for row in range(self._rows, 0, -1):
             print(str(row) + " ", end="")
             for col in range(self._columns):
-                position = self._board[row - 1][col]
-                print(position if isinstance(position, str) else position.get_unicode(), end="")
+                square = self._board[row - 1][col]
+                print(square if isinstance(square, str) else square.get_unicode(), end="")
                 if col < self._rows:
                     print("|", end="")
             if row <= self._rows:
