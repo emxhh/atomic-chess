@@ -413,18 +413,18 @@ class Pawn(ChessPiece):
     Inherits from Chess Piece.
     """
 
-    def __init__(self, name, color, coordinates):
+    def __init__(self, name: str, color: str, coordinates: str) -> None:
         """Initializes the instance based on name, color, and coordinates of the chess piece."""
         super().__init__(name, color, coordinates)
         self._unicode = "\u2659" if self._color == "white" else "\u265F"
         self._first_move = True
 
-    def set_coordinates(self, coordinates):
+    def set_coordinates(self, coordinates: str) -> None:
         """Updates coordinates of the chess piece."""
         self._coordinates = coordinates
         self._first_move = False
 
-    def possible_moves(self, board):
+    def possible_moves(self, board) -> list[str]:
         """Returns a list of possible moves for the pawn from on its current position."""
         possible_moves = []
         current_position = convert_coordinates_to_board_index(self._coordinates)
