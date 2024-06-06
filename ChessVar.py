@@ -323,14 +323,14 @@ class ChessVar:
         """
         # if move_from does not contain a piece belonging to current player, return false
         if move_from not in self._chess_pieces:
-            print('no chess piece there')
+            print(f"No chess piece at move_from: {move_from}")
             return False
         if self._chess_pieces[move_from].get_color() != self._current_player:
-            print("not player's piece")
+            print(f"Not current player's piece: {move_from}")
             return False
         # if the move is invalid, return false
         if not self.is_valid_move(self._chess_pieces[move_from], move_to):
-            print('invalid move')
+            print(f"Invalid move: {move_from} to {move_to}")
             return False
         # if the game_state is won, return false
         if self.get_game_state() == "WHITE_WON" or self.get_game_state() == "BLACK_WON":
