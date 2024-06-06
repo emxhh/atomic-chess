@@ -150,11 +150,11 @@ class ChessVar:
         self._chess_pieces[knight.get_coordinates()] = knight
 
         # initialize queens
-        queen = Queen("queen", "white", "e1")
-        self._board[0][4] = queen
+        queen = Queen("queen", "white", "d1")
+        self._board[0][3] = queen
         self._chess_pieces[queen.get_coordinates()] = queen
-        queen = Queen("queen", "black", "e8")
-        self._board[7][4] = queen
+        queen = Queen("queen", "black", "d8")
+        self._board[7][3] = queen
         self._chess_pieces[queen.get_coordinates()] = queen
 
     def print_board(self):
@@ -639,29 +639,4 @@ class King(ChessPiece):
         possible_moves = []
 
 
-# game = ChessVar()
-# game.make_move("a2", "a4")  # white
-# game.make_move("h7", "h5")  # black
-# game.make_move("a1", "a3")  # white
-# game.make_move("h8", "h6")  # black
-# game.make_move("a3", "e3")  # white
-# game.make_move("h6", "h7")  # black
-# game.make_move("e3", "e5")  # white
-#
-# game.make_move("e7", "e6")  # black
-# game.make_move("h2", "h4")  # white
-# game.make_move("h7", "h6")  # black
-# game.make_move("h1", "h3")  # white
-# game.make_move("h6", "f6")  # black
-# game.make_move("e5", "e6")  # white
-#
-# game.make_move("f8", "e7")  # black
-# game.print_board()
 
-# game = ChessVar()
-# game.make_move("b1", "c3")  # white
-# game.make_move("g8", "h6")  # black
-# game.make_move("c3", "b5")  # white
-# game.make_move("h6", "f5")  # black
-# game.make_move("b5", "c7")  # white
-# game.print_board()
