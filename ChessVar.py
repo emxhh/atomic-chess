@@ -221,8 +221,10 @@ class ChessVar:
         """Checks if a move would kill both kings in one step"""
         kings_killed = 0
         for square in self.get_surrounding_squares(captured_piece):
-            if self._board[square[0]][square[1]].get_name() == "king":
-                kings_killed += 1
+            square_is_occupied = (self._board[square[0]][square[1]] != " ")
+            if square_is_occupied:
+                if self._board[square[0]][square[1]].get_name() == "king":
+                    kings_killed += 1
         if captured_piece.get_name() == "king":
             kings_killed += 1
         if kings_killed > 1:
