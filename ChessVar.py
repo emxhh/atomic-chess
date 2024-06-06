@@ -371,13 +371,13 @@ class Pawn(ChessPiece):
     def __init__(self, name, color, coordinates):
         """Initializes the instance based on name, color, and coordinates of the chess piece."""
         super().__init__(name, color, coordinates)
-        self._move_count = 0
         self._unicode = "\u2659" if self._color == "white" else "\u265F"
+        self._first_move = True
 
     def set_coordinates(self, coordinates):
         """Updates coordinates of the chess piece."""
         self._coordinates = coordinates
-        self._move_count += 1
+        self._first_move = False
 
     def possible_moves(self, board):
         """Returns a list of possible moves for the pawn from on its current position."""
@@ -424,9 +424,9 @@ class Pawn(ChessPiece):
                     diagonal_right_coordinates = convert_board_index_to_coordinates(diagonal_right)
                     possible_moves.append(diagonal_right_coordinates)
 
-        if self._move_count == 0:
+        # 2 squares forward
+        if self._first_move:
             if self._color == "white":
-                # 2 squares forward
                 forward_coordinates = convert_board_index_to_coordinates([current_position[0] + 2, current_position[1]])
                 if board[current_position[0] + 2][current_position[1]] == " ":
                     possible_moves.append(forward_coordinates)
@@ -656,7 +656,3 @@ class King(ChessPiece):
                 if square_is_empty:
                     possible_moves.append(convert_board_index_to_coordinates(square))
         return possible_moves
-
-
-
-
