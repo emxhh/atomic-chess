@@ -561,14 +561,13 @@ class Bishop(ChessPiece):
                     break
         possible_moves += diagonal_down_left_moves
 
-        # check diagonal down right
+        # check continuous diagonal down right squares
         diagonal_down_right_moves = []
         end = max(current_position[0] + 1, 8 - current_position[1])
-        for i in range(1, end):
-            if current_position[0] - i >= 0 and current_position[1] + i < 8:
-                square = [current_position[0] - i, current_position[1] + i]
-                square_is_empty = board[square[0]][square[1]] == " "
-                if square_is_empty:
+        for step in range(1, end):
+            square = [current_position[0] - step, current_position[1] + step]
+            if square[0] >= 0 and square[1] < 8:
+                if self.square_is_empty(board, square):
                     diagonal_down_right_moves.append(convert_board_index_to_coordinates(square))
                 else:
                     if board[square[0]][square[1]].get_color() != self._color:
