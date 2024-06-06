@@ -451,14 +451,14 @@ class Pawn(ChessPiece):
             if self.square_is_empty(board, square):
                 possible_moves.append(square_coordinates)
 
+        # capturing steps
         if self._color == "white":
-            # check diagonal up left
-            diagonal_left = [current_position[0] + 1, current_position[1] - 1]
+            # check diagonal up left square
+            diagonal_up_left_square = [current_position[0] + 1, current_position[1] - 1]
             if current_position[0] + 1 < 8 and current_position[1] - 1 >= 0:
-                square_is_occupied = (board[diagonal_left[0]][diagonal_left[1]] != " ")
-                if square_is_occupied:
-                    diagonal_left_coordinates = convert_board_index_to_coordinates(diagonal_left)
-                    possible_moves.append(diagonal_left_coordinates)
+                if not self.square_is_empty(board, square):
+                    square_coordinates = convert_board_index_to_coordinates(diagonal_up_left_square)
+                    possible_moves.append(square_coordinates)
             # check diagonal up right
             diagonal_right = [current_position[0] + 1, current_position[1] + 1]
             if current_position[0] + 1 < 8 and current_position[1] + 1 < 8:
