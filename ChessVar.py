@@ -191,7 +191,7 @@ class ChessVar:
         """Returns the game state to indicate if the game is unfinished or if black or white has won."""
         return self._game_state
 
-    def create_player(self, player_name, color):
+    def create_player(self, player_name: str, color: str):
         """Creates a Player instance and stores it in the players dictionary."""
         player = Player(player_name, color)
         self._players[player_name] = player
