@@ -211,6 +211,12 @@ class ChessVar:
     def is_valid_move(self, chess_piece: "ChessPiece", move_to: str) -> bool:
         """Checks if the move_to coordinates are valid for the chess piece.
         Uses ChessPiece subclasses to get the possible moves.
+
+        Args:
+            chess_piece: The ChessPiece instance that we are checking if the move is valid for
+            move_to: A string that represents the coordinates of the square moved to
+        Returns:
+            A boolean to indicate if the move_to square is a valid move
         """
         possible_moves = chess_piece.possible_moves(self._board)
         if move_to in possible_moves:
