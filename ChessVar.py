@@ -588,15 +588,23 @@ class Knight(ChessPiece):
         super().__init__(name, color, coordinates)
         self._unicode = "\u2658" if self._color == "white" else "\u265E"
 
-    def possible_moves(self, board):
-        """Returns a list of possible moves for the knight from on its current position."""
+    def possible_moves(self, board: list[list[[Union[str, ChessPiece]]]]) -> list[str]:
+        """Retrieves possible moves that the instance of Knight can make from its current position.
+
+        Args:
+            board: A list that represents the current state of the game board.
+
+        Returns:
+            A list of the instance's possible moves. Each move is represented by its algebraic coordinates.
+        """
         possible_moves = []
         current_position = convert_coordinates_to_board_index(self._coordinates)
         possible_steps = [(1, 2), (1, -2), (-1, -2), (-1, 2), (2, 1), (2, -1), (-2, 1), (-2, -1)]
         for step in possible_steps:
             square = [current_position[0] + step[0], current_position[1] + step[1]]
             if 0 <= square[0] < 8 and 0 <= square[1] < 8:
-                possible_moves.append(convert_board_index_to_coordinates(square))
+                if board[square[0]][square[1]].get_color() != self._color:
+                    possible_moves.append(convert_board_index_to_coordinates(square))
         return possible_moves
 
 
