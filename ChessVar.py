@@ -1,7 +1,7 @@
 # Author: Emily Ho
 # Github username: emxhh
 # Date: 5/28/24
-# Description: Atomic chess game
+# Description: Create an Atomic chess game for 2 players that includes capability to print the board, move chess pieces, and determine the winner.
 
 def convert_coordinates_to_board_index(coordinates):
     """Converts algebraic coordinates to board grid list index positions"""
