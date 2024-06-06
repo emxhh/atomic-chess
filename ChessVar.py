@@ -439,16 +439,16 @@ class Pawn(ChessPiece):
         # forward steps
         # pawn can move forward 1 square
         forward_step = 1 if self._color == "white" else -1
-        square = [current_position[0] + forward_step, current_position[1]]
-        square_coordinates = convert_board_index_to_coordinates([current_position[0] + forward_step, current_position[1]])
-        if self.square_is_empty(board, square):
+        forward_square = [current_position[0] + forward_step, current_position[1]]
+        square_coordinates = convert_board_index_to_coordinates(forward_square)
+        if self.square_is_empty(board, forward_square):
             possible_moves.append(square_coordinates)
         # if the pawn's first move, pawn can move forward 2 squares
         if self._first_move:
             forward_step *= 2
-            square_coordinates = convert_board_index_to_coordinates([current_position[0] + forward_step, current_position[1]])
-            square = [current_position[0] + forward_step, current_position[1]]
-            if self.square_is_empty(board, square):
+            forward_square = [current_position[0] + forward_step, current_position[1]]
+            square_coordinates = convert_board_index_to_coordinates(forward_square)
+            if self.square_is_empty(board, forward_square):
                 possible_moves.append(square_coordinates)
 
         # capturing steps
