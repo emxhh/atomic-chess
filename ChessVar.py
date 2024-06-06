@@ -507,7 +507,7 @@ class Bishop(ChessPiece):
         super().__init__(name, color, coordinates)
         self._unicode = "\u2657" if self._color == "white" else "\u265D"
 
-    def possible_moves(self, board) -> list[str]:
+    def possible_moves(self, board: list[list[[Union[str, ChessPiece]]]]) -> list[str]:
         """Retrieves possible moves that the instance of Bishop can make from its current position.
 
         Args:
@@ -519,25 +519,25 @@ class Bishop(ChessPiece):
         possible_moves = []
         current_position = convert_coordinates_to_board_index(self._coordinates)
 
-        # check diagonal up left
+        # check continuous diagonal up left squares
         diagonal_up_left_moves = []
         end = max(8 - current_position[0], current_position[1] + 1)
-        for i in range(1, end):
-            if current_position[0] + i < 8 and current_position[1] - i >= 0:
-                square = [current_position[0] + i, current_position[1] - i]
-                square_is_empty = board[square[0]][square[1]] == " "
-                if square_is_empty:
+        for step in range(1, end):
+            square = [current_position[0] + step, current_position[1] - step]
+            if square[0] < 8 and square[1] >= 0:
+                if self.square_is_empty(board, square):
                     diagonal_up_left_moves.append(convert_board_index_to_coordinates(square))
                 else:
                     if board[square[0]][square[1]].get_color() != self._color:
                         diagonal_up_left_moves.append(convert_board_index_to_coordinates(square))
                     break
         possible_moves += diagonal_up_left_moves
-        # check diagonal up right
+
+        # check continuous diagonal up right squares
         diagonal_up_right_moves = []
         end = max(8 - current_position[0], current_position[1] - 1)
-        for i in range(1, end):
-            if current_position[0] + i < 8 and current_position[1] + i < 8:
+        for step in range(1, end):
+            if current_position[0] + step < 8 and current_position[1] + i < 8:
                 square = [current_position[0] + i, current_position[1] + i]
                 square_is_empty = board[square[0]][square[1]] == " "
                 if square_is_empty:
@@ -547,6 +547,7 @@ class Bishop(ChessPiece):
                         diagonal_up_right_moves.append(convert_board_index_to_coordinates(square))
                     break
         possible_moves += diagonal_up_right_moves
+
         # check diagonal down left
         diagonal_down_left_moves = []
         end = max(current_position[0] + 1, current_position[1] + 1)
@@ -561,6 +562,7 @@ class Bishop(ChessPiece):
                         diagonal_down_left_moves.append(convert_board_index_to_coordinates(square))
                     break
         possible_moves += diagonal_down_left_moves
+
         # check diagonal down right
         diagonal_down_right_moves = []
         end = max(current_position[0] + 1, 8 - current_position[1])
