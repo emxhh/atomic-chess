@@ -270,7 +270,8 @@ class ChessVar:
                 self._game_state = "BLACK_WON"
         del self._chess_pieces[coordinates]
 
-    def get_surrounding_squares(self, captured_piece) -> list[list[int]]:
+    @staticmethod
+    def get_surrounding_squares(captured_piece) -> list[list[int]]:
         """Returns a list of the surrounding squares of the captured piece"""
         surrounding_squares = []
         captured_piece_position = convert_coordinates_to_board_index(captured_piece.get_coordinates())
@@ -318,8 +319,7 @@ class ChessVar:
                     del self._chess_pieces[coordinates]
 
     def make_move(self, move_from: str, move_to: str) -> bool:
-        """
-        Makes a move for the chess piece in the move_from coordinates to the move_to coordinates.
+        """Makes a move for the chess piece in the move_from coordinates to the move_to coordinates.
         Uses ChessPiece to update coordinates.
         """
         # if move_from does not contain a piece belonging to current player, return false
@@ -336,6 +336,7 @@ class ChessVar:
         # if the game_state is won, return false
         if self.get_game_state() == "WHITE_WON" or self.get_game_state() == "BLACK_WON":
             return False
+
         # make the move
         # if captured piece is the opposing color, remove exploded surrounding pieces and attacking/capturing pieces
         if move_to in self._chess_pieces and self._chess_pieces[move_to].get_color() != self._current_player:
