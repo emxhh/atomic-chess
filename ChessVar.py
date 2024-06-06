@@ -405,9 +405,9 @@ class ChessPiece:
         """Updates coordinates of the chess piece."""
         self._coordinates = coordinates
 
-    def square_is_empty(self, board, board_index):
+    def square_is_empty(self, board, square):
         """"""
-        if board[board_index[0]][board_index[1]] == " ":
+        if board[square[0]][square[1]] == " ":
             return True
         else:
             return False
@@ -437,22 +437,21 @@ class Pawn(ChessPiece):
         # add possible moves
 
         # forward steps
+        # pawn can move forward 1 square
         forward_step = 1 if self._color == "white" else -1
-        coordinates = convert_board_index_to_coordinates([current_position[0] + forward_step, current_position[1]])
-        if board[current_position[0] + forward_step][current_position[1]] == " ":
-            possible_moves.append(coordinates)
+        square = [current_position[0] + forward_step, current_position[1]]
+        square_coordinates = convert_board_index_to_coordinates([current_position[0] + forward_step, current_position[1]])
+        if self.square_is_empty(board, square):
+            possible_moves.append(square_coordinates)
+        # if the pawn's first move, pawn can move forward 2 squares
         if self._first_move:
             forward_step *= 2
-            coordinates = convert_board_index_to_coordinates([current_position[0] + forward_step, current_position[1]])
-            if board[current_position[0] + forward_step][current_position[1]] == " ":
-                possible_moves.append(coordinates)
-
+            square_coordinates = convert_board_index_to_coordinates([current_position[0] + forward_step, current_position[1]])
+            square = [current_position[0] + forward_step, current_position[1]]
+            if self.square_is_empty(board, square):
+                possible_moves.append(square_coordinates)
 
         if self._color == "white":
-            # 1 square forward
-            forward_coordinates = convert_board_index_to_coordinates([current_position[0] + 1, current_position[1]])
-            if board[current_position[0] + 1][current_position[1]] == " ":
-                possible_moves.append(forward_coordinates)
             # check diagonal up left
             diagonal_left = [current_position[0] + 1, current_position[1] - 1]
             if current_position[0] + 1 < 8 and current_position[1] - 1 >= 0:
@@ -468,10 +467,6 @@ class Pawn(ChessPiece):
                     diagonal_right_coordinates = convert_board_index_to_coordinates(diagonal_right)
                     possible_moves.append(diagonal_right_coordinates)
         if self._color == "black":
-            # 1 square forward
-            forward_coordinates = convert_board_index_to_coordinates([current_position[0] - 1, current_position[1]])
-            if board[current_position[0] - 1][current_position[1]] == " ":
-                possible_moves.append(forward_coordinates)
             # check diagonal down left
             diagonal_left = [current_position[0] - 1, current_position[1] - 1]
             if current_position[0] - 1 >= 0 and current_position[1] - 1 >= 0:
@@ -486,17 +481,6 @@ class Pawn(ChessPiece):
                 if square_is_occupied:
                     diagonal_right_coordinates = convert_board_index_to_coordinates(diagonal_right)
                     possible_moves.append(diagonal_right_coordinates)
-
-        # 2 squares forward
-        if self._first_move:
-            if self._color == "white":
-                forward_coordinates = convert_board_index_to_coordinates([current_position[0] + 2, current_position[1]])
-                if board[current_position[0] + 2][current_position[1]] == " ":
-                    possible_moves.append(forward_coordinates)
-            if self._color == "black":
-                forward_coordinates = convert_board_index_to_coordinates([current_position[0] - 2, current_position[1]])
-                if board[current_position[0] - 2][current_position[1]] == " ":
-                    possible_moves.append(forward_coordinates)
 
         return possible_moves
 
