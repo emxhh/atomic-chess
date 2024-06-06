@@ -89,7 +89,7 @@ class ChessVar:
         self.initialize_board()
         self.initialize_players()
 
-    def initialize_board(self):
+    def initialize_board(self) -> None:
         """Initializes the game board, places the chess pieces in their starting positions,
         and adds the chess pieces to the chess pieces dictionary.
         """
@@ -174,7 +174,7 @@ class ChessVar:
         self._board[7][4] = king
         self._chess_pieces[king.get_coordinates()] = king
 
-    def print_board(self):
+    def print_board(self) -> None:
         """Prints a display of the current state of the game board."""
         print("  a", "b", "c", "d", "e", "f", "g", "h")
         for row in range(self._rows, 0, -1):
@@ -187,30 +187,29 @@ class ChessVar:
             if row <= self._rows:
                 print()
 
-    def get_game_state(self):
+    def get_game_state(self) -> str:
         """Returns the game state to indicate if the game is unfinished or if black or white has won."""
         return self._game_state
 
-    def create_player(self, player_name: str, color: str):
+    def create_player(self, player_name: str, color: str) -> None:
         """Creates a Player instance and stores it in the players dictionary."""
         player = Player(player_name, color)
         self._players[player_name] = player
 
-    def initialize_players(self):
+    def initialize_players(self) -> None:
         """Creates the two players for the game."""
         self.create_player("Player 1", "white")
         self.create_player("Player 2", "black")
 
-    def switch_turns(self):
+    def switch_turns(self) -> None:
         """Switches the current player to the opposing player."""
         if self._current_player == "white":
             self._current_player = "black"
         else:
             self._current_player = "white"
 
-    def is_valid_move(self, chess_piece, move_to):
-        """
-        Checks if the move_to coordinates are valid for the chess piece.
+    def is_valid_move(self, chess_piece, move_to: str) -> bool:
+        """Checks if the move_to coordinates are valid for the chess piece.
         Uses ChessPiece subclasses to get the possible moves.
         """
         possible_moves = chess_piece.possible_moves(self._board)
@@ -219,14 +218,14 @@ class ChessVar:
         else:
             return False
 
-    def update_board(self, move_from, move_to):
+    def update_board(self, move_from: str, move_to: str) -> None:
         """Updates board with newly made move"""
         current_position = convert_coordinates_to_board_index(move_from)
         self._board[current_position[0]][current_position[1]] = " "
         new_position = convert_coordinates_to_board_index(move_to)
         self._board[new_position[0]][new_position[1]] = self._chess_pieces[move_to]
 
-    def both_kings_killed(self, captured_piece):
+    def both_kings_killed(self, captured_piece) -> bool:
         """Checks if a move would kill both kings in one step"""
         kings_killed = 0
         for square in self.get_surrounding_squares(captured_piece):
@@ -241,7 +240,7 @@ class ChessVar:
         else:
             return False
 
-    def remove_battle_pieces(self, attacking_piece, captured_piece):
+    def remove_battle_pieces(self, attacking_piece, captured_piece) -> None:
         """Removes attacking and captured pieces"""
         # remove attacking piece
         attacking_piece_position = convert_coordinates_to_board_index(attacking_piece.get_coordinates())
@@ -262,7 +261,7 @@ class ChessVar:
                 self._game_state = "BLACK_WON"
         del self._chess_pieces[coordinates]
 
-    def get_surrounding_squares(self, captured_piece):
+    def get_surrounding_squares(self, captured_piece) -> list[list[int]]:
         """Returns a list of the surrounding squares of the captured piece"""
         surrounding_squares = []
         captured_piece_position = convert_coordinates_to_board_index(captured_piece.get_coordinates())
@@ -288,7 +287,7 @@ class ChessVar:
             surrounding_squares.append([captured_piece_position[0], captured_piece_position[1] + 1])
         return surrounding_squares
 
-    def remove_exploded_pieces(self, captured_piece):
+    def remove_exploded_pieces(self, captured_piece) -> None:
         """Removes exploded chess pieces"""
         surrounding_squares = self.get_surrounding_squares(captured_piece)
         for square in surrounding_squares:
@@ -309,7 +308,7 @@ class ChessVar:
                     coordinates = convert_board_index_to_coordinates(square)
                     del self._chess_pieces[coordinates]
 
-    def make_move(self, move_from, move_to):
+    def make_move(self, move_from: str, move_to: str) -> bool:
         """
         Makes a move for the chess piece in the move_from coordinates to the move_to coordinates.
         Uses ChessPiece to update coordinates.
@@ -349,14 +348,14 @@ class ChessVar:
         # return true
         return True
 
-    def return_winner(self):
+    def return_winner(self) -> None:
         """Prints a message indicating the winner of the game."""
         if self._game_state == "WHITE_WON":
             print("Player 1 wins!")
         if self._game_state == "BLACK_WON":
             print("Player 2 wins!")
 
-    def is_game_over(self):
+    def is_game_over(self) -> None:
         """Checks if the game is over."""
         if self._game_state == "UNFINISHED":
             print("Game is unfinished")
