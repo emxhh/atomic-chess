@@ -535,12 +535,11 @@ class Bishop(ChessPiece):
 
         # check continuous diagonal up right squares
         diagonal_up_right_moves = []
-        end = max(8 - current_position[0], current_position[1] - 1)
+        end = max(8 - current_position[0], 8 - current_position[1])
         for step in range(1, end):
-            if current_position[0] + step < 8 and current_position[1] + i < 8:
-                square = [current_position[0] + i, current_position[1] + i]
-                square_is_empty = board[square[0]][square[1]] == " "
-                if square_is_empty:
+            square = [current_position[0] + step, current_position[1] + step]
+            if square[0] < 8 and square[1] < 8:
+                if self.square_is_empty(board, square):
                     diagonal_up_right_moves.append(convert_board_index_to_coordinates(square))
                 else:
                     if board[square[0]][square[1]].get_color() != self._color:
