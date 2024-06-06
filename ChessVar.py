@@ -321,7 +321,6 @@ class ChessVar:
         Makes a move for the chess piece in the move_from coordinates to the move_to coordinates.
         Uses ChessPiece to update coordinates.
         """
-        print(move_from, move_to, self._current_player)
         # if move_from does not contain a piece belonging to current player, return false
         if move_from not in self._chess_pieces:
             print('no chess piece there')
