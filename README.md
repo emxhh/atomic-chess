@@ -1,14 +1,14 @@
 # Atomic Chess
 
-This Python project provides a framework for playing Atomic Chess, allowing users to simulate this exciting chess variant programmatically. The provided methods enable game state management, move validation, and board visualization, making it a comprehensive tool for both casual play and testing.
+This Python project provides a framework for playing a console-based game of Atomic Chess, allowing users to simulate this exciting chess variant programmatically. The provided methods enable game state management, move validation, and board visualization, making it a comprehensive tool for both casual play and testing.
 
 ## Getting Started
 
-To utilize this project, ensure you have Python installed on your system. Clone this repository and run the provided Python scripts.
+To utilize this project, ensure you have Python 3 installed on your system. Clone this repository and run the provided Python scripts.
 
 ## Prerequisites
 
-This project requires Python 3.8+ installed on your system.
+This project requires Python 3.12+ installed on your system.
 
 ## Rules of Atomic Chess
 Atomic Chess retains the basic movement rules of standard chess but includes the following special rules:
@@ -17,6 +17,7 @@ Atomic Chess retains the basic movement rules of standard chess but includes the
 3. **King Captures**: The king cannot capture pieces. Capturing a king ends the game. A move that would result in both kings being captured simultaneously is not allowed.
 4. **Pawn Capture Exception**: Pawns can only be removed if directly involved in a capture.
 5. **No Check or Checkmate**: The game is won by capturing the opponent's king.
+6. **No Castling, En Passant, or Pawn Promotion**: These advanced rules from standard chess are not applicable in this specific game of Atomic Chess.
 
 ## Classes and Descriptions
 
@@ -45,7 +46,7 @@ Subclass of `ChessPiece` representing a knight on the chessboard. Implements spe
 Subclass of `ChessPiece` representing a queen on the chessboard. Combines movement rules of rooks and bishops, allowing movement along rows, columns, and diagonals.
 
 ### `King`
-Subclass of `ChessPiece` representing a king on the chessboard. Implements specific king movement rules, including castling, and is pivotal in determining game state.
+Subclass of `ChessPiece` representing a king on the chessboard. Implements specific king movement rules and is pivotal in determining game state.
 
 ## Implementation Details
 - **Private Data Members**: All data members of the `ChessVar` class are private to ensure encapsulation and proper state management.
