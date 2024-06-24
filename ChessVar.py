@@ -1,9 +1,3 @@
-# Author: Emily Ho
-# Github username: emxhh
-# Date: 5/28/24
-# Description: Create an Atomic chess game for 2 players that includes capability
-# to print the board, move chess pieces, and determine the winner.
-
 from typing import Union
 
 
